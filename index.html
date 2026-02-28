@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OULU Higher Education Center</title>
+    <title>Sky Edge Institute | OULU Higher Education Center</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -21,7 +21,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             scroll-behavior: smooth;
         }
 
@@ -116,6 +116,7 @@
         .nav-links {
             display: flex;
             gap: 2rem;
+            flex-wrap: wrap;
         }
 
         .nav-links li a {
@@ -193,10 +194,34 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .hero-content h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
         .hero-content p {
             font-size: 1.1rem;
             color: var(--text-light);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.2);
+        }
+
+        .cta-box span {
+            display: block;
+            font-size: 1.2rem;
+            color: var(--accent-color);
         }
 
         .hero-image {
@@ -243,6 +268,29 @@
 
         .section-title:hover::after {
             width: 100px;
+        }
+
+        .mission-text {
+            text-align: center; 
+            font-size: 1.4rem; 
+            color: var(--secondary-color); 
+            font-weight: 600; 
+            font-style: italic; 
+            margin-bottom: 3rem;
+        }
+
+        /* Introduction Text Block */
+        .intro-text-block {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 3rem auto;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .intro-text-block p {
+            margin-bottom: 1rem;
         }
 
         /* Lecturers Carousel Section */
@@ -431,15 +479,26 @@
             background-color: #007bff;
         }
 
-        /* Features Section */
+        /* Features / Objectives / Fast Track Sections */
         .features {
             padding: 5rem 0;
             background-color: var(--bg-light);
         }
 
+        .features-white {
+            background-color: var(--bg-white);
+        }
+
+        .fast-track-section {
+            background-color: #f0f4f8; /* Soft blueish tint for differentiation */
+            padding: 5rem 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
@@ -452,6 +511,11 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .features-white .feature-item,
+        .fast-track-section .feature-item {
+            background: var(--bg-white);
+        }
+
         .feature-item:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15);
@@ -462,6 +526,27 @@
             margin-bottom: 1rem;
             position: relative;
             display: inline-block;
+        }
+
+        .feature-item ul {
+            list-style: none;
+            padding-top: 10px;
+        }
+
+        .feature-item ul li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .feature-item ul li::before {
+            content: '✔';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-size: 0.9rem;
         }
 
         /* Timetables */
@@ -750,7 +835,7 @@
             }
 
             .nav-links.active {
-                max-height: 400px;
+                max-height: 500px;
                 padding: 1.5rem 0;
             }
 
@@ -809,14 +894,15 @@
     <header id="header">
         <div class="container">
             <nav>
-                <a href="#" class="logo">OULU</a>
+                <a href="#" class="logo">Sky Edge Institute</a>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#lecturers">Our Lecturers</a></li>
+                    <li><a href="#objectives">Mission</a></li>
+                    <li><a href="#fast-track">Fast Track</a></li>
+                    <li><a href="#lecturers">Lecturers</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#timetables">Time Table</a></li>
-                    <li><a href="#feedback">Student Feedback</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#feedback">Feedback</a></li>
                 </ul>
                 <div class="menu-toggle" id="mobileMenuBtn">☰</div>
             </nav>
@@ -827,11 +913,89 @@
         <div class="container">
             <div style="display: flex; flex-wrap: wrap; align-items: center;">
                 <div class="hero-content animate-on-scroll">
-                    <h1>Enhance Your Learning Experience</h1>
-                    <p>OULU Higher Education Center offers innovative tools and resources designed to elevate your educational journey and make learning engaging and effective. Join us today and take the next step toward academic excellence!</p>
+                    <h1>Sky Edge Institute</h1>
+                    <h2>Trusted Guidance for A/L Success</h2>
+                    <p style="font-weight: 600; color: var(--primary-color);">උසස් පෙළ සාර්ථකත්වයට විශ්වාසනීය මඟපෙන්වීම.</p>
+                    <p>අඩු කාලයකින්, අඩු වියදමකින්, එකම ස්ථානයකින්, සැලසුම්ගත සහ විශ්වාසනීය මඟපෙන්වීමක් ලබාදෙන නව පරපුරේ අධ්‍යාපන ආයතනයකි.</p>
+                    <p>Sky Edge Institute is a modern education institute designed to help Advanced Level students achieve success through structured and reliable guidance. Students can benefit from less time, affordable fees, and all services in one place.</p>
+                    <div class="cta-box">
+                        📞 072 104 2222
+                        <span>Register Today – Limited Seats!</span>
+                        <span style="font-size: 0.9rem; font-weight: normal; color: white;">අදම ලියාපදිංචි වන්න – සීමිත ආසන!</span>
+                    </div>
                 </div>
                 <div class="hero-image animate-on-scroll delay-2">
                     <div style="width: 100%; height: 350px; background-image: url('slide1.png'); background-size: cover; background-position: center;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features features-white" id="objectives">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Our Main Objectives</h2>
+            <p class="mission-text animate-on-scroll delay-1">
+                "Guiding every child towards a successful future."<br>
+                <span style="font-size: 1.1rem;">"දරුවෙකුගේ අනාගතය නිවැරදි මඟකට ගෙන යාම."</span>
+            </p>
+            <div class="feature-grid">
+                <div class="feature-item animate-on-scroll delay-1">
+                    <h3>🎓 University Dreams</h3>
+                    <p>Turning university dreams into reality. විශ්වවිද්‍යාල සිහිනය යථාර්ථයක් බවට පත් කිරීම අපගේ ප්‍රධාන අරමුණයි.</p>
+                </div>
+                <div class="feature-item animate-on-scroll delay-2">
+                    <h3>🛡️ Safe Environment</h3>
+                    <p>Providing a safe, responsible, and confident learning environment. විශ්වාසය, ආරක්ෂාව සහ වගකීම සහිත ඉගෙනුම් පරිසරයක් සැපයීම.</p>
+                </div>
+                <div class="feature-item animate-on-scroll delay-3">
+                    <h3>💎 Value for Time & Money</h3>
+                    <p>Maximizing students’ time and money to achieve the best results. දරුවන්ගේ කාලය සහ මුදල් වටිනා ලෙස භාවිතා කර ප්‍රතිඵල ලබාදීම.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="fast-track-section" id="fast-track">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Your Fast Track to First-Attempt A/L Success</h2>
+            <p class="mission-text animate-on-scroll delay-1" style="color: var(--primary-color);">"Time is Gold – Learn Faster, Achieve More"</p>
+            
+            <div class="intro-text-block animate-on-scroll delay-2">
+                <p><strong>Sky Edge Institute</strong> is a modern, fast-track educational institute designed to transform motivated O/L graduates into confident, first-attempt A/L achievers. We believe youthful energy should never be wasted. In Sri Lanka, many students lose motivation after O/Ls and remain stuck in prolonged A/L cycles.</p>
+                <p>We break this pattern by offering a high-speed, structured A/L learning pathway, enabling students to complete the entire syllabus efficiently within <strong>12 to 15 months</strong>. Using smart boards and modern learning tools, and guided by experienced educators, we take full responsibility for your child’s learning journey.</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-item animate-on-scroll delay-1">
+                    <h3>📚 Our Academic Pathway</h3>
+                    <ul>
+                        <li>Students select any three main subjects</li>
+                        <li>Complete full A/L syllabus within 12–15 months</li>
+                        <li>Continuous weekly unit tests and performance tracking</li>
+                        <li>Intensive revision programs & model paper discussions</li>
+                        <li>Preparation to pass A/L on the first attempt</li>
+                    </ul>
+                </div>
+                <div class="feature-item animate-on-scroll delay-2">
+                    <h3>🌟 Beyond Academics</h3>
+                    <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-light);">At Sky Edge, academic success is paired with personal growth. We focus on developing confident, disciplined, motivated students.</p>
+                    <ul>
+                        <li>Strong teacher–student–parent connections</li>
+                        <li>Regular parent meetings & ranking systems</li>
+                        <li>Awards and recognition for top performers</li>
+                        <li>Mental and physical wellbeing programs</li>
+                        <li>Cultural events, educational projects & excursions</li>
+                    </ul>
+                </div>
+                <div class="feature-item animate-on-scroll delay-3">
+                    <h3>🤝 Our Promise</h3>
+                    <p style="margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dark);">What usually takes two years, we achieve in one focused, well-structured year — without pressure, burnout, or loss of motivation.</p>
+                    <ul>
+                        <li>Structured learning and speed without compromise</li>
+                        <li>Personalized attention to identify strengths & weaknesses</li>
+                        <li>First-attempt A/L success readiness</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-weight: bold; color: var(--primary-color);">Sky Edge builds trust, confidence, and results.</p>
                 </div>
             </div>
         </div>
@@ -940,23 +1104,38 @@
 
     <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Why OULU?</h2>
+            <h2 class="section-title animate-on-scroll">Our Special Features</h2>
             <div class="feature-grid">
                 <div class="feature-item animate-on-scroll delay-1">
-                    <h3>Physical Classes</h3>
-                    <p>Physical classes offer direct instruction, hands-on learning, and real-time interaction, fostering engagement, accountability, and a strong sense of community.</p>
+                    <h3>Flexible Learning</h3>
+                    <ul>
+                        <li>Online and Physical Classes (දිවයින පුරා)</li>
+                        <li>Class Recording & Study Packs</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">Direct instruction, hands-on learning, and live Zoom classes offer an interactive and flexible learning experience from anywhere.</p>
                 </div>
                 <div class="feature-item animate-on-scroll delay-2">
-                    <h3>Online Classes</h3>
-                    <p>Live Zoom classes offer an interactive and flexible learning experience from anywhere. Students can engage in real-time discussions, ask questions, and receive instant feedback.</p>
+                    <h3>Expert Preparation</h3>
+                    <ul>
+                        <li>Experienced teachers for major subjects</li>
+                        <li>A/L General English & Common Test prep</li>
+                        <li>Past Paper & Model Paper discussions</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">Complete and structured A/L exam preparation designed to tackle the hardest papers with ease.</p>
                 </div>
                 <div class="feature-item animate-on-scroll delay-3">
-                    <h3>Class Recording</h3>
-                    <p>Recorded classes offer flexible learning, allowing students to study anytime, anywhere. Students can pause, rewind, and replay lessons at their own pace.</p>
+                    <h3>Student Tracking & Mentorship</h3>
+                    <ul>
+                        <li>Monthly Progress Reports</li>
+                        <li>Parent Meetings</li>
+                        <li>Motivation & Self-confidence Sessions</li>
+                    </ul>
+                    <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">We provide close monitoring, time management skills, exam techniques, and University Entrance Orientation.</p>
                 </div>
                 <div class="feature-item animate-on-scroll delay-4">
-                    <h3>Study Packs</h3>
-                    <p>StudyPacks offer comprehensive learning resources, providing students with access to pre-recorded lectures, tutorials, and materials.</p>
+                    <h3>Budget Friendly</h3>
+                    <p style="margin-top: 10px;">සෑම කෙනෙකුටම ගැළපෙන ගාස්තු පද්ධතිය.</p>
+                    <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">A budget-friendly fee structure ensuring that everyone has access to high-quality education without the financial burden.</p>
                 </div>
             </div>
         </div>
@@ -999,15 +1178,15 @@
             <h2 class="section-title animate-on-scroll">Student Feedbacks</h2>
             <div class="feedback-container">
                 <div class="feedback-card animate-on-scroll delay-1">
-                    <p>OULU මගේ ඉගෙනීම සඳහා මට හොඳ සහයෝගයක් ලබා දුන්නා. Online platform එක ගොඩක් user-friendly. පාඩම් නැවත නැවත බලන්න පුලුවන් උන එක ගොඩක් වටිනවා.</p>
+                    <p>ආයතනය මගේ ඉගෙනීම සඳහා මට හොඳ සහයෝගයක් ලබා දුන්නා. Online platform එක ගොඩක් user-friendly. පාඩම් නැවත නැවත බලන්න පුලුවන් උන එක ගොඩක් වටිනවා.</p>
                     <div class="feedback-author">Nuwan De Silva (Mahanama College)</div>
                 </div>
                 <div class="feedback-card animate-on-scroll delay-2">
-                    <p>ඇත්තෙන්ම කියනවනම් OULU කියන්නේ ලමෙක්ට ගොඩ යන්න ශක්තිය දෙන සුපිරි තැනක්.. මෙතන වෙන ආයතන වල දැකපු නැති ගොඩාක් දේවල් තියෙනව.</p>
+                    <p>ඇත්තෙන්ම කියනවනම් මේක කියන්නේ ලමෙක්ට ගොඩ යන්න ශක්තිය දෙන සුපිරි තැනක්.. මෙතන වෙන ආයතන වල දැකපු නැති ගොඩාක් දේවල් තියෙනව.</p>
                     <div class="feedback-author">Kavindu Sashintha</div>
                 </div>
                 <div class="feedback-card animate-on-scroll delay-3">
-                    <p>OL ඉවර වෙලා AL කියන මහා සාගරේට පැන්නෙ කොහොමහරි එතෙර වෙනවා කියලා හිතාගන්න. තනියෙන් පීනගෙන යන්න අමාරු නිසා OULU කියන නැවට නැග්ගා.</p>
+                    <p>OL ඉවර වෙලා AL කියන මහා සාගරේට පැන්නෙ කොහොමහරි එතෙර වෙනවා කියලා හිතාගන්න. තනියෙන් පීනගෙන යන්න අමාරු නිසා මේ ආයතනය කියන නැවට නැග්ගා.</p>
                     <div class="feedback-author">Ramika Risiwara (Ananda College)</div>
                 </div>
             </div>
@@ -1050,29 +1229,29 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h4>OULU Education</h4>
-                    <p style="color: #94a3b8; margin-top: 1.5rem; line-height: 1.6;">Empowering the next generation of leaders with world-class education and modern learning technologies.</p>
+                    <h4>Sky Edge Institute</h4>
+                    <p style="color: #94a3b8; margin-top: 1.5rem; line-height: 1.6;">Empowering the next generation of leaders with world-class education, trusted guidance, and modern learning technologies.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
+                        <li><a href="#objectives">Our Mission</a></li>
+                        <li><a href="#fast-track">Fast Track</a></li>
                         <li><a href="#lecturers">Our Lecturers</a></li>
-                        <li><a href="#timetables">Time Tables</a></li>
-                        <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Contact Us</h4>
                     <ul>
-                        <li><span style="color: #94a3b8;">Hotline:</span> 011 234 5678</li>
-                        <li><span style="color: #94a3b8;">Email:</span> info@oulu.lk</li>
-                        <li><span style="color: #94a3b8;">Address:</span> 123 Education Mawatha, Colombo.</li>
+                        <li><span style="color: #94a3b8;">Hotline:</span> 072 104 2222</li>
+                        <li><span style="color: #94a3b8;">Email:</span> info@skyedge.lk</li>
+                        <li><span style="color: #94a3b8;">Location:</span> Colombo & Online – Islandwide Access</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 OULU Higher Education Center. All Rights Reserved.</p>
+                <p>&copy; 2026 Sky Edge Institute | OULU Higher Education Center. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
