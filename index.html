@@ -32,6 +32,58 @@
             overflow-x: hidden;
         }
 
+        /* --- Language Toggle CSS --- */
+        body.lang-en .si-text { display: none !important; }
+        body.lang-si .en-text { display: none !important; }
+        
+        .lang-toggle-btn {
+            background: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .lang-toggle-btn:hover {
+            background: var(--bg-white);
+            color: var(--primary-color);
+        }
+
+        /* --- WhatsApp Button CSS --- */
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            color: #25D366; /* WhatsApp Brand Color */
+        }
+        
+        .whatsapp-icon {
+            width: 1.2em;
+            height: 1.2em;
+            fill: currentColor;
+        }
+        
+        .cta-box .whatsapp-btn {
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        
+        .cta-box .whatsapp-btn:hover {
+            color: #dcf8c6;
+            transform: scale(1.02);
+        }
+
         a {
             text-decoration: none;
             color: inherit;
@@ -153,6 +205,12 @@
             color: var(--primary-color);
             transition: transform 0.3s ease;
         }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
 
         /* Hero Section */
         .hero {
@@ -271,7 +329,7 @@
         }
 
         .mission-text {
-            text-align: center; 
+            text-align: center;
             font-size: 1.4rem; 
             color: var(--secondary-color); 
             font-weight: 600; 
@@ -490,7 +548,7 @@
         }
 
         .fast-track-section {
-            background-color: #f0f4f8; /* Soft blueish tint for differentiation */
+            background-color: #f0f4f8;
             padding: 5rem 0;
             border-top: 1px solid #e2e8f0;
             border-bottom: 1px solid #e2e8f0;
@@ -889,22 +947,28 @@
         }
     </style>
 </head>
-<body>
+<body class="lang-en">
 
     <header id="header">
         <div class="container">
             <nav>
-                <a href="#" class="logo">Sky Edge Institute</a>
+                <a href="#" class="logo">
+                    <span class="en-text">Sky Edge Institute</span>
+                    <span class="si-text">Sky Edge ආයතනය</span>
+                </a>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#objectives">Mission</a></li>
-                    <li><a href="#fast-track">Fast Track</a></li>
-                    <li><a href="#lecturers">Lecturers</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#timetables">Time Table</a></li>
-                    <li><a href="#feedback">Feedback</a></li>
+                    <li><a href="#home"><span class="en-text">Home</span><span class="si-text">මුල් පිටුව</span></a></li>
+                    <li><a href="#objectives"><span class="en-text">Mission</span><span class="si-text">මෙහෙවර</span></a></li>
+                    <li><a href="#fast-track"><span class="en-text">Fast Track</span><span class="si-text">කඩිනම් වැඩපිළිවෙළ</span></a></li>
+                    <li><a href="#lecturers"><span class="en-text">Lecturers</span><span class="si-text">දේශක මණ්ඩලය</span></a></li>
+                    <li><a href="#features"><span class="en-text">Features</span><span class="si-text">විශේෂාංග</span></a></li>
+                    <li><a href="#timetables"><span class="en-text">Time Table</span><span class="si-text">කාලසටහන</span></a></li>
+                    <li><a href="#feedback"><span class="en-text">Feedback</span><span class="si-text">ප්‍රතිපෝෂණ</span></a></li>
                 </ul>
-                <div class="menu-toggle" id="mobileMenuBtn">☰</div>
+                <div class="header-controls">
+                    <button id="langToggle" class="lang-toggle-btn">සිංහල</button>
+                    <div class="menu-toggle" id="mobileMenuBtn">☰</div>
+                </div>
             </nav>
         </div>
     </header>
@@ -913,15 +977,24 @@
         <div class="container">
             <div style="display: flex; flex-wrap: wrap; align-items: center;">
                 <div class="hero-content animate-on-scroll">
-                    <h1>Sky Edge Institute</h1>
-                    <h2>Trusted Guidance for A/L Success</h2>
-                    <p style="font-weight: 600; color: var(--primary-color);">උසස් පෙළ සාර්ථකත්වයට විශ්වාසනීය මඟපෙන්වීම.</p>
-                    <p>අඩු කාලයකින්, අඩු වියදමකින්, එකම ස්ථානයකින්, සැලසුම්ගත සහ විශ්වාසනීය මඟපෙන්වීමක් ලබාදෙන නව පරපුරේ අධ්‍යාපන ආයතනයකි.</p>
-                    <p>Sky Edge Institute is a modern education institute designed to help Advanced Level students achieve success through structured and reliable guidance. Students can benefit from less time, affordable fees, and all services in one place.</p>
+                    <h1 class="en-text">Sky Edge Institute</h1>
+                    <h1 class="si-text">Sky Edge ආයතනය</h1>
+                    
+                    <h2 class="en-text">Trusted Guidance for A/L Success</h2>
+                    <h2 class="si-text" style="color: var(--primary-color);">උසස් පෙළ සාර්ථකත්වයට විශ්වාසනීය මඟපෙන්වීම.</h2>
+                    
+                    <p class="en-text">Sky Edge Institute is a modern education institute designed to help Advanced Level students achieve success through structured and reliable guidance. Students can benefit from less time, affordable fees, and all services in one place.</p>
+                    <p class="si-text">අඩු කාලයකින්, අඩු වියදමකින්, එකම ස්ථානයකින්, සැලසුම්ගත සහ විශ්වාසනීය මඟපෙන්වීමක් ලබාදෙන නව පරපුරේ අධ්‍යාපන ආයතනයකි.</p>
+                    
                     <div class="cta-box">
-                        📞 072 104 2222
-                        <span>Register Today – Limited Seats!</span>
-                        <span style="font-size: 0.9rem; font-weight: normal; color: white;">අදම ලියාපදිංචි වන්න – සීමිත ආසන!</span>
+                        <a href="https://wa.me/94721042222?text=Hello%20Sky%20Edge%20Institute%2C%20I%20would%20like%20to%20know%20more%20about%20your%20classes." target="_blank" class="whatsapp-btn">
+                            <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                            </svg>
+                            072 104 2222
+                        </a>
+                        <span class="en-text">Register Today – Limited Seats!</span>
+                        <span class="si-text" style="font-size: 0.9rem; font-weight: normal; color: white;">අදම ලියාපදිංචි වන්න – සීමිත ආසන!</span>
                     </div>
                 </div>
                 <div class="hero-image animate-on-scroll delay-2">
@@ -933,23 +1006,29 @@
 
     <section class="features features-white" id="objectives">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Our Main Objectives</h2>
+            <h2 class="section-title animate-on-scroll">
+                <span class="en-text">Our Main Objectives</span>
+                <span class="si-text">අපගේ ප්‍රධාන අරමුණු</span>
+            </h2>
             <p class="mission-text animate-on-scroll delay-1">
-                "Guiding every child towards a successful future."<br>
-                <span style="font-size: 1.1rem;">"දරුවෙකුගේ අනාගතය නිවැරදි මඟකට ගෙන යාම."</span>
+                <span class="en-text">"Guiding every child towards a successful future."</span>
+                <span class="si-text" style="font-size: 1.1rem;">"දරුවෙකුගේ අනාගතය නිවැරදි මඟකට ගෙන යාම."</span>
             </p>
             <div class="feature-grid">
                 <div class="feature-item animate-on-scroll delay-1">
-                    <h3>🎓 University Dreams</h3>
-                    <p>Turning university dreams into reality. විශ්වවිද්‍යාල සිහිනය යථාර්ථයක් බවට පත් කිරීම අපගේ ප්‍රධාන අරමුණයි.</p>
+                    <h3>🎓 <span class="en-text">University Dreams</span><span class="si-text">විශ්වවිද්‍යාල සිහිනය</span></h3>
+                    <p class="en-text">Turning university dreams into reality.</p>
+                    <p class="si-text">විශ්වවිද්‍යාල සිහිනය යථාර්ථයක් බවට පත් කිරීම අපගේ ප්‍රධාන අරමුණයි.</p>
                 </div>
                 <div class="feature-item animate-on-scroll delay-2">
-                    <h3>🛡️ Safe Environment</h3>
-                    <p>Providing a safe, responsible, and confident learning environment. විශ්වාසය, ආරක්ෂාව සහ වගකීම සහිත ඉගෙනුම් පරිසරයක් සැපයීම.</p>
+                    <h3>🛡️ <span class="en-text">Safe Environment</span><span class="si-text">ආරක්ෂිත පරිසරය</span></h3>
+                    <p class="en-text">Providing a safe, responsible, and confident learning environment.</p>
+                    <p class="si-text">විශ්වාසය, ආරක්ෂාව සහ වගකීම සහිත ඉගෙනුම් පරිසරයක් සැපයීම.</p>
                 </div>
                 <div class="feature-item animate-on-scroll delay-3">
-                    <h3>💎 Value for Time & Money</h3>
-                    <p>Maximizing students’ time and money to achieve the best results. දරුවන්ගේ කාලය සහ මුදල් වටිනා ලෙස භාවිතා කර ප්‍රතිඵල ලබාදීම.</p>
+                    <h3>💎 <span class="en-text">Value for Time & Money</span><span class="si-text">කාලයට සහ මුදලට වටිනාකමක්</span></h3>
+                    <p class="en-text">Maximizing students’ time and money to achieve the best results.</p>
+                    <p class="si-text">දරුවන්ගේ කාලය සහ මුදල් වටිනා ලෙස භාවිතා කර ප්‍රතිඵල ලබාදීම.</p>
                 </div>
             </div>
         </div>
@@ -957,45 +1036,76 @@
 
     <section class="fast-track-section" id="fast-track">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Your Fast Track to First-Attempt A/L Success</h2>
-            <p class="mission-text animate-on-scroll delay-1" style="color: var(--primary-color);">"Time is Gold – Learn Faster, Achieve More"</p>
+            <h2 class="section-title animate-on-scroll">
+                <span class="en-text">Your Fast Track to First-Attempt A/L Success</span>
+                <span class="si-text">පළමු වරෙන්ම උසස් පෙළ සමත් වීමේ කඩිනම් වැඩපිළිවෙළ</span>
+            </h2>
+            <p class="mission-text animate-on-scroll delay-1" style="color: var(--primary-color);">
+                <span class="en-text">"Time is Gold – Learn Faster, Achieve More"</span>
+                <span class="si-text">"කාලය රන් හා සමානය - කඩිනමින් ඉගෙනගන්න, වැඩි යමක් ලබාගන්න"</span>
+            </p>
             
             <div class="intro-text-block animate-on-scroll delay-2">
-                <p><strong>Sky Edge Institute</strong> is a modern, fast-track educational institute designed to transform motivated O/L graduates into confident, first-attempt A/L achievers. We believe youthful energy should never be wasted. In Sri Lanka, many students lose motivation after O/Ls and remain stuck in prolonged A/L cycles.</p>
-                <p>We break this pattern by offering a high-speed, structured A/L learning pathway, enabling students to complete the entire syllabus efficiently within <strong>12 to 15 months</strong>. Using smart boards and modern learning tools, and guided by experienced educators, we take full responsibility for your child’s learning journey.</p>
+                <p class="en-text"><strong>Sky Edge Institute</strong> is a modern, fast-track educational institute designed to transform motivated O/L graduates into confident, first-attempt A/L achievers. We believe youthful energy should never be wasted. In Sri Lanka, many students lose motivation after O/Ls and remain stuck in prolonged A/L cycles.</p>
+                <p class="si-text"><strong>Sky Edge ආයතනය</strong> යනු සාමාන්‍ය පෙළ සාර්ථකව නිම කළ සිසුන්, පළමු වරෙන්ම උසස් පෙළ ජයගන්නා ආත්ම විශ්වාසයෙන් යුත් පිරිසක් බවට පත් කිරීම සඳහා නිර්මාණය කරන ලද නවීන, කඩිනම් අධ්‍යාපන ආයතනයකි. අපගේ රටේ බොහෝ සිසුන් සාමාන්‍ය පෙළින් පසු උසස් පෙළ සඳහා දීර්ඝ කාලයක් වැය කිරීමෙන් අධ්‍යාපනය කෙරෙහි ඇති උනන්දුව නැති කර ගනී.</p>
+                
+                <p class="en-text">We break this pattern by offering a high-speed, structured A/L learning pathway, enabling students to complete the entire syllabus efficiently within <strong>12 to 15 months</strong>. Using smart boards and modern learning tools, and guided by experienced educators, we take full responsibility for your child’s learning journey.</p>
+                <p class="si-text">මාස <strong>12 සිට 15</strong> දක්වා කාලයක් තුළ සම්පූර්ණ විෂය නිර්දේශය කාර්යක්ෂමව ආවරණය කරන කඩිනම් සහ ක්‍රමානුකූල අධ්‍යයන සැලැස්මක් මගින් අපි මෙම දුර්වලතාවය මඟහරවන්නෙමු. නවීන තාක්ෂණය හා පළපුරුදු ගුරුවරුන්ගේ මඟපෙන්වීම යටතේ, ඔබේ දරුවාගේ අධ්‍යාපන ගමනේ සම්පූර්ණ වගකීම අපි භාර ගනිමු.</p>
             </div>
 
             <div class="feature-grid">
                 <div class="feature-item animate-on-scroll delay-1">
-                    <h3>📚 Our Academic Pathway</h3>
-                    <ul>
+                    <h3>📚 <span class="en-text">Our Academic Pathway</span><span class="si-text">අපගේ අධ්‍යයන සැලැස්ම</span></h3>
+                    <ul class="en-text">
                         <li>Students select any three main subjects</li>
                         <li>Complete full A/L syllabus within 12–15 months</li>
                         <li>Continuous weekly unit tests and performance tracking</li>
                         <li>Intensive revision programs & model paper discussions</li>
                         <li>Preparation to pass A/L on the first attempt</li>
                     </ul>
+                    <ul class="si-text">
+                        <li>ඕනෑම ප්‍රධාන විෂයයන් තුනක් තෝරා ගැනීමේ හැකියාව</li>
+                        <li>මාස 12-15 ක් ඇතුළත සම්පූර්ණ විෂය නිර්දේශය ආවරණය කිරීම</li>
+                        <li>සෑම සතියකම ඒකක පරීක්ෂණ සහ ප්‍රගති සමාලෝචන</li>
+                        <li>පුනරීක්ෂණ වැඩසටහන් සහ ආදර්ශ ප්‍රශ්න පත්‍ර සාකච්ඡා කිරීම</li>
+                        <li>පළමු උත්සාහයෙන්ම උසස් පෙළ සමත් වීමට සූදානම් කිරීම</li>
+                    </ul>
                 </div>
                 <div class="feature-item animate-on-scroll delay-2">
-                    <h3>🌟 Beyond Academics</h3>
-                    <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-light);">At Sky Edge, academic success is paired with personal growth. We focus on developing confident, disciplined, motivated students.</p>
-                    <ul>
+                    <h3>🌟 <span class="en-text">Beyond Academics</span><span class="si-text">අධ්‍යාපනයෙන් ඔබ්බට</span></h3>
+                    <p class="en-text" style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-light);">At Sky Edge, academic success is paired with personal growth. We focus on developing confident, disciplined, motivated students.</p>
+                    <p class="si-text" style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-light);">Sky Edge හිදී, අපි අධ්‍යාපනික සාර්ථකත්වය මෙන්ම පෞරුෂ වර්ධනයටද මුල්තැන දෙමු. විනයගරුක සහ ආත්ම විශ්වාසයකින් යුත් සිසුන් පිරිසක් බිහිකිරීම අපගේ අරමුණයි.</p>
+                    <ul class="en-text">
                         <li>Strong teacher–student–parent connections</li>
                         <li>Regular parent meetings & ranking systems</li>
                         <li>Awards and recognition for top performers</li>
                         <li>Mental and physical wellbeing programs</li>
                         <li>Cultural events, educational projects & excursions</li>
                     </ul>
+                    <ul class="si-text">
+                        <li>ගුරු-සිසු-දෙමාපිය ශක්තිමත් සබඳතා</li>
+                        <li>ක්‍රමානුකූල දෙමාපිය රැස්වීම් සහ ශ්‍රේණිගත කිරීමේ ක්‍රමවේද</li>
+                        <li>විශිෂ්ට ප්‍රතිඵල ලබා ගන්නා සිසුන් ඇගයීම</li>
+                        <li>මානසික සහ ශාරීරික සෞඛ්‍ය ප්‍රවර්ධන වැඩසටහන්</li>
+                        <li>සංස්කෘතික වැඩසටහන් සහ අධ්‍යාපනික චාරිකා</li>
+                    </ul>
                 </div>
                 <div class="feature-item animate-on-scroll delay-3">
-                    <h3>🤝 Our Promise</h3>
-                    <p style="margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dark);">What usually takes two years, we achieve in one focused, well-structured year — without pressure, burnout, or loss of motivation.</p>
-                    <ul>
+                    <h3>🤝 <span class="en-text">Our Promise</span><span class="si-text">අපගේ පොරොන්දුව</span></h3>
+                    <p class="en-text" style="margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dark);">What usually takes two years, we achieve in one focused, well-structured year — without pressure, burnout, or loss of motivation.</p>
+                    <p class="si-text" style="margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dark);">වසර දෙකක් ගතවන උසස් පෙළ අධ්‍යාපනය, මානසික පීඩනයකින් තොරව ක්‍රමානුකූලව වසරක් තුළ සම්පූර්ණ කර දීම අපගේ වගකීමයි.</p>
+                    <ul class="en-text">
                         <li>Structured learning and speed without compromise</li>
                         <li>Personalized attention to identify strengths & weaknesses</li>
                         <li>First-attempt A/L success readiness</li>
                     </ul>
-                    <p style="margin-top: 15px; font-weight: bold; color: var(--primary-color);">Sky Edge builds trust, confidence, and results.</p>
+                    <ul class="si-text">
+                        <li>ගුණාත්මක බවින් ඉහළ සහ කඩිනම් ඉගෙනුම් ක්‍රියාවලියක්</li>
+                        <li>සෑම සිසුවෙකුගේම දුර්වලතා හඳුනාගෙන පෞද්ගලික අවධානය යොමු කිරීම</li>
+                        <li>පළමු වරෙන්ම උසස් පෙළ සමත් වීමේ සූදානම</li>
+                    </ul>
+                    <p class="en-text" style="margin-top: 15px; font-weight: bold; color: var(--primary-color);">Sky Edge builds trust, confidence, and results.</p>
+                    <p class="si-text" style="margin-top: 15px; font-weight: bold; color: var(--primary-color);">Sky Edge යනු විශ්වාසය සහ විශිෂ්ට ප්‍රතිඵල වල එකතුවකි.</p>
                 </div>
             </div>
         </div>
@@ -1003,8 +1113,14 @@
 
     <section class="lecturers" id="lecturers">
         <div class="container">
-            <h2 class="section-title animate-on-scroll" style="margin-bottom: 0.5rem; color: #1e3a8a; font-weight: 800;">Our Talented Lecturers</h2>
-            <p class="section-subtitle animate-on-scroll" style="text-align: center; color: var(--text-light); margin-bottom: 4rem;">Learn from the best teachers in the country who has enlightened thousands already.</p>
+            <h2 class="section-title animate-on-scroll" style="margin-bottom: 0.5rem; color: #1e3a8a; font-weight: 800;">
+                <span class="en-text">Our Talented Lecturers</span>
+                <span class="si-text">අපගේ දක්ෂ දේශක මණ්ඩලය</span>
+            </h2>
+            <p class="section-subtitle animate-on-scroll" style="text-align: center; color: var(--text-light); margin-bottom: 4rem;">
+                <span class="en-text">Learn from the best teachers in the country who has enlightened thousands already.</span>
+                <span class="si-text">දහස් ගණනකගේ නැණැස පෑදූ, දිවයිනේ හොඳම ගුරුවරුන්ගෙන් ඉගෙනගන්න.</span>
+            </p>
 
             <div class="carousel-wrapper animate-on-scroll delay-1">
                 <button class="nav-arrow left-arrow" id="prevLecturer">&#10094;</button>
@@ -1016,7 +1132,7 @@
                         </div>
                         <div class="card-bottom">
                             <h3>Ishan Ghamage</h3>
-                            <h4 class="subject-title">ඉතිහාසය</h4>
+                            <h4 class="subject-title"><span class="en-text">History</span><span class="si-text">ඉතිහාසය</span></h4>
                             <div class="qualifications">
                                 <p>BA (UG), University of Sri Jayewardenepura</p>
                                 <p>Dip. in Epigraphy, PGIAR, University of Kelaniya</p>
@@ -1031,7 +1147,7 @@
                         </div>
                         <div class="card-bottom">
                             <h3>D.U.S. WIJESINGHE</h3>
-                            <h4 class="subject-title">සිංහල</h4>
+                            <h4 class="subject-title"><span class="en-text">Sinhala</span><span class="si-text">සිංහල</span></h4>
                             <div class="qualifications">
                                 <p>Teacher at Visakha Vidyalaya, Colombo 05</p>
                                 <p>B.Ed. Hons. in IT (Reading), CINEC Campus</p>
@@ -1047,7 +1163,7 @@
                         </div>
                         <div class="card-bottom">
                             <h3>Shyamali Liyanarachchi</h3>
-                            <h4 class="subject-title">තර්ක ශාස්ත්‍රය හා විද්‍යාත්මක ක්‍රමය</h4>
+                            <h4 class="subject-title"><span class="en-text">Logic & Scientific Method</span><span class="si-text">තර්ක ශාස්ත්‍රය හා විද්‍යාත්මක ක්‍රමය</span></h4>
                             <div class="qualifications">
                                 <p>BA,MA</p>
                             </div>
@@ -1060,7 +1176,7 @@
                         </div>
                         <div class="card-bottom">
                             <h3>Hansika Perera</h3>
-                            <h4 class="subject-title">Japanese</h4>
+                            <h4 class="subject-title"><span class="en-text">Japanese</span><span class="si-text">ජපන් භාෂාව</span></h4>
                             <div class="qualifications">
                                 <p>B.Sc. Eng. (Hons.) UOM</p>
                             </div>
@@ -1073,20 +1189,20 @@
                         </div>
                         <div class="card-bottom">
                             <h3>Sugathi Silva</h3>
-                            <h4 class="subject-title">දේශපාලන විද්‍යාව</h4>
+                            <h4 class="subject-title"><span class="en-text">Political Science</span><span class="si-text">දේශපාලන විද්‍යාව</span></h4>
                             <div class="qualifications">
                                 <p>BA (Hon ) in Criminology and Criminal Justice (UG at USJ )</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="lecturer-card" data-index="4">
+                    <div class="lecturer-card" data-index="5">
                         <div class="card-top bg-lightgreen">
-                            <img src="leon silva.jpeg" alt="Sugathi Silva">
+                            <img src="leon silva.jpeg" alt="Leon Silva">
                         </div>
                         <div class="card-bottom">
-                            <h3>Sugathi Silva</h3>
-                            <h4 class="subject-title">ආර්ථික විද්‍යාව</h4>
+                            <h3>Leon Silva</h3>
+                            <h4 class="subject-title"><span class="en-text">Economics</span><span class="si-text">ආර්ථික විද්‍යාව</span></h4>
                             <div class="qualifications">
                                 <p>B.Sc.(Mgt.)Sp</p>
                             </div>
@@ -1096,46 +1212,67 @@
 
                 <button class="nav-arrow right-arrow" id="nextLecturer">&#10095;</button>
                 
-                <div class="carousel-dots" id="lecturerDots">
-                    </div>
+                <div class="carousel-dots" id="lecturerDots"></div>
             </div>
         </div>
     </section>
 
     <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Our Special Features</h2>
+            <h2 class="section-title animate-on-scroll">
+                <span class="en-text">Our Special Features</span>
+                <span class="si-text">අපගේ සුවිශේෂී ලක්ෂණ</span>
+            </h2>
             <div class="feature-grid">
                 <div class="feature-item animate-on-scroll delay-1">
-                    <h3>Flexible Learning</h3>
-                    <ul>
-                        <li>Online and Physical Classes (දිවයින පුරා)</li>
+                    <h3><span class="en-text">Flexible Learning</span><span class="si-text">නම්‍යශීලී ඉගෙනුම් රටාව</span></h3>
+                    <ul class="en-text">
+                        <li>Online and Physical Classes (Islandwide)</li>
                         <li>Class Recording & Study Packs</li>
                     </ul>
-                    <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">Direct instruction, hands-on learning, and live Zoom classes offer an interactive and flexible learning experience from anywhere.</p>
+                    <ul class="si-text">
+                        <li>මාර්ගගත සහ භෞතික පන්ති (දිවයින පුරා)</li>
+                        <li>පන්ති පටිගත කිරීම් සහ අධ්‍යයන පැකේජ</li>
+                    </ul>
+                    <p class="en-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">Direct instruction, hands-on learning, and live Zoom classes offer an interactive and flexible learning experience from anywhere.</p>
+                    <p class="si-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">සජීවී විශිෂ්ට ඉගැන්වීම් රටාව ඔස්සේ ලංකාවේ ඕනෑම ස්ථානයක සිට නම්‍යශීලීව ඉගෙනීමේ පහසුකම් සලසා ඇත.</p>
                 </div>
                 <div class="feature-item animate-on-scroll delay-2">
-                    <h3>Expert Preparation</h3>
-                    <ul>
+                    <h3><span class="en-text">Expert Preparation</span><span class="si-text">විශේෂඥ මඟපෙන්වීම</span></h3>
+                    <ul class="en-text">
                         <li>Experienced teachers for major subjects</li>
                         <li>A/L General English & Common Test prep</li>
                         <li>Past Paper & Model Paper discussions</li>
                     </ul>
-                    <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">Complete and structured A/L exam preparation designed to tackle the hardest papers with ease.</p>
+                    <ul class="si-text">
+                        <li>ප්‍රධාන විෂයයන් සඳහා පළපුරුදු ගුරුවරුන්</li>
+                        <li>සාමාන්‍ය ඉංග්‍රීසි සහ පොදු පරීක්ෂණ සූදානම</li>
+                        <li>පසුගිය ප්‍රශ්න පත්‍ර සහ ආදර්ශ ප්‍රශ්න පත්‍ර සාකච්ඡා</li>
+                    </ul>
+                    <p class="en-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">Complete and structured A/L exam preparation designed to tackle the hardest papers with ease.</p>
+                    <p class="si-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">සංකීර්ණ ප්‍රශ්න පත්‍ර සඳහා පවා පහසුවෙන් මුහුණ දීමට සකස් කළ විධිමත් විභාග සූදානම.</p>
                 </div>
                 <div class="feature-item animate-on-scroll delay-3">
-                    <h3>Student Tracking & Mentorship</h3>
-                    <ul>
+                    <h3><span class="en-text">Student Tracking & Mentorship</span><span class="si-text">ශිෂ්‍ය ලුහුබැඳීම සහ උපදේශනය</span></h3>
+                    <ul class="en-text">
                         <li>Monthly Progress Reports</li>
                         <li>Parent Meetings</li>
                         <li>Motivation & Self-confidence Sessions</li>
                     </ul>
-                    <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">We provide close monitoring, time management skills, exam techniques, and University Entrance Orientation.</p>
+                    <ul class="si-text">
+                        <li>මාසික ප්‍රගති වාර්තා</li>
+                        <li>දෙමාපිය රැස්වීම්</li>
+                        <li>ප්‍රබෝධමත් කිරීමේ සහ ආත්ම විශ්වාසය ගොඩනැංවීමේ සැසි</li>
+                    </ul>
+                    <p class="en-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">We provide close monitoring, time management skills, exam techniques, and University Entrance Orientation.</p>
+                    <p class="si-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">කාල කළමනාකරණය, විභාග ශිල්පක්‍රම සහ විශ්වවිද්‍යාල ප්‍රවේශය සඳහා සමීපව නිරීක්ෂණය කරමින් මඟ පෙන්වයි.</p>
                 </div>
                 <div class="feature-item animate-on-scroll delay-4">
-                    <h3>Budget Friendly</h3>
-                    <p style="margin-top: 10px;">සෑම කෙනෙකුටම ගැළපෙන ගාස්තු පද්ධතිය.</p>
-                    <p style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">A budget-friendly fee structure ensuring that everyone has access to high-quality education without the financial burden.</p>
+                    <h3><span class="en-text">Budget Friendly</span><span class="si-text">සහනදායී ගාස්තු</span></h3>
+                    <p class="en-text" style="margin-top: 10px;">A budget-friendly fee structure for everyone.</p>
+                    <p class="si-text" style="margin-top: 10px;">සෑම කෙනෙකුටම ගැළපෙන ගාස්තු පද්ධතිය.</p>
+                    <p class="en-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">A fee structure ensuring that everyone has access to high-quality education without the financial burden.</p>
+                    <p class="si-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">මූල්‍යමය අපහසුතාවයකින් තොරව උසස් තත්ත්වයේ අධ්‍යාපනයක් ලබා ගැනීමට අවස්ථාව සලසන ගාස්තු ව්‍යුහයකි.</p>
                 </div>
             </div>
         </div>
@@ -1143,31 +1280,51 @@
 
     <section class="timetables" id="timetables">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Class Time Tables</h2>
+            <h2 class="section-title animate-on-scroll">
+                <span class="en-text">Class Time Tables</span>
+                <span class="si-text">පන්ති කාලසටහන්</span>
+            </h2>
             <div class="timetable-buttons animate-on-scroll delay-1">
-                <button class="btn-outline">Calendar 2025 Classes</button>
-                <button class="btn-outline">Calendar 2026 Classes</button>
-                <button class="btn-outline">Calendar 2027 Classes</button>
+                <button class="btn-outline">
+                    <span class="en-text">Calendar 2025 Classes</span>
+                    <span class="si-text">2025 පන්ති කාලසටහන</span>
+                </button>
+                <button class="btn-outline">
+                    <span class="en-text">Calendar 2026 Classes</span>
+                    <span class="si-text">2026 පන්ති කාලසටහන</span>
+                </button>
+                <button class="btn-outline">
+                    <span class="en-text">Calendar 2027 Classes</span>
+                    <span class="si-text">2027 පන්ති කාලසටහන</span>
+                </button>
             </div>
         </div>
     </section>
 
     <section class="edumix" id="edumix">
         <div class="container">
-            <h2 class="section-title animate-on-scroll" style="color: white;">Built for Students</h2>
-            <p class="animate-on-scroll delay-1" style="text-align: center; max-width: 700px; margin: 0 auto;">Edumix is a simple and intuitive modern learning platform which uses latest technologies to provide a boundless digital learning experience for Sri Lankan students.</p>
+            <h2 class="section-title animate-on-scroll" style="color: white;">
+                <span class="en-text">Built for Students</span>
+                <span class="si-text">සිසුන් වෙනුවෙන්ම නිර්මාණය කර ඇත</span>
+            </h2>
+            <p class="en-text animate-on-scroll delay-1" style="text-align: center; max-width: 700px; margin: 0 auto;">Edumix is a simple and intuitive modern learning platform which uses latest technologies to provide a boundless digital learning experience for Sri Lankan students.</p>
+            <p class="si-text animate-on-scroll delay-1" style="text-align: center; max-width: 700px; margin: 0 auto;">Edumix යනු ශ්‍රී ලාංකික සිසුන් සඳහා සීමා රහිත ඩිජිටල් ඉගෙනුම් අත්දැකීමක් ලබා දීමට නවීන තාක්ෂණයන් භාවිතා කරන සරල සහ බුද්ධිමත් නවීන ඉගෙනුම් වේදිකාවකි.</p>
+            
             <div class="edumix-content">
                 <div class="edumix-item animate-on-scroll delay-1">
-                    <h3>Freedom</h3>
-                    <p>Connect to the lesson through Edumix at your convenience.</p>
+                    <h3><span class="en-text">Freedom</span><span class="si-text">නිදහස</span></h3>
+                    <p class="en-text">Connect to the lesson through Edumix at your convenience.</p>
+                    <p class="si-text">ඔබට පහසු ඕනෑම වෙලාවක Edumix හරහා පාඩම් සමග සම්බන්ධ වන්න.</p>
                 </div>
                 <div class="edumix-item animate-on-scroll delay-2">
-                    <h3>Data Free</h3>
-                    <p>Dialog-free data for lessons when connecting via internet!</p>
+                    <h3><span class="en-text">Data Free</span><span class="si-text">දත්ත රහිත (නොමිලේ)</span></h3>
+                    <p class="en-text">Dialog-free data for lessons when connecting via internet!</p>
+                    <p class="si-text">Dialog අන්තර්ජාලය හරහා සම්බන්ධ වීමේදී පාඩම් සඳහා දත්ත අය කිරීමක් සිදු නොවේ!</p>
                 </div>
                 <div class="edumix-item animate-on-scroll delay-3">
-                    <h3>Support Hotline</h3>
-                    <p>Quick and reliable tech support for all your technical problems.</p>
+                    <h3><span class="en-text">Support Hotline</span><span class="si-text">තාක්ෂණික සහාය</span></h3>
+                    <p class="en-text">Quick and reliable tech support for all your technical problems.</p>
+                    <p class="si-text">ඔබේ සියලුම තාක්ෂණික ගැටළු සඳහා කඩිනම් සහ විශ්වාසදායක සහාය සේවාවක්.</p>
                 </div>
             </div>
         </div>
@@ -1175,18 +1332,24 @@
 
     <section class="feedback" id="feedback">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Student Feedbacks</h2>
+            <h2 class="section-title animate-on-scroll">
+                <span class="en-text">Student Feedbacks</span>
+                <span class="si-text">සිසුන්ගේ ප්‍රතිපෝෂණ</span>
+            </h2>
             <div class="feedback-container">
                 <div class="feedback-card animate-on-scroll delay-1">
-                    <p>ආයතනය මගේ ඉගෙනීම සඳහා මට හොඳ සහයෝගයක් ලබා දුන්නා. Online platform එක ගොඩක් user-friendly. පාඩම් නැවත නැවත බලන්න පුලුවන් උන එක ගොඩක් වටිනවා.</p>
+                    <p class="en-text">The institute provided great support for my studies. The online platform is very user-friendly. Being able to re-watch the lessons is highly valuable.</p>
+                    <p class="si-text">ආයතනය මගේ ඉගෙනීම සඳහා මට හොඳ සහයෝගයක් ලබා දුන්නා. Online platform එක ගොඩක් user-friendly. පාඩම් නැවත නැවත බලන්න පුලුවන් උන එක ගොඩක් වටිනවා.</p>
                     <div class="feedback-author">Nuwan De Silva (Mahanama College)</div>
                 </div>
                 <div class="feedback-card animate-on-scroll delay-2">
-                    <p>ඇත්තෙන්ම කියනවනම් මේක කියන්නේ ලමෙක්ට ගොඩ යන්න ශක්තිය දෙන සුපිරි තැනක්.. මෙතන වෙන ආයතන වල දැකපු නැති ගොඩාක් දේවල් තියෙනව.</p>
+                    <p class="en-text">Honestly, this is a superb place that gives students the strength to succeed. You can find so many things here that you won't see in other institutes.</p>
+                    <p class="si-text">ඇත්තෙන්ම කියනවනම් මේක කියන්නේ ලමෙක්ට ගොඩ යන්න ශක්තිය දෙන සුපිරි තැනක්.. මෙතන වෙන ආයතන වල දැකපු නැති ගොඩාක් දේවල් තියෙනව.</p>
                     <div class="feedback-author">Kavindu Sashintha</div>
                 </div>
                 <div class="feedback-card animate-on-scroll delay-3">
-                    <p>OL ඉවර වෙලා AL කියන මහා සාගරේට පැන්නෙ කොහොමහරි එතෙර වෙනවා කියලා හිතාගන්න. තනියෙන් පීනගෙන යන්න අමාරු නිසා මේ ආයතනය කියන නැවට නැග්ගා.</p>
+                    <p class="en-text">After finishing O/Ls, jumping into the vast ocean of A/Ls is hard. Since it's tough to swim alone, I boarded this ship called Sky Edge Institute.</p>
+                    <p class="si-text">OL ඉවර වෙලා AL කියන මහා සාගරේට පැන්නෙ කොහොමහරි එතෙර වෙනවා කියලා හිතාගන්න. තනියෙන් පීනගෙන යන්න අමාරු නිසා මේ ආයතනය කියන නැවට නැග්ගා.</p>
                     <div class="feedback-author">Ramika Risiwara (Ananda College)</div>
                 </div>
             </div>
@@ -1195,30 +1358,49 @@
 
     <section class="faq" id="faq">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Frequently Asked Questions</h2>
+            <h2 class="section-title animate-on-scroll">
+                <span class="en-text">Frequently Asked Questions</span>
+                <span class="si-text">නිතර අසන ප්‍රශ්න</span>
+            </h2>
             <div class="accordion animate-on-scroll delay-1">
                 <div class="accordion-item active">
-                    <div class="accordion-header">How do I register for classes?</div>
+                    <div class="accordion-header">
+                        <span class="en-text">How do I register for classes?</span>
+                        <span class="si-text">මා පන්ති සඳහා ලියාපදිංචි වන්නේ කෙසේද?</span>
+                    </div>
                     <div class="accordion-content">
-                        <p>You can register online through our student portal or visit our physical office during working hours. Make sure to bring your student ID and relevant documents.</p>
+                        <p class="en-text">You can register online through our student portal or visit our physical office during working hours. Make sure to bring your student ID and relevant documents.</p>
+                        <p class="si-text">අපගේ ශිෂ්‍ය ද්වාරය හරහා මාර්ගගතව හෝ කාර්යාල වේලාවන් තුළ පැමිණ ඔබට ලියාපදිංචි විය හැක. ඔබගේ හැඳුනුම්පත සහ අදාළ ලියකියවිලි ගෙන ඒමට අමතක නොකරන්න.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">Can I access recorded lectures?</div>
+                    <div class="accordion-header">
+                        <span class="en-text">Can I access recorded lectures?</span>
+                        <span class="si-text">මට පටිගත කළ දේශන නැරඹිය හැකිද?</span>
+                    </div>
                     <div class="accordion-content">
-                        <p>Yes, all online and physical classes are recorded and uploaded to the Edumix platform. You can access them anytime using your student login credentials.</p>
+                        <p class="en-text">Yes, all online and physical classes are recorded and uploaded to the Edumix platform. You can access them anytime using your student login credentials.</p>
+                        <p class="si-text">ඔව්, සියලුම මාර්ගගත සහ භෞතික පන්ති පටිගත කර Edumix වෙත උඩුගත කෙරේ. ඔබට ඔබගේ ගිණුම හරහා ඕනෑම වේලාවක ඒවාට පිවිසිය හැක.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">What are the payment methods available?</div>
+                    <div class="accordion-header">
+                        <span class="en-text">What are the payment methods available?</span>
+                        <span class="si-text">මුදල් ගෙවීමේ ක්‍රම මොනවාද?</span>
+                    </div>
                     <div class="accordion-content">
-                        <p>We accept online bank transfers, credit/debit cards via our secure gateway, and physical cash payments at our main center.</p>
+                        <p class="en-text">We accept online bank transfers, credit/debit cards via our secure gateway, and physical cash payments at our main center.</p>
+                        <p class="si-text">අපගේ ප්‍රධාන මධ්‍යස්ථානයේදී මුදලින් ගෙවීමට මෙන්ම, බැංකු තැන්පතු හෝ ක්‍රෙඩිට්/ඩෙබිට් කාඩ්පත් හරහාද ගෙවීම් කළ හැකිය.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <div class="accordion-header">Is there technical support for the Edumix platform?</div>
+                    <div class="accordion-header">
+                        <span class="en-text">Is there technical support for the Edumix platform?</span>
+                        <span class="si-text">Edumix වේදිකාව සඳහා තාක්ෂණික සහාය තිබේද?</span>
+                    </div>
                     <div class="accordion-content">
-                        <p>Absolutely! We have a dedicated support hotline. If you face any issues connecting to classes or accessing your data-free study packs, our team is ready to help.</p>
+                        <p class="en-text">Absolutely! We have a dedicated support hotline. If you face any issues connecting to classes or accessing your data-free study packs, our team is ready to help.</p>
+                        <p class="si-text">අනිවාර්යයෙන්ම! අපට ඒ සඳහාම වෙන්වූ ක්ෂණික ඇමතුම් සේවාවක් ඇත. පන්තිවලට සම්බන්ධ වීමේදී ගැටළුවක් ඇති වුවහොත් අපගේ කණ්ඩායම උපකාර කිරීමට සූදානම්.</p>
                     </div>
                 </div>
             </div>
@@ -1229,34 +1411,68 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h4>Sky Edge Institute</h4>
-                    <p style="color: #94a3b8; margin-top: 1.5rem; line-height: 1.6;">Empowering the next generation of leaders with world-class education, trusted guidance, and modern learning technologies.</p>
+                    <h4>
+                        <span class="en-text">Sky Edge Institute</span>
+                        <span class="si-text">Sky Edge ආයතනය</span>
+                    </h4>
+                    <p class="en-text" style="color: #94a3b8; margin-top: 1.5rem; line-height: 1.6;">Empowering the next generation of leaders with world-class education, trusted guidance, and modern learning technologies.</p>
+                    <p class="si-text" style="color: #94a3b8; margin-top: 1.5rem; line-height: 1.6;">ලොවක් දිනන අනාගත පරපුරක් බිහිකිරීම උදෙසා විශ්වාසනීය මඟපෙන්වීමක් සහ නවීන තාක්ෂණයෙන් සපිරි විශිෂ්ට අධ්‍යාපනයක්.</p>
                 </div>
                 <div class="footer-col">
-                    <h4>Quick Links</h4>
+                    <h4>
+                        <span class="en-text">Quick Links</span>
+                        <span class="si-text">කෙටි සබැඳි</span>
+                    </h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#objectives">Our Mission</a></li>
-                        <li><a href="#fast-track">Fast Track</a></li>
-                        <li><a href="#lecturers">Our Lecturers</a></li>
+                        <li><a href="#home"><span class="en-text">Home</span><span class="si-text">මුල් පිටුව</span></a></li>
+                        <li><a href="#objectives"><span class="en-text">Our Mission</span><span class="si-text">අපගේ මෙහෙවර</span></a></li>
+                        <li><a href="#fast-track"><span class="en-text">Fast Track</span><span class="si-text">කඩිනම් වැඩපිළිවෙළ</span></a></li>
+                        <li><a href="#lecturers"><span class="en-text">Our Lecturers</span><span class="si-text">දේශක මණ්ඩලය</span></a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Contact Us</h4>
+                    <h4>
+                        <span class="en-text">Contact Us</span>
+                        <span class="si-text">අප හා සම්බන්ධ වන්න</span>
+                    </h4>
                     <ul>
-                        <li><span style="color: #94a3b8;">Hotline:</span> 072 104 2222</li>
-                        <li><span style="color: #94a3b8;">Email:</span> info@skyedge.lk</li>
-                        <li><span style="color: #94a3b8;">Location:</span> Colombo & Online – Islandwide Access</li>
+                        <li><span style="color: #94a3b8;"><span class="en-text">Hotline:</span><span class="si-text">ක්ෂණික ඇමතුම්:</span></span> 
+                            <a href="https://wa.me/94721042222?text=Hello%20Sky%20Edge%20Institute%2C%20I%20would%20like%20to%20know%20more%20about%20your%20classes." target="_blank" class="whatsapp-btn">
+                                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                                </svg>
+                                072 104 2222
+                            </a>
+                        </li>
+                        <li><span style="color: #94a3b8;"><span class="en-text">Email:</span><span class="si-text">විද්‍යුත් තැපෑල:</span></span> info@skyedge.lk</li>
+                        <li><span style="color: #94a3b8;"><span class="en-text">Location:</span><span class="si-text">ස්ථානය:</span></span> <span class="en-text">Colombo & Online – Islandwide Access</span><span class="si-text">කොළඹ සහ මාර්ගගතව - දිවයින පුරා සේවය</span></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Sky Edge Institute | OULU Higher Education Center. All Rights Reserved.</p>
+                <p>&copy; 2026 Sky Edge Institute | OULU Higher Education Center. <span class="en-text">All Rights Reserved.</span><span class="si-text">සියලුම හිමිකම් ඇවිරිණි.</span></p>
             </div>
         </div>
     </footer>
 
     <script>
+        // --- 0. Language Toggle Logic ---
+        const langToggleBtn = document.getElementById('langToggle');
+        
+        langToggleBtn.addEventListener('click', () => {
+            const isEnglish = document.body.classList.contains('lang-en');
+            
+            if (isEnglish) {
+                document.body.classList.remove('lang-en');
+                document.body.classList.add('lang-si');
+                langToggleBtn.textContent = 'English';
+            } else {
+                document.body.classList.remove('lang-si');
+                document.body.classList.add('lang-en');
+                langToggleBtn.textContent = 'සිංහල';
+            }
+        });
+
         // --- 1. Mobile Navigation Toggle ---
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
@@ -1266,7 +1482,7 @@
             mobileMenuBtn.classList.toggle('active');
             mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
         });
-
+        
         // Close mobile menu on link click
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
@@ -1282,7 +1498,6 @@
             rootMargin: '0px',
             threshold: 0.15
         };
-
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1291,7 +1506,7 @@
                 }
             });
         }, observerOptions);
-
+        
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
@@ -1332,30 +1547,31 @@
             dot.addEventListener('click', () => updateCarousel(index));
             dotsContainer.appendChild(dot);
         });
+        
         const dots = Array.from(dotsContainer.querySelectorAll('.dot'));
-
+        
         function updateCarousel(newIndex) {
             // Handle array bounds for infinite wrapping
             if (newIndex < 0) newIndex = cards.length - 1;
             if (newIndex >= cards.length) newIndex = 0;
             
             currentIndex = newIndex;
-
+            
             // Reset classes on all cards
             cards.forEach(card => {
                 card.className = 'lecturer-card'; 
             });
-
+            
             // Update Dots
             dots.forEach(dot => dot.classList.remove('active'));
             dots[currentIndex].classList.add('active');
-
+            
             // Apply new positioning classes
             cards[currentIndex].classList.add('active');
-
+            
             // Helper function to calculate wrapped indices
             const getIndex = (offset) => (currentIndex + offset + cards.length) % cards.length;
-
+            
             cards[getIndex(-1)].classList.add('prev-1');
             cards[getIndex(1)].classList.add('next-1');
             
