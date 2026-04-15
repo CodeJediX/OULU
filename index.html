@@ -887,13 +887,13 @@ footer { background:#050c19; border-top:1px solid var(--border-d); padding:4rem 
     <h2 class="sec-h" data-r data-d="1" data-key="tt_h">Class Time Tables</h2>
     <p class="sec-p" data-r data-d="2" data-key="tt_p">Select your batch year to view the OULU Academy class timetable or contact us for the latest schedule.</p>
     <div class="tt-tabs" data-r data-d="3">
-      <button class="tt-tab active" onclick="switchTab(this,'2025')">2025 Batch</button>
-      <button class="tt-tab" onclick="switchTab(this,'2026')">2026 Batch</button>
-      <button class="tt-tab" onclick="switchTab(this,'2027')">2027 Batch</button>
+      <button class="tt-tab active" onclick="switchTab(this,'2025')">2026 Batch</button>
+      <button class="tt-tab" onclick="switchTab(this,'2026')">2027 Batch</button>
+      <button class="tt-tab" onclick="switchTab(this,'2027')">2028 Batch</button>
     </div>
     <div class="tt-box" data-r data-d="4">
       <div class="tt-ico">📅</div>
-      <p id="tt-msg">The 2025 Batch timetable will be published shortly. Contact us on <strong>072 104 2222</strong> for the current schedule.</p>
+      <p id="tt-msg">The 2026 Batch timetable will be published shortly. Contact us on <strong>072 104 2222</strong> for the current schedule.</p>
       <a href="#contact" class="btn-gold" style="display:inline-flex;margin:0 auto;" data-key="tt_cta">Request Schedule</a>
     </div>
   </div>
@@ -927,7 +927,7 @@ footer { background:#050c19; border-top:1px solid var(--border-d); padding:4rem 
       <div class="c-info" data-r data-d="1">
         <div class="c-block"><div class="c-ico">📞</div><div><strong data-key="c_hot">Hotline</strong><span data-key="c_hot_d">072 104 2222 — Monday to Saturday, 8am–6pm</span></div></div>
         <div class="c-block"><div class="c-ico">✉️</div><div><strong data-key="c_email">Email</strong><span>info@ouluacademy.lk</span></div></div>
-        <div class="c-block"><div class="c-ico">📍</div><div><strong data-key="c_loc">Location</strong><span data-key="c_loc_d">Colombo &amp; Online — Islandwide Access via Edumix</span></div></div>
+        <div class="c-block"><div class="c-ico">📍</div><div><strong data-key="c_loc">Location</strong><span data-key="c_loc_d">37 1/2, 1st Floor, Highlevel Rd, Colombo 06.</span></div></div>
         <div class="c-block"><div class="c-ico">⏰</div><div><strong data-key="c_hrs">Office Hours</strong><span data-key="c_hrs_d">Monday – Saturday: 8:00 AM – 6:00 PM</span></div></div>
         <div class="c-note"><strong data-key="c_note_h">⚡ Limited Seats Available</strong><p data-key="c_note_p">Each batch has a strictly limited number of seats. Register early to secure your place and begin your fast-track journey to A/L success with OULU Academy.</p></div>
       </div>
@@ -990,7 +990,7 @@ footer { background:#050c19; border-top:1px solid var(--border-d); padding:4rem 
         <ul>
           <li><a href="tel:0721042222">📞 072 104 2222</a></li>
           <li><a href="mailto:info@ouluacademy.lk">✉ info@ouluacademy.lk</a></li>
-          <li><a href="#contact">📍 Colombo &amp; Online</a></li>
+          <li><a href="#contact">📍 37 1/2, 1st Floor, Highlevel Rd, Colombo 06.</a></li>
           <li><a href="https://wa.me/94724401111" target="_blank">💬 WhatsApp Us</a></li>
         </ul>
       </div>
@@ -1364,9 +1364,9 @@ document.querySelectorAll('.faq-q').forEach(q => {
 
 /* ══════ TIMETABLE ══════ */
 let ttMsgs = {
-  '2025': 'The 2025 Batch timetable will be published shortly. Contact us on <strong>072 104 2222</strong> for the current schedule.',
-  '2026': 'The 2026 Batch timetable is being finalised. Call <strong>072 104 2222</strong> to be notified.',
-  '2027': 'The 2027 Batch timetable will be available closer to enrolment. Register your interest now.'
+  '2025': 'The 2026 Batch timetable will be published shortly. Contact us on <strong>072 104 2222</strong> for the current schedule.',
+  '2026': 'The 2027 Batch timetable is being finalised. Call <strong>072 104 2222</strong> to be notified.',
+  '2027': 'The 2028 Batch timetable will be available closer to enrolment. Register your interest now.'
 };
 function switchTab(btn, year) {
   document.querySelectorAll('.tt-tab').forEach(t => t.classList.remove('active'));
