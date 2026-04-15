@@ -1,1592 +1,1393 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sky Edge Institute | OULU Higher Education Center</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #3b82f6;
-            --accent-color: #f59e0b;
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --bg-light: #f3f4f6;
-            --bg-white: #ffffff;
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            color: var(--text-dark);
-            line-height: 1.6;
-            background-color: var(--bg-light);
-            overflow-x: hidden;
-        }
-
-        /* --- Language Toggle CSS --- */
-        body.lang-en .si-text { display: none !important; }
-        body.lang-si .en-text { display: none !important; }
-        
-        .lang-toggle-btn {
-            background: var(--primary-color);
-            color: white;
-            border: 2px solid var(--primary-color);
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .lang-toggle-btn:hover {
-            background: var(--bg-white);
-            color: var(--primary-color);
-        }
-
-        /* --- WhatsApp Button CSS --- */
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        
-        .whatsapp-btn:hover {
-            color: #25D366; /* WhatsApp Brand Color */
-        }
-        
-        .whatsapp-icon {
-            width: 1.2em;
-            height: 1.2em;
-            fill: currentColor;
-        }
-        
-        .cta-box .whatsapp-btn {
-            color: white;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-        
-        .cta-box .whatsapp-btn:hover {
-            color: #dcf8c6;
-            transform: scale(1.02);
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            will-change: opacity, visibility;
-        }
-
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            visibility: visible;
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        .delay-4 { animation-delay: 0.4s; }
-
-        /* Container */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Header & Navigation */
-        header {
-            background-color: var(--bg-white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: padding 0.3s ease;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            letter-spacing: 1px;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .nav-links li a {
-            font-weight: 600;
-            color: var(--text-dark);
-            position: relative;
-            transition: var(--transition);
-            padding-bottom: 5px;
-        }
-
-        .nav-links li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--secondary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links li a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links li a:hover {
-            color: var(--secondary-color);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--primary-color);
-            transition: transform 0.3s ease;
-        }
-        
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5rem 0;
-            background: linear-gradient(135deg, var(--bg-white) 0%, #e0e7ff 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .hero-content {
-            flex: 1;
-            padding-right: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content h2 {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .cta-box {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            display: inline-block;
-            margin-top: 1.5rem;
-            font-weight: 700;
-            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.2);
-        }
-
-        .cta-box span {
-            display: block;
-            font-size: 1.2rem;
-            color: var(--accent-color);
-        }
-
-        .hero-image {
-            flex: 1;
-            text-align: right;
-            position: relative;
-            z-index: 1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero-image div {
-            max-width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
-            transition: transform 0.5s ease;
-        }
-
-        .hero-image div:hover {
-            transform: scale(1.02) rotate(1deg);
-        }
-
-        /* Section Titles */
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            width: 60px;
-            height: 4px;
-            background-color: var(--accent-color);
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-            transition: width 0.3s ease;
-        }
-
-        .section-title:hover::after {
-            width: 100px;
-        }
-
-        .mission-text {
-            text-align: center;
-            font-size: 1.4rem; 
-            color: var(--secondary-color); 
-            font-weight: 600; 
-            font-style: italic; 
-            margin-bottom: 3rem;
-        }
-
-        /* Introduction Text Block */
-        .intro-text-block {
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto 3rem auto;
-            color: var(--text-light);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .intro-text-block p {
-            margin-bottom: 1rem;
-        }
-
-        /* Lecturers Carousel Section */
-        .lecturers {
-            padding: 5rem 0;
-            background-color: #f8fafc;
-            overflow: hidden;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-        }
-
-        .carousel-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            height: 480px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .carousel-track {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lecturer-card {
-            position: absolute;
-            width: 280px;
-            height: 400px;
-            background-color: var(--bg-white);
-            border-radius: 4px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            opacity: 0;
-            z-index: 1;
-        }
-
-        /* Carousel Positioning Classes */
-        .lecturer-card.active {
-            transform: translateX(0) scale(1.1);
-            z-index: 5;
-            opacity: 1;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-        
-        .lecturer-card.prev-1 {
-            transform: translateX(-55%) scale(0.95);
-            z-index: 4;
-            opacity: 0.8;
-            filter: brightness(0.9);
-        }
-
-        .lecturer-card.next-1 {
-            transform: translateX(55%) scale(0.95);
-            z-index: 4;
-            opacity: 0.8;
-            filter: brightness(0.9);
-        }
-
-        .lecturer-card.prev-2 {
-            transform: translateX(-105%) scale(0.85);
-            z-index: 3;
-            opacity: 0.5;
-            filter: brightness(0.8);
-        }
-
-        .lecturer-card.next-2 {
-            transform: translateX(105%) scale(0.85);
-            z-index: 3;
-            opacity: 0.5;
-            filter: brightness(0.8);
-        }
-
-        /* Card Internals */
-        .card-top {
-            height: 45%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            position: relative;
-        }
-
-        .bg-green { background-color: #c8e6c9; }
-        .bg-orange { background-color: #ffe0b2; }
-        .bg-red { background-color: #ffcdd2; }
-        .bg-purple { background-color: #d1c4e9; }
-        .bg-lightgreen { background-color: #dcedc8; }
-
-        .card-top img {
-            width: 140px;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 10px 10px 0 0;
-            margin-bottom: -10px;
-            z-index: 2;
-        }
-
-        .card-bottom {
-            height: 55%;
-            padding: 1.5rem 1rem;
-            text-align: center;
-            background-color: #eef2f6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .lecturer-card h3 {
-            font-size: 1.1rem;
-            color: #000;
-            margin-bottom: 0.2rem;
-            font-weight: 700;
-        }
-
-        .subject-title {
-            color: #0288d1;
-            font-size: 1.2rem;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-        }
-
-        .qualifications {
-            font-size: 0.75rem;
-            color: #0277bd;
-            line-height: 1.3;
-        }
-        
-        .qualifications p {
-            margin-bottom: 0.3rem;
-        }
-
-        /* Navigation Controls */
-        .nav-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            font-size: 3rem;
-            color: #007bff;
-            cursor: pointer;
-            z-index: 10;
-            transition: transform 0.2s ease;
-            font-weight: 300;
-        }
-
-        .nav-arrow:hover {
-            transform: translateY(-50%) scale(1.2);
-        }
-
-        .left-arrow { left: 10px; }
-        .right-arrow { right: 10px; }
-
-        .carousel-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #b0bec5;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .dot.active {
-            background-color: #007bff;
-        }
-
-        /* Features / Objectives / Fast Track Sections */
-        .features {
-            padding: 5rem 0;
-            background-color: var(--bg-light);
-        }
-
-        .features-white {
-            background-color: var(--bg-white);
-        }
-
-        .fast-track-section {
-            background-color: #f0f4f8;
-            padding: 5rem 0;
-            border-top: 1px solid #e2e8f0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-item {
-            background: var(--bg-white);
-            padding: 2.5rem 2rem;
-            border-radius: 15px;
-            border-top: 4px solid var(--secondary-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .features-white .feature-item,
-        .fast-track-section .feature-item {
-            background: var(--bg-white);
-        }
-
-        .feature-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15);
-        }
-
-        .feature-item h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .feature-item ul {
-            list-style: none;
-            padding-top: 10px;
-        }
-
-        .feature-item ul li {
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
-
-        .feature-item ul li::before {
-            content: '✔';
-            color: var(--accent-color);
-            position: absolute;
-            left: 0;
-            font-size: 0.9rem;
-        }
-
-        /* Timetables */
-        .timetables {
-            padding: 5rem 0;
-            background-color: var(--bg-white);
-            text-align: center;
-        }
-
-        .timetable-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-outline {
-            padding: 1rem 2.5rem;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            background: transparent;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn-outline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
-            z-index: -1;
-        }
-
-        .btn-outline:hover::before {
-            width: 100%;
-        }
-
-        .btn-outline:hover {
-            color: var(--bg-white);
-            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Edumix Section */
-        .edumix {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #172554 100%);
-            color: var(--bg-white);
-            position: relative;
-        }
-
-        .edumix .section-title {
-            color: var(--bg-white);
-        }
-
-        .edumix-content {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .edumix-item {
-            text-align: center;
-            max-width: 300px;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .edumix-item:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .edumix-item h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        /* Feedback Section */
-        .feedback {
-            padding: 5rem 0;
-            background-color: var(--bg-white);
-        }
-
-        .feedback-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feedback-card {
-            background-color: var(--bg-light);
-            padding: 2.5rem;
-            border-radius: 15px;
-            font-style: italic;
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feedback-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .feedback-card::before {
-            content: '"';
-            font-size: 6rem;
-            color: var(--secondary-color);
-            opacity: 0.15;
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-family: serif;
-        }
-
-        .feedback-author {
-            margin-top: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            font-style: normal;
-            display: flex;
-            align-items: center;
-        }
-        
-        .feedback-author::before {
-            content: '';
-            width: 20px;
-            height: 2px;
-            background-color: var(--accent-color);
-            margin-right: 10px;
-        }
-
-        /* FAQ Section */
-        .faq {
-            padding: 5rem 0;
-            background-color: var(--bg-light);
-        }
-
-        .accordion {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .accordion-item {
-            background-color: var(--bg-white);
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-item:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .accordion-header {
-            padding: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            background-color: #f8fafc;
-        }
-
-        .accordion-header::after {
-            content: '+';
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-item.active .accordion-header::after {
-            transform: rotate(45deg);
-        }
-
-        .accordion-content {
-            padding: 0 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.4s ease;
-            color: var(--text-light);
-            background-color: var(--bg-white);
-        }
-
-        .accordion-item.active .accordion-content {
-            padding-bottom: 1.5rem;
-            max-height: 500px;
-            transition: max-height 0.4s ease-in-out, padding 0.4s ease;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #0f172a;
-            color: #e2e8f0;
-            padding: 5rem 0 2rem;
-            position: relative;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-col h4 {
-            color: var(--bg-white);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .footer-col h4::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 30px;
-            height: 2px;
-            background-color: var(--secondary-color);
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.8rem;
-            transition: transform 0.3s ease;
-        }
-
-        .footer-col ul li:hover {
-            transform: translateX(5px);
-        }
-
-        .footer-col ul li a {
-            color: #94a3b8;
-            transition: var(--transition);
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--bg-white);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #334155;
-            color: #94a3b8;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--bg-white);
-                padding: 0;
-                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease;
-            }
-
-            .nav-links.active {
-                max-height: 500px;
-                padding: 1.5rem 0;
-            }
-
-            .nav-links li {
-                text-align: center;
-                width: 100%;
-            }
-
-            .nav-links li a {
-                display: block;
-                padding: 10px 0;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-            
-            .menu-toggle.active {
-                transform: rotate(90deg);
-            }
-
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 3rem 0;
-            }
-
-            .hero-content {
-                padding-right: 0;
-                margin-bottom: 3rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-
-            /* Responsive tweaks for the carousel */
-            .carousel-wrapper {
-                height: 420px;
-            }
-            
-            .lecturer-card {
-                width: 240px;
-                height: 350px;
-            }
-
-            .lecturer-card.prev-1 { transform: translateX(-40%) scale(0.90); }
-            .lecturer-card.next-1 { transform: translateX(40%) scale(0.90); }
-            .lecturer-card.prev-2 { transform: translateX(-80%) scale(0.80); opacity: 0;}
-            .lecturer-card.next-2 { transform: translateX(80%) scale(0.80); opacity: 0; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OULU Academy | A/L Success, First Attempt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────
+   RESET & DESIGN TOKENS
+───────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --ink:       #08111f;
+  --ink-mid:   #111e35;
+  --ink-soft:  #1e3154;
+  --gold:      #c4922a;
+  --gold-lt:   #f0c050;
+  --gold-dim:  rgba(196,146,42,0.15);
+  --sky:       #3b82f6;
+  --cream:     #f8f7f3;
+  --card:      #ffffff;
+  --muted:     #64748b;
+  --border-d:  rgba(255,255,255,0.07);
+  --border-l:  rgba(8,17,31,0.08);
+  --r:         14px;
+  --shadow:    0 8px 40px rgba(8,17,31,0.16);
+  --ease:      cubic-bezier(0.4,0,0.2,1);
+  --wa-green:  #25d366;
+}
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; line-height:1.65; }
+a { text-decoration:none; color:inherit; }
+ul { list-style:none; }
+img { max-width:100%; display:block; }
+
+/* ─── PRELOADER ─── */
+#preloader {
+  position:fixed; inset:0; background:var(--ink);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  z-index:9999; transition:opacity .7s var(--ease), visibility .7s var(--ease);
+}
+#preloader.hide { opacity:0; visibility:hidden; pointer-events:none; }
+#preloader img { width:88px; height:88px; object-fit:contain; border-radius:16px; animation:plPulse 1.4s ease-in-out infinite; }
+@keyframes plPulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.07);opacity:.85;} }
+.pl-name { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:900; color:#fff; margin-top:1.1rem; letter-spacing:.04em; }
+.pl-name span { color:var(--gold-lt); }
+.pl-sub { font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-top:.35rem; }
+.pl-bar { width:200px; height:2px; background:rgba(255,255,255,.1); border-radius:99px; overflow:hidden; margin-top:1.8rem; }
+.pl-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--gold),var(--gold-lt)); border-radius:99px; animation:plFill 2.5s var(--ease) forwards; }
+@keyframes plFill { to{width:100%;} }
+
+/* ─── SCROLL TOP ─── */
+#scrollTop {
+  position:fixed; bottom:5.5rem; right:1.4rem; width:44px; height:44px;
+  background:var(--ink-mid); border:1px solid var(--gold); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--gold);
+  cursor:pointer; z-index:600; opacity:0; pointer-events:none; transition:all .3s var(--ease);
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+#scrollTop.show { opacity:1; pointer-events:auto; }
+#scrollTop:hover { background:var(--gold); color:var(--ink); transform:translateY(-3px); }
+
+/* ─── WHATSAPP FLOAT ─── */
+#waFloat {
+  position:fixed; bottom:1.4rem; right:1.4rem; z-index:601;
+  width:52px; height:52px; border-radius:50%;
+  background:var(--wa-green);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 6px 24px rgba(37,211,102,.45);
+  cursor:pointer; transition:all .3s var(--ease);
+  animation:waPulse 2.5s ease-in-out infinite;
+}
+#waFloat:hover { transform:scale(1.1); box-shadow:0 10px 32px rgba(37,211,102,.65); animation:none; }
+#waFloat svg { width:26px; height:26px; fill:#fff; }
+@keyframes waPulse {
+  0%,100%{box-shadow:0 6px 24px rgba(37,211,102,.45);}
+  50%{box-shadow:0 6px 32px rgba(37,211,102,.7), 0 0 0 8px rgba(37,211,102,.12);}
+}
+
+/* ─── HEADER ─── */
+header {
+  position:sticky; top:0; z-index:800;
+  background:rgba(8,17,31,.97); backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border-d);
+}
+.nav-wrap {
+  max-width:1240px; margin:0 auto; padding:0 1.5rem;
+  display:flex; align-items:center; justify-content:space-between; height:70px; gap:1rem;
+}
+.logo {
+  display:flex; align-items:center; gap:.55rem;
+  font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:900;
+  color:#fff; letter-spacing:.02em; flex-shrink:0; white-space:nowrap;
+}
+.logo-badge {
+  width:36px; height:36px; border-radius:9px;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-lt) 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem; font-weight:900; color:var(--ink); font-family:'Playfair Display',serif; flex-shrink:0;
+}
+.logo em { color:var(--gold-lt); font-style:normal; }
+.d-nav { display:flex; align-items:center; gap:.1rem; }
+.d-nav a {
+  color:rgba(255,255,255,.65); font-size:.82rem; font-weight:500;
+  padding:.42rem .75rem; border-radius:8px; transition:all .25s var(--ease); white-space:nowrap;
+}
+.d-nav a:hover { color:#fff; background:rgba(255,255,255,.08); }
+.d-nav .cta { background:var(--gold)!important; color:var(--ink)!important; font-weight:700!important; margin-left:.3rem; }
+.d-nav .cta:hover { background:var(--gold-lt)!important; }
+
+/* LANG SWITCH */
+.lang-switch {
+  display:flex; align-items:center;
+  background:rgba(255,255,255,.07); border:1px solid var(--border-d);
+  border-radius:99px; padding:3px; gap:2px; flex-shrink:0; margin-left:.5rem;
+}
+.lang-btn {
+  padding:.3rem .75rem; border-radius:99px; font-size:.72rem; font-weight:700;
+  letter-spacing:.06em; border:none; cursor:pointer;
+  color:rgba(255,255,255,.45); background:transparent;
+  transition:all .25s var(--ease); font-family:'DM Sans',sans-serif;
+}
+.lang-btn.active { background:var(--gold); color:var(--ink); box-shadow:0 2px 10px rgba(196,146,42,.4); }
+
+.nav-right { display:flex; align-items:center; gap:.4rem; }
+
+.burger {
+  display:none; flex-direction:column; gap:5px; cursor:pointer; padding:5px; border:none; background:none;
+}
+.burger span { display:block; width:22px; height:2px; background:#fff; border-radius:2px; transition:all .3s var(--ease); }
+.burger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.burger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.m-nav {
+  display:none; flex-direction:column; gap:.2rem;
+  background:#0c1829; padding:1rem 1.5rem 1.5rem; border-top:1px solid var(--border-d);
+}
+.m-nav.open { display:flex; }
+.m-nav a { color:rgba(255,255,255,.72); font-size:.95rem; font-weight:500; padding:.7rem 1rem; border-radius:9px; transition:all .25s var(--ease); }
+.m-nav a:hover { color:#fff; background:rgba(255,255,255,.08); }
+.m-nav .mcta { background:var(--gold); color:var(--ink); font-weight:700; text-align:center; margin-top:.5rem; border-radius:10px; }
+.m-lang { display:flex; gap:.5rem; padding:.5rem 1rem .3rem; }
+.m-lang .lang-btn { flex:1; text-align:center; border:1.5px solid rgba(255,255,255,.15); border-radius:99px; padding:.55rem 0; font-size:.8rem; }
+.m-lang .lang-btn.active { background:var(--gold); color:var(--ink); border-color:var(--gold); }
+
+/* ─── HERO ─── */
+.hero { min-height:100vh; background:var(--ink); position:relative; overflow:hidden; display:flex; align-items:center; }
+.hero-glow {
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 900px 700px at 65% 45%,rgba(59,130,246,.1) 0%,transparent 70%),
+    radial-gradient(ellipse 500px 400px at 5% 90%,rgba(196,146,42,.07) 0%,transparent 70%);
+}
+.hero-dots {
+  position:absolute; inset:0; pointer-events:none; opacity:.045;
+  background-image:radial-gradient(circle,rgba(255,255,255,.8) 1px,transparent 1px);
+  background-size:36px 36px;
+}
+.hero-inner {
+  max-width:1240px; width:100%; margin:0 auto; padding:5rem 1.5rem 4rem;
+  display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; position:relative; z-index:2;
+}
+.h-eyebrow {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:var(--gold-dim); border:1px solid rgba(196,146,42,.35);
+  border-radius:99px; padding:.38rem 1rem; font-size:.72rem; font-weight:700;
+  color:var(--gold-lt); letter-spacing:.1em; text-transform:uppercase; margin-bottom:1.4rem;
+  opacity:0; animation:up .7s .2s var(--ease) forwards;
+}
+.h-eyebrow::before { content:'✦'; font-size:.6rem; }
+.hero h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem,4.2vw,3.6rem); font-weight:900; line-height:1.1; color:#fff; margin-bottom:1.2rem;
+  opacity:0; animation:up .7s .38s var(--ease) forwards;
+}
+.hero h1 em { color:var(--gold-lt); font-style:italic; }
+.h-sub { font-size:1rem; color:rgba(255,255,255,.6); margin-bottom:.7rem; line-height:1.75; opacity:0; animation:up .7s .52s var(--ease) forwards; }
+.h-sin { font-size:.9rem; color:rgba(255,255,255,.38); margin-bottom:2rem; opacity:0; animation:up .7s .62s var(--ease) forwards; }
+.h-actions { display:flex; flex-wrap:wrap; gap:.9rem; opacity:0; animation:up .7s .76s var(--ease) forwards; }
+.btn-gold {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-lt) 100%);
+  color:var(--ink); font-weight:700; font-size:.95rem;
+  padding:.85rem 1.9rem; border-radius:11px; border:none; cursor:pointer;
+  transition:all .3s var(--ease); box-shadow:0 4px 22px rgba(196,146,42,.38);
+}
+.btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(196,146,42,.55); }
+.btn-outline-w {
+  display:inline-flex; align-items:center; gap:.5rem;
+  background:transparent; color:rgba(255,255,255,.8); font-weight:500; font-size:.95rem;
+  padding:.85rem 1.9rem; border-radius:11px; border:1.5px solid rgba(255,255,255,.2);
+  cursor:pointer; transition:all .3s var(--ease);
+}
+.btn-outline-w:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.4); }
+.h-stats { display:flex; gap:2.2rem; flex-wrap:wrap; margin-top:2.5rem; opacity:0; animation:up .7s .92s var(--ease) forwards; }
+.h-stat .n { font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:900; color:var(--gold-lt); display:block; }
+.h-stat .l { font-size:.72rem; color:rgba(255,255,255,.4); letter-spacing:.05em; }
+.h-visual { opacity:0; animation:fadeIn 1s .45s var(--ease) forwards; position:relative; }
+.h-img-frame {
+  border-radius:22px; overflow:hidden; aspect-ratio:4/3;
+  background:linear-gradient(135deg,#1a2744 0%,#0e1930 100%);
+  box-shadow:0 30px 80px rgba(0,0,0,.55); border:1px solid var(--border-d);
+}
+.h-img-frame img { width:100%; height:100%; object-fit:cover; }
+.h-badge {
+  position:absolute; bottom:-18px; left:-18px;
+  background:var(--ink-mid); border:1px solid rgba(196,146,42,.3);
+  border-radius:14px; padding:1rem 1.3rem;
+  display:flex; align-items:center; gap:.8rem; box-shadow:var(--shadow);
+  animation:floatY 4s ease-in-out infinite;
+}
+.h-badge-i { font-size:1.4rem; }
+.h-badge strong { display:block; color:#fff; font-size:.9rem; }
+.h-badge span { font-size:.72rem; color:var(--gold); }
+.h-badge2 {
+  position:absolute; top:-16px; right:-16px;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-lt) 100%);
+  border-radius:12px; padding:.8rem 1.2rem;
+  display:flex; align-items:center; gap:.6rem;
+  box-shadow:0 8px 28px rgba(196,146,42,.45);
+  animation:floatY 4s 1.5s ease-in-out infinite;
+}
+.h-badge2 strong { font-size:.85rem; color:var(--ink); font-weight:700; display:block; }
+.h-badge2 span { font-size:.7rem; color:var(--ink-soft); }
+
+@keyframes up { from{opacity:0;transform:translateY(26px);} to{opacity:1;transform:none;} }
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+@keyframes floatY { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+
+/* ─── SECTION UTILITIES ─── */
+.sec { padding:6rem 1.5rem; }
+.wrap { max-width:1240px; margin:0 auto; }
+.sec-label {
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-size:.7rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:.9rem;
+}
+.sec-label::before { content:''; display:block; width:22px; height:2px; background:var(--gold); }
+.sec-h { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.2vw,2.7rem); font-weight:900; line-height:1.15; color:var(--ink); margin-bottom:.9rem; }
+.sec-h.lt { color:#fff; }
+.sec-p { font-size:1rem; color:var(--muted); max-width:660px; line-height:1.8; }
+.sec-p.lt { color:rgba(255,255,255,.5); }
+[data-r] { opacity:0; transform:translateY(28px); transition:opacity .65s var(--ease),transform .65s var(--ease); }
+[data-r].on { opacity:1; transform:none; }
+[data-r][data-d="1"]{transition-delay:.1s;}[data-r][data-d="2"]{transition-delay:.2s;}
+[data-r][data-d="3"]{transition-delay:.3s;}[data-r][data-d="4"]{transition-delay:.4s;}
+[data-r][data-d="5"]{transition-delay:.5s;}
+
+/* ─── STATS BAND ─── */
+.stats-band { background:var(--ink-mid); border-top:1px solid var(--border-d); border-bottom:1px solid rgba(196,146,42,.15); padding:2.5rem 1.5rem; }
+.stats-band-inner { max-width:1240px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); }
+.sb-item { text-align:center; padding:1.4rem 1rem; border-right:1px solid var(--border-d); transition:background .3s var(--ease); }
+.sb-item:last-child { border-right:none; }
+.sb-item:hover { background:rgba(255,255,255,.03); }
+.sb-num { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:900; color:var(--gold-lt); display:block; }
+.sb-lbl { font-size:.78rem; color:rgba(255,255,255,.45); margin-top:.3rem; }
+
+/* ─── ABOUT ─── */
+.about-sec { background:var(--cream); }
+.about-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:5rem; align-items:center; }
+.about-img-col { position:relative; }
+.about-main-img { border-radius:20px; overflow:hidden; aspect-ratio:4/5; background:linear-gradient(135deg,#dde4f5,#c0cef0); box-shadow:var(--shadow); }
+.about-main-img img { width:100%; height:100%; object-fit:cover; }
+.about-pill {
+  position:absolute; bottom:-1.5rem; right:-1.8rem;
+  background:var(--ink); border:1px solid rgba(196,146,42,.3); border-radius:14px; padding:1.1rem 1.4rem;
+  box-shadow:var(--shadow); animation:floatY 5s ease-in-out infinite;
+}
+.about-pill strong { color:var(--gold-lt); font-size:1.5rem; font-family:'Playfair Display',serif; display:block; }
+.about-pill span { color:rgba(255,255,255,.5); font-size:.78rem; }
+.about-list { margin:1.5rem 0 2rem; display:flex; flex-direction:column; gap:.75rem; }
+.about-list li { display:flex; align-items:flex-start; gap:.7rem; font-size:.93rem; color:var(--ink-soft); }
+.about-list li::before { content:'✦'; color:var(--gold); font-size:.65rem; margin-top:.32rem; flex-shrink:0; }
+
+/* ─── FAST TRACK ─── */
+.ft-sec { background:var(--ink); }
+.ft-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-top:3.5rem; }
+.ft-card {
+  background:rgba(255,255,255,.04); border:1px solid var(--border-d);
+  border-radius:var(--r); padding:2rem; position:relative; overflow:hidden;
+  transition:all .35s var(--ease);
+}
+.ft-card::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--gold),var(--gold-lt)); opacity:0; transition:opacity .3s; }
+.ft-card:hover { background:rgba(255,255,255,.07); transform:translateY(-5px); }
+.ft-card:hover::after { opacity:1; }
+.ft-ico { width:52px; height:52px; border-radius:12px; background:rgba(196,146,42,.1); display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.2rem; }
+.ft-card h3 { font-family:'Playfair Display',serif; font-size:1.15rem; color:#fff; margin-bottom:1rem; }
+.ft-card ul li {
+  font-size:.86rem; color:rgba(255,255,255,.58); padding:.32rem 0;
+  border-bottom:1px solid var(--border-d); display:flex; align-items:flex-start; gap:.5rem;
+}
+.ft-card ul li:last-child { border-bottom:none; }
+.ft-card ul li::before { content:'→'; color:var(--gold); font-size:.75rem; margin-top:.15rem; flex-shrink:0; }
+.ft-strip {
+  margin-top:2.5rem; background:rgba(196,146,42,.07); border:1px solid rgba(196,146,42,.22);
+  border-radius:var(--r); padding:1.4rem 2rem; display:flex; align-items:center; gap:1.4rem; flex-wrap:wrap;
+}
+.ft-strip-ico { font-size:2rem; flex-shrink:0; }
+.ft-strip strong { color:var(--gold-lt); font-size:1rem; display:block; margin-bottom:.25rem; }
+.ft-strip p { color:rgba(255,255,255,.5); font-size:.88rem; line-height:1.65; }
+
+/* ─── SUBJECTS ─── */
+.subj-sec { background:#f2f4f9; }
+.subj-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:1.2rem; margin-top:3rem; }
+.subj-card {
+  background:var(--card); border-radius:var(--r); padding:1.5rem;
+  box-shadow:0 2px 16px rgba(8,17,31,.06); border:1px solid transparent;
+  transition:all .3s var(--ease); display:flex; flex-direction:column; gap:.65rem;
+}
+.subj-card:hover { transform:translateY(-4px); box-shadow:0 10px 32px rgba(8,17,31,.12); border-color:rgba(196,146,42,.25); }
+.subj-icon { width:46px; height:46px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
+.subj-card h4 { font-weight:600; font-size:.92rem; color:var(--ink); }
+.subj-card small { font-size:.76rem; color:var(--muted); }
+.stag { display:inline-block; font-size:.68rem; font-weight:700; padding:.18rem .65rem; border-radius:99px; width:fit-content; }
+.t-arts { background:rgba(59,130,246,.1); color:#3b82f6; }
+.t-lang { background:rgba(196,146,42,.12); color:var(--gold); }
+.t-gen  { background:rgba(16,185,129,.1); color:#10b981; }
+.t-com  { background:rgba(139,92,246,.1); color:#8b5cf6; }
+
+/* ─── LECTURERS ─── */
+.lec-sec { background:var(--cream); }
+.lec-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:1.5rem; margin-top:3rem; }
+.lec-card { background:var(--card); border-radius:18px; overflow:hidden; box-shadow:0 4px 24px rgba(8,17,31,.07); border:1px solid var(--border-l); transition:all .35s var(--ease); }
+.lec-card:hover { transform:translateY(-6px); box-shadow:0 18px 50px rgba(8,17,31,.14); }
+.lec-photo { aspect-ratio:1/1; overflow:hidden; background:linear-gradient(135deg,#e2e8f5,#c8d3ee); position:relative; }
+.lec-photo img { width:100%; height:100%; object-fit:cover; object-position:top; transition:transform .6s var(--ease); }
+.lec-card:hover .lec-photo img { transform:scale(1.07); }
+.lec-photo-ph { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:3.5rem; }
+.lec-body { padding:1.3rem; }
+.lec-subj { font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:.3rem; }
+.lec-body h3 { font-weight:700; font-size:1rem; color:var(--ink); margin-bottom:.5rem; }
+.lec-quals { font-size:.76rem; color:var(--muted); line-height:1.6; }
+
+/* ─── FEATURES ─── */
+.feat-sec { background:var(--ink-soft); }
+.feat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem; margin-top:3rem; }
+.feat-item {
+  background:rgba(255,255,255,.04); border:1px solid var(--border-d);
+  border-radius:var(--r); padding:1.8rem 1.8rem 1.8rem 1.6rem;
+  display:flex; gap:1.3rem; align-items:flex-start; transition:all .3s var(--ease);
+}
+.feat-item:hover { background:rgba(255,255,255,.08); transform:translateX(4px); }
+.feat-ico { flex-shrink:0; width:50px; height:50px; border-radius:12px; background:rgba(196,146,42,.12); display:flex; align-items:center; justify-content:center; font-size:1.35rem; }
+.feat-item h4 { font-size:.95rem; color:#fff; font-weight:600; margin-bottom:.45rem; }
+.feat-item p { font-size:.85rem; color:rgba(255,255,255,.5); line-height:1.7; }
+
+/* ─── EDUMIX ─── */
+.edu-sec { background:var(--ink); position:relative; overflow:hidden; }
+.edu-sec::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 800px 600px at 80% 50%,rgba(59,130,246,.07) 0%,transparent 70%); }
+.edu-inner { max-width:1240px; margin:0 auto; padding:0 1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; position:relative; z-index:2; }
+.edu-pills { display:flex; flex-wrap:wrap; gap:.65rem; margin-top:2rem; }
+.pill { display:flex; align-items:center; gap:.45rem; background:rgba(255,255,255,.06); border:1px solid var(--border-d); border-radius:99px; padding:.55rem 1.1rem; font-size:.82rem; color:rgba(255,255,255,.68); transition:all .25s var(--ease); }
+.pill:hover { background:rgba(255,255,255,.1); border-color:rgba(196,146,42,.4); }
+.pdot { width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+.edu-cards { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.edu-card { background:rgba(255,255,255,.05); border:1px solid var(--border-d); border-radius:var(--r); padding:1.6rem; transition:all .3s var(--ease); }
+.edu-card:hover { background:rgba(255,255,255,.09); transform:scale(1.03); }
+.edu-card:first-child { grid-column:span 2; }
+.edu-card .ei { font-size:1.6rem; margin-bottom:.8rem; }
+.edu-card h4 { color:var(--gold-lt); font-size:.95rem; font-weight:600; margin-bottom:.4rem; }
+.edu-card p { font-size:.8rem; color:rgba(255,255,255,.48); line-height:1.7; }
+
+/* ─── GALLERY ─── */
+.gallery-sec { background:var(--ink); overflow:hidden; }
+.gallery-intro { text-align:center; margin-bottom:3rem; }
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  grid-template-rows:auto;
+  gap:12px;
+  margin-top:2rem;
+}
+.g-item {
+  overflow:hidden; border-radius:16px; position:relative;
+  background:linear-gradient(135deg,#1a2744,#0e1930);
+  border:1px solid var(--border-d);
+  cursor:pointer; transition:all .4s var(--ease);
+}
+.g-item:nth-child(1) { grid-column:span 5; grid-row:span 2; aspect-ratio:4/5; }
+.g-item:nth-child(2) { grid-column:span 4; aspect-ratio:16/9; }
+.g-item:nth-child(3) { grid-column:span 3; aspect-ratio:16/9; }
+.g-item:nth-child(4) { grid-column:span 3; aspect-ratio:16/9; }
+.g-item:nth-child(5) { grid-column:span 4; aspect-ratio:16/9; }
+.g-item:nth-child(6) { grid-column:span 5; grid-row:span 1; aspect-ratio:16/7; }
+.g-item:nth-child(7) { grid-column:span 7; aspect-ratio:16/7; }
+
+.g-item img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .6s var(--ease), filter .4s;
+  filter:brightness(.88);
+}
+.g-item:hover img { transform:scale(1.08); filter:brightness(1); }
+.g-overlay {
+  position:absolute; inset:0; background:linear-gradient(to top,rgba(8,17,31,.8) 0%,transparent 55%);
+  opacity:0; transition:opacity .4s var(--ease); display:flex; align-items:flex-end; padding:1.2rem;
+}
+.g-item:hover .g-overlay { opacity:1; }
+.g-label { color:rgba(255,255,255,.9); font-size:.78rem; font-weight:600; letter-spacing:.05em; }
+/* Placeholder art for gallery items when no image */
+.g-placeholder {
+  width:100%; height:100%; min-height:160px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem;
+  background:linear-gradient(135deg,rgba(196,146,42,.08),rgba(59,130,246,.06));
+}
+.g-placeholder .gp-ico { font-size:2.2rem; opacity:.6; }
+.g-placeholder .gp-lbl { font-size:.72rem; color:rgba(255,255,255,.3); letter-spacing:.08em; text-align:center; padding:0 1rem; }
+
+/* Lightbox */
+#lightbox {
+  display:none; position:fixed; inset:0; z-index:2000;
+  background:rgba(8,17,31,.95); align-items:center; justify-content:center;
+  backdrop-filter:blur(12px);
+}
+#lightbox.show { display:flex; }
+#lightbox img { max-width:90vw; max-height:85vh; border-radius:16px; box-shadow:0 30px 80px rgba(0,0,0,.8); object-fit:contain; }
+#lbClose {
+  position:absolute; top:1.5rem; right:1.5rem; width:44px; height:44px;
+  background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:1.2rem; color:#fff; cursor:pointer; transition:all .25s var(--ease);
+}
+#lbClose:hover { background:rgba(255,255,255,.2); }
+
+/* ─── TESTIMONIALS ─── */
+.testi-sec { background:#f2f4f9; }
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-top:3rem; }
+.testi-card {
+  background:var(--card); border-radius:var(--r); padding:2rem;
+  box-shadow:0 2px 18px rgba(8,17,31,.06); border:1px solid transparent;
+  transition:all .3s var(--ease); display:flex; flex-direction:column; gap:.85rem;
+}
+.testi-card:hover { transform:translateY(-4px); box-shadow:0 12px 38px rgba(8,17,31,.12); border-color:rgba(196,146,42,.22); }
+.testi-stars { color:var(--gold); font-size:.8rem; letter-spacing:2px; }
+.testi-txt { font-size:.9rem; color:var(--ink-soft); line-height:1.8; font-style:italic; flex:1; }
+.testi-auth { display:flex; align-items:center; gap:.7rem; padding-top:.75rem; border-top:1px solid rgba(8,17,31,.06); }
+.t-av { width:38px; height:38px; border-radius:50%; flex-shrink:0; background:linear-gradient(135deg,var(--ink-mid),#3b82f6); display:flex; align-items:center; justify-content:center; font-size:.85rem; color:#fff; font-weight:700; }
+.testi-auth strong { font-size:.86rem; color:var(--ink); display:block; }
+.testi-auth span { font-size:.73rem; color:var(--muted); }
+
+/* ─── TIMETABLE ─── */
+.tt-sec { background:var(--cream); }
+.tt-tabs { display:flex; gap:.7rem; flex-wrap:wrap; margin:2rem 0 1.5rem; }
+.tt-tab { padding:.6rem 1.4rem; border-radius:99px; font-size:.875rem; font-weight:600; border:1.5px solid rgba(8,17,31,.15); background:transparent; color:var(--ink-soft); cursor:pointer; transition:all .25s var(--ease); }
+.tt-tab.active, .tt-tab:hover { background:var(--ink); color:var(--gold-lt); border-color:var(--ink); }
+.tt-box { background:var(--card); border-radius:var(--r); border:1px solid var(--border-l); box-shadow:0 2px 16px rgba(8,17,31,.05); padding:2.5rem; text-align:center; }
+.tt-box .tt-ico { font-size:2.8rem; margin-bottom:.8rem; }
+.tt-box p { color:var(--muted); font-size:.92rem; max-width:480px; margin:0 auto 1.5rem; line-height:1.75; }
+
+/* ─── FAQ ─── */
+.faq-sec { background:#f2f4f9; }
+.faq-list { max-width:760px; margin:3rem auto 0; display:flex; flex-direction:column; gap:.7rem; }
+.faq-item { background:var(--card); border-radius:var(--r); border:1px solid var(--border-l); overflow:hidden; box-shadow:0 1px 10px rgba(8,17,31,.04); }
+.faq-q { padding:1.3rem 1.5rem; font-weight:600; font-size:.93rem; color:var(--ink); display:flex; justify-content:space-between; align-items:center; cursor:pointer; gap:1rem; transition:background .25s; }
+.faq-q:hover { background:rgba(8,17,31,.02); }
+.faq-ico { flex-shrink:0; width:26px; height:26px; border-radius:50%; background:rgba(196,146,42,.1); display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--gold); transition:transform .3s var(--ease); }
+.faq-item.open .faq-ico { transform:rotate(45deg); background:rgba(196,146,42,.2); }
+.faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease,padding .3s ease; font-size:.88rem; color:var(--muted); line-height:1.8; padding:0 1.5rem; }
+.faq-item.open .faq-a { max-height:300px; padding:.2rem 1.5rem 1.3rem; }
+
+/* ─── CONTACT (WhatsApp) ─── */
+.contact-sec { background:var(--ink); }
+.contact-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:4rem; align-items:start; }
+.c-info { display:flex; flex-direction:column; gap:1.2rem; }
+.c-block { display:flex; gap:1rem; align-items:flex-start; background:rgba(255,255,255,.04); border:1px solid var(--border-d); border-radius:var(--r); padding:1.2rem; transition:background .3s var(--ease); }
+.c-block:hover { background:rgba(255,255,255,.07); }
+.c-ico { width:42px; height:42px; border-radius:10px; flex-shrink:0; background:rgba(196,146,42,.12); display:flex; align-items:center; justify-content:center; font-size:1rem; }
+.c-block strong { display:block; color:#fff; font-size:.88rem; margin-bottom:.2rem; }
+.c-block span { font-size:.82rem; color:rgba(255,255,255,.45); }
+.c-note { background:rgba(196,146,42,.08); border:1px solid rgba(196,146,42,.22); border-radius:var(--r); padding:1.3rem 1.4rem; }
+.c-note strong { color:var(--gold-lt); font-weight:700; font-size:.92rem; display:block; margin-bottom:.35rem; }
+.c-note p { color:rgba(255,255,255,.5); font-size:.84rem; line-height:1.7; }
+
+/* WhatsApp contact card */
+.wa-contact-card {
+  background:rgba(255,255,255,.04); border:1px solid var(--border-d);
+  border-radius:20px; padding:2.8rem 2.4rem;
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.5rem;
+}
+.wa-icon-big {
+  width:88px; height:88px; border-radius:50%;
+  background:var(--wa-green);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 36px rgba(37,211,102,.4);
+  animation:waPulse 2.5s ease-in-out infinite;
+}
+.wa-icon-big svg { width:44px; height:44px; fill:#fff; }
+.wa-contact-card h3 { font-family:'Playfair Display',serif; color:#fff; font-size:1.4rem; }
+.wa-contact-card p { color:rgba(255,255,255,.5); font-size:.9rem; line-height:1.75; max-width:340px; }
+.wa-number { color:var(--gold-lt); font-size:1.25rem; font-weight:700; letter-spacing:.04em; }
+.btn-wa {
+  display:inline-flex; align-items:center; gap:.7rem;
+  background:var(--wa-green); color:#fff;
+  font-weight:700; font-size:1rem;
+  padding:1rem 2.4rem; border-radius:14px; border:none; cursor:pointer;
+  transition:all .3s var(--ease); width:100%; justify-content:center;
+  box-shadow:0 6px 24px rgba(37,211,102,.4);
+}
+.btn-wa:hover { background:#1db954; transform:translateY(-2px); box-shadow:0 10px 32px rgba(37,211,102,.55); }
+.btn-wa svg { width:22px; height:22px; fill:#fff; }
+.wa-alt-links { display:flex; gap:1rem; width:100%; }
+.wa-alt-links a {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:.5rem;
+  background:rgba(255,255,255,.06); border:1px solid var(--border-d); color:rgba(255,255,255,.7);
+  padding:.75rem 1rem; border-radius:11px; font-size:.85rem; font-weight:600;
+  transition:all .25s var(--ease);
+}
+.wa-alt-links a:hover { background:rgba(255,255,255,.1); color:#fff; }
+
+/* ─── FOOTER ─── */
+footer { background:#050c19; border-top:1px solid var(--border-d); padding:4rem 1.5rem 2rem; }
+.foot-inner { max-width:1240px; margin:0 auto; }
+.foot-grid { display:grid; grid-template-columns:1.8fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
+.foot-brand p { font-size:.86rem; color:rgba(255,255,255,.42); line-height:1.75; margin-top:1rem; max-width:290px; }
+.f-socials { display:flex; gap:.55rem; margin-top:1.4rem; }
+.f-soc { width:34px; height:34px; border-radius:8px; background:rgba(255,255,255,.07); border:1px solid var(--border-d); display:flex; align-items:center; justify-content:center; font-size:.8rem; color:rgba(255,255,255,.55); cursor:pointer; transition:all .25s var(--ease); }
+.f-soc:hover { background:var(--gold); color:var(--ink); border-color:var(--gold); }
+.foot-col h5 { font-size:.72rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:1.1rem; }
+.foot-col ul li { margin-bottom:.65rem; }
+.foot-col ul li a { font-size:.86rem; color:rgba(255,255,255,.52); transition:color .25s var(--ease); }
+.foot-col ul li a:hover { color:var(--gold-lt); }
+.foot-bottom { padding-top:2rem; border-top:1px solid var(--border-d); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.8rem; }
+.foot-bottom p { font-size:.8rem; color:rgba(255,255,255,.28); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:1100px) {
+  .gallery-grid { grid-template-columns:repeat(6,1fr); }
+  .g-item:nth-child(1){grid-column:span 3;grid-row:span 1;aspect-ratio:16/9;}
+  .g-item:nth-child(2){grid-column:span 3;aspect-ratio:16/9;}
+  .g-item:nth-child(3){grid-column:span 2;aspect-ratio:4/3;}
+  .g-item:nth-child(4){grid-column:span 2;aspect-ratio:4/3;}
+  .g-item:nth-child(5){grid-column:span 2;aspect-ratio:4/3;}
+  .g-item:nth-child(6){grid-column:span 3;aspect-ratio:16/9;}
+  .g-item:nth-child(7){grid-column:span 3;aspect-ratio:16/9;}
+}
+@media (max-width:1024px) {
+  .hero-inner,.about-grid,.contact-grid { gap:2.5rem; }
+  .foot-grid { grid-template-columns:1fr 1fr; gap:2.2rem; }
+  .edu-inner { gap:3rem; }
+}
+@media (max-width:768px) {
+  .d-nav { display:none; }
+  .burger { display:flex; }
+  .nav-right .lang-switch { display:none; }
+  .hero-inner { grid-template-columns:1fr; }
+  .h-badge,.h-badge2 { display:none; }
+  .h-visual { order:-1; }
+  .about-grid { grid-template-columns:1fr; }
+  .about-pill { display:none; }
+  .ft-grid { grid-template-columns:1fr; }
+  .feat-grid { grid-template-columns:1fr; }
+  .edu-inner { grid-template-columns:1fr; }
+  .edu-cards { grid-template-columns:1fr; }
+  .edu-card:first-child { grid-column:span 1; }
+  .testi-grid { grid-template-columns:1fr; }
+  .contact-grid { grid-template-columns:1fr; }
+  .stats-band-inner { grid-template-columns:repeat(2,1fr); }
+  .sb-item { border-right:none; border-bottom:1px solid var(--border-d); }
+  .sb-item:nth-child(2) { border-right: none; }
+  .sb-item:last-child { border-bottom:none; }
+  .foot-grid { grid-template-columns:1fr; }
+  .gallery-grid { grid-template-columns:1fr 1fr; }
+  .g-item { grid-column:span 1 !important; grid-row:span 1 !important; aspect-ratio:4/3 !important; }
+  .wa-alt-links { flex-direction:column; }
+}
+@media (max-width:480px) {
+  .sec { padding:4rem 1rem; }
+  .hero-inner { padding:3rem 1rem; }
+  .hero h1 { font-size:2rem; }
+  .lec-grid { grid-template-columns:1fr 1fr; }
+  .subj-grid { grid-template-columns:1fr 1fr; }
+  .gallery-grid { grid-template-columns:1fr; }
+  .g-item { aspect-ratio:16/9 !important; }
+  .wa-contact-card { padding:2rem 1.5rem; }
+}
+</style>
 </head>
-<body class="lang-en">
+<body>
 
-    <header id="header">
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">
-                    <span class="en-text">Sky Edge Institute</span>
-                    <span class="si-text">Sky Edge ආයතනය</span>
-                </a>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#home"><span class="en-text">Home</span><span class="si-text">මුල් පිටුව</span></a></li>
-                    <li><a href="#objectives"><span class="en-text">Mission</span><span class="si-text">මෙහෙවර</span></a></li>
-                    <li><a href="#fast-track"><span class="en-text">Fast Track</span><span class="si-text">කඩිනම් වැඩපිළිවෙළ</span></a></li>
-                    <li><a href="#lecturers"><span class="en-text">Lecturers</span><span class="si-text">දේශක මණ්ඩලය</span></a></li>
-                    <li><a href="#features"><span class="en-text">Features</span><span class="si-text">විශේෂාංග</span></a></li>
-                    <li><a href="#timetables"><span class="en-text">Time Table</span><span class="si-text">කාලසටහන</span></a></li>
-                    <li><a href="#feedback"><span class="en-text">Feedback</span><span class="si-text">ප්‍රතිපෝෂණ</span></a></li>
-                </ul>
-                <div class="header-controls">
-                    <button id="langToggle" class="lang-toggle-btn">සිංහල</button>
-                    <div class="menu-toggle" id="mobileMenuBtn">☰</div>
-                </div>
-            </nav>
+<!-- PRELOADER -->
+<div id="preloader">
+  <img src="preloader.gif" alt="Loading" onerror="this.style.display='none'">
+  <div class="pl-name">OULU <span>Academy</span></div>
+  <div class="pl-sub">Higher Education Center</div>
+  <div class="pl-bar"><div class="pl-fill"></div></div>
+</div>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" aria-label="Back to top">↑</button>
+
+<!-- WHATSAPP FLOAT -->
+<a id="waFloat" href="https://wa.me/94724401111?text=Hello%20OULU%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20enrollment." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lbClose" aria-label="Close">✕</button>
+  <img id="lbImg" src="" alt="Gallery">
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-wrap">
+    <a href="#home" class="logo">
+      <div class="logo-badge">O</div>
+      OULU&nbsp;<em>Academy</em>
+    </a>
+    <nav class="d-nav" id="dNav">
+      <a href="#home" data-key="nav_home">Home</a>
+      <a href="#about" data-key="nav_about">About</a>
+      <a href="#fast-track" data-key="nav_fasttrack">Fast Track</a>
+      <a href="#subjects" data-key="nav_subjects">Subjects</a>
+      <a href="#lecturers" data-key="nav_lecturers">Lecturers</a>
+      <a href="#gallery" data-key="nav_gallery">Gallery</a>
+      <a href="#testimonials" data-key="nav_feedback">Feedback</a>
+      <a href="#faq" data-key="nav_faq">FAQ</a>
+      <a href="#contact" class="cta" data-key="nav_register">Register Now</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch" id="langSwitch">
+        <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btnSI" onclick="setLang('si')">සිං</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="m-nav" id="mNav">
+    <div class="m-lang">
+      <button class="lang-btn active" id="mBtnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="mBtnSI" onclick="setLang('si')">සිංහල</button>
+    </div>
+    <a href="#home" data-key="nav_home">Home</a>
+    <a href="#about" data-key="nav_about">About</a>
+    <a href="#fast-track" data-key="nav_fasttrack">Fast Track</a>
+    <a href="#subjects" data-key="nav_subjects">Subjects</a>
+    <a href="#lecturers" data-key="nav_lecturers">Lecturers</a>
+    <a href="#gallery" data-key="nav_gallery">Gallery</a>
+    <a href="#testimonials" data-key="nav_feedback">Feedback</a>
+    <a href="#faq" data-key="nav_faq">FAQ</a>
+    <a href="#contact" class="mcta" data-key="nav_register">Register Now</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="h-eyebrow" data-key="hero_eyebrow">Sri Lanka's Fast-Track A/L Institute</div>
+      <h1 data-key="hero_h1">Pass A/Levels on<br>Your <em>First Attempt</em></h1>
+      <p class="h-sub" data-key="hero_sub">OULU Academy — structured, expert-guided A/L education designed to take motivated O/L graduates from enrolment to exam-ready in just 12–15 months.</p>
+      <p class="h-sin" data-key="hero_sin">අඩු කාලයකින් · අඩු වියදමකින් · එකම ස්ථානයකින් — A/L සාර්ථකත්වයට.</p>
+      <div class="h-actions">
+        <a href="#contact" class="btn-gold" data-key="hero_cta1">📞 Register Today <span style="font-size:.8rem;opacity:.75;margin-left:.2rem">— Limited Seats</span></a>
+        <a href="#fast-track" class="btn-outline-w" data-key="hero_cta2">Explore Programme →</a>
+      </div>
+      <div class="h-stats">
+        <div class="h-stat"><span class="n">12–15</span><span class="l" data-key="stat1_l">Months to A/L</span></div>
+        <div class="h-stat"><span class="n">6+</span><span class="l" data-key="stat2_l">Expert Lecturers</span></div>
+        <div class="h-stat"><span class="n">100%</span><span class="l" data-key="stat3_l">First-Attempt Focus</span></div>
+      </div>
+    </div>
+    <div class="h-visual">
+      <div class="h-img-frame">
+        <img src="slide1.png" alt="OULU Academy Students" onerror="this.style.display='none'">
+      </div>
+      <div class="h-badge">
+        <div class="h-badge-i">🏛️</div>
+        <div><strong data-key="badge1_strong">OULU Higher Education</strong><span data-key="badge1_span">Trusted &amp; Certified</span></div>
+      </div>
+      <div class="h-badge2">
+        <div style="font-size:1.2rem">🏆</div>
+        <div><strong data-key="badge2_strong">First-Attempt</strong><span data-key="badge2_span">A/L Success</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stats-band-inner">
+    <div class="sb-item" data-r><span class="sb-num" data-count="500">0</span><div class="sb-lbl" data-key="sband1">Students Enrolled</div></div>
+    <div class="sb-item" data-r data-d="1"><span class="sb-num" data-count="6">0+</span><div class="sb-lbl" data-key="sband2">Expert Lecturers</div></div>
+    <div class="sb-item" data-r data-d="2"><span class="sb-num" data-count="15">12–15</span><div class="sb-lbl" data-key="sband3">Months Full Syllabus</div></div>
+    <div class="sb-item" data-r data-d="3"><span class="sb-num" data-count="3">0+</span><div class="sb-lbl" data-key="sband4">Batch Years Offered</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec about-sec" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img-col" data-r>
+        <div class="about-main-img">
+          <img src="image1.png" alt="OULU Academy" onerror="this.parentElement.style.minHeight='420px'">
         </div>
-    </header>
+        <div class="about-pill"><strong>2026</strong><span data-key="about_pill">Batch Now Open</span></div>
+      </div>
+      <div>
+        <div class="sec-label" data-r data-key="about_label">About OULU Academy</div>
+        <h2 class="sec-h" data-r data-d="1" data-key="about_h">Modern Education.<br>Proven Results.</h2>
+        <p class="sec-p" data-r data-d="2" data-key="about_p">OULU Academy is a new-generation A/L institute under <strong>OULU Higher Education Center</strong>, built to help Advanced Level students succeed on their <em>very first attempt</em> — with less time, affordable fees, and all expert support under one roof.</p>
+        <ul class="about-list" data-r data-d="3">
+          <li data-key="about_li1">Fast-track pathway — complete the full A/L syllabus in 12–15 months</li>
+          <li data-key="about_li2">Smart-board technology &amp; modern audio-visual classrooms</li>
+          <li data-key="about_li3">Strong teacher–student–parent communication throughout</li>
+          <li data-key="about_li4">Online &amp; physical classes — accessible islandwide via Edumix</li>
+          <li data-key="about_li5">Budget-friendly fee structure — quality for every student</li>
+          <li data-key="about_li6">Monthly progress reports, performance rankings &amp; parent meetings</li>
+        </ul>
+        <a href="#contact" class="btn-gold" data-r data-d="4" style="display:inline-flex;" data-key="about_cta">Get Started Today →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="hero" id="home">
-        <div class="container">
-            <div style="display: flex; flex-wrap: wrap; align-items: center;">
-                <div class="hero-content animate-on-scroll">
-                    <h1 class="en-text">Sky Edge Institute</h1>
-                    <h1 class="si-text">Sky Edge ආයතනය</h1>
-                    
-                    <h2 class="en-text">Trusted Guidance for A/L Success</h2>
-                    <h2 class="si-text" style="color: var(--primary-color);">උසස් පෙළ සාර්ථකත්වයට විශ්වාසනීය මඟපෙන්වීම.</h2>
-                    
-                    <p class="en-text">Sky Edge Institute is a modern education institute designed to help Advanced Level students achieve success through structured and reliable guidance. Students can benefit from less time, affordable fees, and all services in one place.</p>
-                    <p class="si-text">අඩු කාලයකින්, අඩු වියදමකින්, එකම ස්ථානයකින්, සැලසුම්ගත සහ විශ්වාසනීය මඟපෙන්වීමක් ලබාදෙන නව පරපුරේ අධ්‍යාපන ආයතනයකි.</p>
-                    
-                    <div class="cta-box">
-                        <a href="https://wa.me/94721042222?text=Hello%20Sky%20Edge%20Institute%2C%20I%20would%20like%20to%20know%20more%20about%20your%20classes." target="_blank" class="whatsapp-btn">
-                            <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-                            </svg>
-                            072 104 2222
-                        </a>
-                        <span class="en-text">Register Today – Limited Seats!</span>
-                        <span class="si-text" style="font-size: 0.9rem; font-weight: normal; color: white;">අදම ලියාපදිංචි වන්න – සීමිත ආසන!</span>
-                    </div>
-                </div>
-                <div class="hero-image animate-on-scroll delay-2">
-                    <div style="width: 100%; height: 350px; background-image: url('slide1.png'); background-size: cover; background-position: center;"></div>
-                </div>
-            </div>
+<!-- FAST TRACK -->
+<section class="sec ft-sec" id="fast-track">
+  <div class="wrap">
+    <div class="sec-label" data-r data-key="ft_label">Our Programme</div>
+    <h2 class="sec-h lt" data-r data-d="1" data-key="ft_h">Your Fast Track to<br>First-Attempt A/L Success</h2>
+    <p class="sec-p lt" data-r data-d="2" data-key="ft_p">"Time is Gold — Learn Faster, Achieve More." What normally takes two years, OULU Academy condenses into one focused, well-structured programme.</p>
+    <div class="ft-grid">
+      <div class="ft-card" data-r data-d="1">
+        <div class="ft-ico">📚</div>
+        <h3 data-key="ft_c1_h">Academic Pathway</h3>
+        <ul>
+          <li data-key="ft_c1_l1">Choose any three main A/L subjects</li>
+          <li data-key="ft_c1_l2">Complete full syllabus within 12–15 months</li>
+          <li data-key="ft_c1_l3">Weekly unit tests &amp; performance tracking</li>
+          <li data-key="ft_c1_l4">Intensive revision &amp; model paper discussions</li>
+          <li data-key="ft_c1_l5">Structured readiness for first-attempt A/L</li>
+        </ul>
+      </div>
+      <div class="ft-card" data-r data-d="2">
+        <div class="ft-ico">🌟</div>
+        <h3 data-key="ft_c2_h">Beyond Academics</h3>
+        <ul>
+          <li data-key="ft_c2_l1">Strong teacher–student–parent connections</li>
+          <li data-key="ft_c2_l2">Regular parent meetings &amp; ranking systems</li>
+          <li data-key="ft_c2_l3">Awards &amp; recognition for top performers</li>
+          <li data-key="ft_c2_l4">Mental &amp; physical wellbeing programmes</li>
+          <li data-key="ft_c2_l5">Cultural events, projects &amp; excursions</li>
+        </ul>
+      </div>
+      <div class="ft-card" data-r data-d="3">
+        <div class="ft-ico">🤝</div>
+        <h3 data-key="ft_c3_h">Our Promise</h3>
+        <ul>
+          <li data-key="ft_c3_l1">Structured speed — no burnout, no pressure</li>
+          <li data-key="ft_c3_l2">Personalised attention to strengths &amp; gaps</li>
+          <li data-key="ft_c3_l3">University Entrance Orientation included</li>
+          <li data-key="ft_c3_l4">Time management &amp; exam technique coaching</li>
+          <li data-key="ft_c3_l5">OULU builds trust, confidence, and results</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-strip" data-r data-d="3">
+      <div class="ft-strip-ico">⏱️</div>
+      <div>
+        <strong data-key="ft_strip_h">12 to 15 Months — Complete A/L Syllabus</strong>
+        <p data-key="ft_strip_p">From O/L graduate to confident first-attempt A/L candidate. Our fast-track structured pathway covers every subject deeply — efficiently, not carelessly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<section class="sec subj-sec" id="subjects">
+  <div class="wrap">
+    <div class="sec-label" data-r data-key="subj_label">What We Teach</div>
+    <h2 class="sec-h" data-r data-d="1" data-key="subj_h">Subjects We Offer</h2>
+    <p class="sec-p" data-r data-d="2" data-key="subj_p">Expert-taught A/L subjects across all major streams, language electives and A/L common papers — all under one roof at OULU Academy.</p>
+    <div class="subj-grid" data-r data-d="3">
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(196,146,42,.1)">📜</div><h4>ඉතිහාසය — History</h4><small data-key="subj_arts">Arts Stream</small><span class="stag t-arts">Arts</span></div>
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(59,130,246,.1)">📖</div><h4>සිංහල — Sinhala</h4><small data-key="subj_lang">Language Subject</small><span class="stag t-lang">Language</span></div>
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(236,72,153,.1)">🧠</div><h4>තර්ක ශාස්ත්‍රය — Logic &amp; Scientific Method</h4><small data-key="subj_arts">Arts Stream</small><span class="stag t-arts">Arts</span></div>
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(16,185,129,.1)">🌏</div><h4>Japanese Language</h4><small data-key="subj_langelec">Language Elective</small><span class="stag t-lang">Language</span></div>
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(99,102,241,.1)">🏛️</div><h4>දේශපාලන විද්‍යාව — Political Science</h4><small data-key="subj_arts">Arts Stream</small><span class="stag t-arts">Arts</span></div>
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(245,158,11,.1)">📊</div><h4>ආර්ථික විද්‍යාව — Economics</h4><small data-key="subj_com">Commerce / Arts</small><span class="stag t-com">Commerce</span></div>
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(245,158,11,.1)">🎬</div><h4>සන්නිවේදනය හා මාධ්‍ය — Media</h4><small data-key="subj_arts">Arts Stream</small><span class="stag t-com">Arts</span></div>
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(245,158,11,.1)">🎨</div><h4>French</h4><small data-key="subj_arts">Arts Stream</small><span class="stag t-com">Arts</span></div>
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(239,68,68,.1)">📝</div><h4>General English</h4><small data-key="subj_common">A/L Common Subject</small><span class="stag t-gen">Common</span></div>
+      <div class="subj-card"><div class="subj-icon" style="background:rgba(59,130,246,.1)">🎯</div><h4>Common General Test</h4><small data-key="subj_gen">A/L General Paper</small><span class="stag t-gen">General</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LECTURERS -->
+<section class="sec lec-sec" id="lecturers">
+  <div class="wrap">
+    <div class="sec-label" data-r data-key="lec_label">Our Team</div>
+    <h2 class="sec-h" data-r data-d="1" data-key="lec_h">Expert Lecturers</h2>
+    <p class="sec-p" data-r data-d="2" data-key="lec_p">Learn from the country's most dedicated educators who have guided thousands of students to university success.</p>
+    <div class="lec-grid">
+      <div class="lec-card" data-r data-d="1"><div class="lec-photo"><img src="Ishan Ghamage.jpeg" alt="Ishan Ghamage" onerror="this.parentElement.innerHTML='<div class=lec-photo-ph style=background:linear-gradient(135deg,#c8e6c9,#a5d6a7);height:100%>👨‍🏫</div>'"></div><div class="lec-body"><p class="lec-subj">ඉතිහාසය — History</p><h3>Ishan Ghamage</h3><p class="lec-quals">BA, PGIAR</p></div></div>
+      <div class="lec-card" data-r data-d="2"><div class="lec-photo"><img src="D.U.S. WIJESINGHE.jpeg" alt="D.U.S. Wijesinghe" onerror="this.parentElement.innerHTML='<div class=lec-photo-ph style=background:linear-gradient(135deg,#ffe0b2,#ffcc80);height:100%>👩‍🏫</div>'"></div><div class="lec-body"><p class="lec-subj">සිංහල — Sinhala</p><h3>D.U.S. Wijesinghe</h3><p class="lec-quals">B.Ed. Hons. in IT</p></div></div>
+      <div class="lec-card" data-r data-d="3"><div class="lec-photo"><img src="shyamali.png" alt="Shyamali Liyanarachchi" onerror="this.parentElement.innerHTML='<div class=lec-photo-ph style=background:linear-gradient(135deg,#ffcdd2,#ef9a9a);height:100%>👩‍🏫</div>'"></div><div class="lec-body"><p class="lec-subj">තර්ක ශාස්ත්‍රය — Logic</p><h3>Shyamali Liyanarachchi</h3><p class="lec-quals">BA, MA, PGDE<br>Specialist in Logic &amp; Scientific Method</p></div></div>
+      <div class="lec-card" data-r data-d="1"><div class="lec-photo"><img src="Hansika Perera.jpeg" alt="Hansika Perera" onerror="this.parentElement.innerHTML='<div class=lec-photo-ph style=background:linear-gradient(135deg,#d1c4e9,#b39ddb);height:100%>👩‍🏫</div>'"></div><div class="lec-body"><p class="lec-subj">Japanese Language</p><h3>Hansika Perera</h3><p class="lec-quals">B.Sc. Engineering (Hons.)<br>University of Moratuwa<br>Over 28 Years of Teaching Experience</p></div></div>
+      <div class="lec-card" data-r data-d="2"><div class="lec-photo"><img src="Sugathi Silva .png" alt="Sugathi Silva" onerror="this.parentElement.innerHTML='<div class=lec-photo-ph style=background:linear-gradient(135deg,#dcedc8,#c5e1a5);height:100%>👩‍🏫</div>'"></div><div class="lec-body"><p class="lec-subj">දේශපාලන විද්‍යාව — Political Science</p><h3>Sugathi Silva</h3><p class="lec-quals">BA (Hons.) Criminology &amp; Criminal Justice<br>University of Sri Jayewardenepura</p></div></div>
+      <div class="lec-card" data-r data-d="3"><div class="lec-photo"><img src="leon silva.jpeg" alt="Leon Silva" onerror="this.parentElement.innerHTML='<div class=lec-photo-ph style=background:linear-gradient(135deg,#b2dfdb,#80cbc4);height:100%>👨‍🏫</div>'"></div><div class="lec-body"><p class="lec-subj">ආර්ථික විද්‍යාව — Economics</p><h3>Leon Silva</h3><p class="lec-quals">B.Sc. (Management) Special</p></div></div>
+      <div class="lec-card" data-r data-d="1"><div class="lec-photo"><img src="dilini.jpeg" alt="Dilini Hettiarachchi" onerror="this.parentElement.innerHTML='<div class=lec-photo-ph style=background:linear-gradient(135deg,#fce4ec,#f48fb1);height:100%>👩‍🏫</div>'"></div><div class="lec-body"><p class="lec-subj">French</p><h3>Dilini Hettiarachchi</h3><p class="lec-quals">FIE</p></div></div>
+      <div class="lec-card" data-r data-d="2"><div class="lec-photo"><img src="isindra.jpeg" alt="Isindra Moonesinghe" onerror="this.parentElement.innerHTML='<div class=lec-photo-ph style=background:linear-gradient(135deg,#e8eaf6,#9fa8da);height:100%>👩‍🏫</div>'"></div><div class="lec-body"><p class="lec-subj">සන්නිවේදනය හා මාධ්‍ය — Media</p><h3>Isindra Moonesinghe</h3><p class="lec-quals">BA, MSSC, PGDE</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec feat-sec" id="features">
+  <div class="wrap">
+    <div class="sec-label" data-r data-key="feat_label">Why OULU Academy</div>
+    <h2 class="sec-h lt" data-r data-d="1" data-key="feat_h">Special Features</h2>
+    <p class="sec-p lt" data-r data-d="2" data-key="feat_p">A complete academic ecosystem ensuring every OULU Academy student thrives — inside the classroom and beyond.</p>
+    <div class="feat-grid">
+      <div class="feat-item" data-r data-d="1"><div class="feat-ico">🖥️</div><div><h4 data-key="feat_1h">Online &amp; Physical Classes</h4><p data-key="feat_1p">Live classes at our Colombo centre with simultaneous Zoom access. All sessions recorded and available on Edumix — study anywhere, anytime, islandwide.</p></div></div>
+      <div class="feat-item" data-r data-d="2"><div class="feat-ico">🎯</div><div><h4 data-key="feat_2h">Expert Exam Preparation</h4><p data-key="feat_2p">Dedicated lecturers for every subject. Intensive past paper &amp; model paper discussions. Full A/L General English and Common General Test preparation included.</p></div></div>
+      <div class="feat-item" data-r data-d="3"><div class="feat-ico">📈</div><div><h4 data-key="feat_3h">Student Tracking &amp; Mentorship</h4><p data-key="feat_3p">Monthly progress reports, parent meetings, performance rankings, motivation sessions, time management coaching, and University Entrance Orientation for every student.</p></div></div>
+      <div class="feat-item" data-r data-d="4"><div class="feat-ico">💰</div><div><h4 data-key="feat_4h">Budget-Friendly Fees</h4><p data-key="feat_4p">සෑම කෙනෙකුටම ගැළපෙන ගාස්තු පද්ධතිය. A carefully structured fee system ensuring high-quality education is accessible to every motivated student without financial burden.</p></div></div>
+      <div class="feat-item" data-r data-d="1"><div class="feat-ico">📋</div><div><h4 data-key="feat_5h">Smart Board Technology</h4><p data-key="feat_5p">Every classroom at OULU Academy is equipped with smart boards and modern audio-visual tools, making complex syllabus concepts clear, engaging and memorable.</p></div></div>
+      <div class="feat-item" data-r data-d="2"><div class="feat-ico">🏅</div><div><h4 data-key="feat_6h">Awards &amp; Recognition</h4><p data-key="feat_6p">Top performers receive awards, rankings and recognition at regular award ceremonies — building healthy competition, confidence, and long-lasting academic motivation.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUMIX -->
+<section class="sec edu-sec" id="edumix">
+  <div class="edu-inner">
+    <div>
+      <div class="sec-label" data-r data-key="edu_label">Digital Platform</div>
+      <h2 class="sec-h lt" data-r data-d="1" data-key="edu_h">Powered by<br>Edumix</h2>
+      <p class="sec-p lt" data-r data-d="2" data-key="edu_p">Edumix is OULU Academy's own modern learning platform — simple, intuitive, and built to give Sri Lankan A/L students a boundless digital learning experience.</p>
+      <div class="edu-pills" data-r data-d="3">
+        <div class="pill"><div class="pdot"></div><span data-key="edu_pill1">Study anytime, anywhere</span></div>
+        <div class="pill"><div class="pdot"></div><span data-key="edu_pill2">Dialog data-free access</span></div>
+        <div class="pill"><div class="pdot"></div><span data-key="edu_pill3">All lectures recorded</span></div>
+        <div class="pill"><div class="pdot"></div><span data-key="edu_pill4">Downloadable study packs</span></div>
+        <div class="pill"><div class="pdot"></div><span data-key="edu_pill5">Dedicated support hotline</span></div>
+      </div>
+    </div>
+    <div class="edu-cards" data-r data-d="2">
+      <div class="edu-card"><div class="ei">🕊️</div><h4 data-key="edu_c1h">Freedom</h4><p data-key="edu_c1p">Connect to any lesson through Edumix at your convenience — morning, evening, or late night. Your schedule, your pace, your success.</p></div>
+      <div class="edu-card"><div class="ei">📡</div><h4 data-key="edu_c2h">Data Free</h4><p data-key="edu_c2p">Dialog SIM users enjoy free data access on Edumix. Zero data costs means zero barriers to learning for every student.</p></div>
+      <div class="edu-card"><div class="ei">🛟</div><h4 data-key="edu_c3h">Support Hotline</h4><p data-key="edu_c3p">Quick, reliable technical support for any platform issue. Our team is on standby so your learning is never interrupted.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec gallery-sec" id="gallery">
+  <div class="wrap">
+    <div class="gallery-intro" data-r>
+      <div class="sec-label" style="justify-content:center" data-key="gal_label">Our Campus Life</div>
+      <h2 class="sec-h lt" data-key="gal_h">Inside OULU Academy</h2>
+      <p class="sec-p lt" style="margin:0 auto" data-key="gal_p">A glimpse into our vibrant campus, modern classrooms, award ceremonies, and student life at OULU Academy.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Items populated by JS for clean fallbacks -->
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec testi-sec" id="testimonials">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:.5rem">
+      <div class="sec-label" data-r style="justify-content:center" data-key="testi_label">Student Voices</div>
+      <h2 class="sec-h" data-r data-d="1" style="text-align:center" data-key="testi_h">What Our Students Say</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card" data-r data-d="1"><div class="testi-stars">★★★★★</div><p class="testi-txt">ආයතනය මගේ ඉගෙනීම සඳහා මට හොඳ සහයෝගයක් ලබා දුන්නා. Online platform එක ගොඩක් user-friendly. පාඩම් නැවත නැවත බලන්න පුලුවන් උන එක ගොඩක් වටිනවා.</p><div class="testi-auth"><div class="t-av">N</div><div><strong>Nuwan De Silva</strong><span>Mahanama College</span></div></div></div>
+      <div class="testi-card" data-r data-d="1"><div class="testi-stars">★★★★★</div><p class="testi-txt">අවුරුද්දක වැනි කාලයක් තුළ උසස් පෙළ සාර්ථකව නිම කිරීමට මට නිසි ක්‍රමයක් නොතිබූ අවස්ථාවක, මෙම වැඩසටහන මට හමුවීම ඇත්තෙන්ම වාසනාවක් විය. 2025 වසරේදී මගේ ඉලක්කය සාක්ෂාත් කර ගැනීමට ලබා දුන් ඔබට ස්තූතිය.</p><div class="testi-auth"><div class="t-av">N</div><div><strong>Nulara</strong><span>OULU Academy Student</span></div></div></div>
+      <div class="testi-card" data-r data-d="2"><div class="testi-stars">★★★★★</div><p class="testi-txt">ඇත්තෙන්ම කියනවනම් මේක කියන්නේ ලමෙකුට ගොඩ යන්න ශක්තිය දෙන සුපිරි තැනක්. මෙතන වෙන ආයතන වල දැකපු නැති ගොඩාක් දේවල් තියෙනව.</p><div class="testi-auth"><div class="t-av">K</div><div><strong>Kavindu Sashintha</strong><span>OULU Academy Student</span></div></div></div>
+      <div class="testi-card" data-r data-d="3"><div class="testi-stars">★★★★★</div><p class="testi-txt">OL ඉවර වෙලා AL කියන මහා සාගරේට පැන්නෙ කොහොමහරි එතෙර වෙනවා කියලා හිතාගන්න. OULU Academy කියන නැවට නැග්ගා — නිවැරදි තීරණයක් !</p><div class="testi-auth"><div class="t-av">R</div><div><strong>Ramika Risiwara</strong><span>Ananda College</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMETABLE -->
+<section class="sec tt-sec" id="timetables">
+  <div class="wrap">
+    <div class="sec-label" data-r data-key="tt_label">Schedules</div>
+    <h2 class="sec-h" data-r data-d="1" data-key="tt_h">Class Time Tables</h2>
+    <p class="sec-p" data-r data-d="2" data-key="tt_p">Select your batch year to view the OULU Academy class timetable or contact us for the latest schedule.</p>
+    <div class="tt-tabs" data-r data-d="3">
+      <button class="tt-tab active" onclick="switchTab(this,'2025')">2025 Batch</button>
+      <button class="tt-tab" onclick="switchTab(this,'2026')">2026 Batch</button>
+      <button class="tt-tab" onclick="switchTab(this,'2027')">2027 Batch</button>
+    </div>
+    <div class="tt-box" data-r data-d="4">
+      <div class="tt-ico">📅</div>
+      <p id="tt-msg">The 2025 Batch timetable will be published shortly. Contact us on <strong>072 104 2222</strong> for the current schedule.</p>
+      <a href="#contact" class="btn-gold" style="display:inline-flex;margin:0 auto;" data-key="tt_cta">Request Schedule</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq-sec" id="faq">
+  <div class="wrap">
+    <div style="text-align:center">
+      <div class="sec-label" data-r style="justify-content:center">FAQ</div>
+      <h2 class="sec-h" data-r data-d="1" style="text-align:center" data-key="faq_h">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open" data-r data-d="1"><div class="faq-q" data-key="faq_q1">How do I register for OULU Academy? <div class="faq-ico">+</div></div><div class="faq-a" data-key="faq_a1">Register online through our student portal or visit our Colombo office during working hours. Bring your student ID and O/L results. Call <strong>072 104 2222</strong> for step-by-step guidance.</div></div>
+      <div class="faq-item" data-r data-d="2"><div class="faq-q" data-key="faq_q2">Can I access recorded lectures later? <div class="faq-ico">+</div></div><div class="faq-a" data-key="faq_a2">Yes — every class is recorded and uploaded to the Edumix platform. Access any lecture at any time using your student login. Dialog SIM users access Edumix completely data-free.</div></div>
+      <div class="faq-item" data-r data-d="3"><div class="faq-q" data-key="faq_q3">How long does it take to complete the A/L syllabus? <div class="faq-ico">+</div></div><div class="faq-a" data-key="faq_a3">OULU Academy's fast-track programme is structured to complete the full A/L syllabus within 12 to 15 months, preparing students to sit the A/L examination confidently on their first attempt.</div></div>
+      <div class="faq-item" data-r data-d="1"><div class="faq-q" data-key="faq_q4">What payment methods are available? <div class="faq-ico">+</div></div><div class="faq-a" data-key="faq_a4">We accept online bank transfers, credit/debit card payments via our secure gateway, and cash payments at our Colombo centre. Flexible monthly instalment options are available on request.</div></div>
+      <div class="faq-item" data-r data-d="2"><div class="faq-q" data-key="faq_q5">Are classes available for students outside Colombo? <div class="faq-ico">+</div></div><div class="faq-a" data-key="faq_a5">Absolutely. Physical classes are held at our Colombo centre and all sessions are simultaneously accessible online via Edumix. Any student anywhere in Sri Lanka can enrol and attend.</div></div>
+      <div class="faq-item" data-r data-d="3"><div class="faq-q" data-key="faq_q6">Is there technical support for the Edumix platform? <div class="faq-ico">+</div></div><div class="faq-a" data-key="faq_a6">Yes. Our dedicated tech support hotline is available to resolve any platform issues quickly so your learning is never interrupted. Contact us on 072 104 2222 for assistance.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec contact-sec" id="contact">
+  <div class="wrap">
+    <div class="sec-label" data-r data-key="contact_label">Get In Touch</div>
+    <h2 class="sec-h lt" data-r data-d="1" data-key="contact_h">Register or Enquire</h2>
+    <p class="sec-p lt" style="margin-bottom:3rem" data-r data-d="2" data-key="contact_p">Ready to take the fast track to A/L success with OULU Academy? Reach us instantly on WhatsApp — we respond within minutes.</p>
+    <div class="contact-grid">
+      <div class="c-info" data-r data-d="1">
+        <div class="c-block"><div class="c-ico">📞</div><div><strong data-key="c_hot">Hotline</strong><span data-key="c_hot_d">072 104 2222 — Monday to Saturday, 8am–6pm</span></div></div>
+        <div class="c-block"><div class="c-ico">✉️</div><div><strong data-key="c_email">Email</strong><span>info@ouluacademy.lk</span></div></div>
+        <div class="c-block"><div class="c-ico">📍</div><div><strong data-key="c_loc">Location</strong><span data-key="c_loc_d">Colombo &amp; Online — Islandwide Access via Edumix</span></div></div>
+        <div class="c-block"><div class="c-ico">⏰</div><div><strong data-key="c_hrs">Office Hours</strong><span data-key="c_hrs_d">Monday – Saturday: 8:00 AM – 6:00 PM</span></div></div>
+        <div class="c-note"><strong data-key="c_note_h">⚡ Limited Seats Available</strong><p data-key="c_note_p">Each batch has a strictly limited number of seats. Register early to secure your place and begin your fast-track journey to A/L success with OULU Academy.</p></div>
+      </div>
+      <div class="wa-contact-card" data-r data-d="2">
+        <div class="wa-icon-big">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </div>
-    </section>
-
-    <section class="features features-white" id="objectives">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">
-                <span class="en-text">Our Main Objectives</span>
-                <span class="si-text">අපගේ ප්‍රධාන අරමුණු</span>
-            </h2>
-            <p class="mission-text animate-on-scroll delay-1">
-                <span class="en-text">"Guiding every child towards a successful future."</span>
-                <span class="si-text" style="font-size: 1.1rem;">"දරුවෙකුගේ අනාගතය නිවැරදි මඟකට ගෙන යාම."</span>
-            </p>
-            <div class="feature-grid">
-                <div class="feature-item animate-on-scroll delay-1">
-                    <h3>🎓 <span class="en-text">University Dreams</span><span class="si-text">විශ්වවිද්‍යාල සිහිනය</span></h3>
-                    <p class="en-text">Turning university dreams into reality.</p>
-                    <p class="si-text">විශ්වවිද්‍යාල සිහිනය යථාර්ථයක් බවට පත් කිරීම අපගේ ප්‍රධාන අරමුණයි.</p>
-                </div>
-                <div class="feature-item animate-on-scroll delay-2">
-                    <h3>🛡️ <span class="en-text">Safe Environment</span><span class="si-text">ආරක්ෂිත පරිසරය</span></h3>
-                    <p class="en-text">Providing a safe, responsible, and confident learning environment.</p>
-                    <p class="si-text">විශ්වාසය, ආරක්ෂාව සහ වගකීම සහිත ඉගෙනුම් පරිසරයක් සැපයීම.</p>
-                </div>
-                <div class="feature-item animate-on-scroll delay-3">
-                    <h3>💎 <span class="en-text">Value for Time & Money</span><span class="si-text">කාලයට සහ මුදලට වටිනාකමක්</span></h3>
-                    <p class="en-text">Maximizing students’ time and money to achieve the best results.</p>
-                    <p class="si-text">දරුවන්ගේ කාලය සහ මුදල් වටිනා ලෙස භාවිතා කර ප්‍රතිඵල ලබාදීම.</p>
-                </div>
-            </div>
+        <h3 data-key="wa_h">Chat With Us on WhatsApp</h3>
+        <p data-key="wa_p">Have a question or ready to register? Message us directly on WhatsApp — our team replies fast, any day of the week.</p>
+        <div class="wa-number">+94 72 440 1111</div>
+        <a href="https://wa.me/94724401111?text=Hello%20OULU%20Academy%2C%20I%20would%20like%20to%20enquire%20about%20enrolment%20for%20the%20A%2FL%20programme." target="_blank" rel="noopener" class="btn-wa">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span data-key="wa_btn">Message Us on WhatsApp</span>
+        </a>
+        <div class="wa-alt-links">
+          <a href="tel:0721042222">📞 <span data-key="wa_call">Call Us</span></a>
+          <a href="mailto:info@ouluacademy.lk">✉️ <span data-key="wa_mail">Send Email</span></a>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="fast-track-section" id="fast-track">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">
-                <span class="en-text">Your Fast Track to First-Attempt A/L Success</span>
-                <span class="si-text">පළමු වරෙන්ම උසස් පෙළ සමත් වීමේ කඩිනම් වැඩපිළිවෙළ</span>
-            </h2>
-            <p class="mission-text animate-on-scroll delay-1" style="color: var(--primary-color);">
-                <span class="en-text">"Time is Gold – Learn Faster, Achieve More"</span>
-                <span class="si-text">"කාලය රන් හා සමානය - කඩිනමින් ඉගෙනගන්න, වැඩි යමක් ලබාගන්න"</span>
-            </p>
-            
-            <div class="intro-text-block animate-on-scroll delay-2">
-                <p class="en-text"><strong>Sky Edge Institute</strong> is a modern, fast-track educational institute designed to transform motivated O/L graduates into confident, first-attempt A/L achievers. We believe youthful energy should never be wasted. In Sri Lanka, many students lose motivation after O/Ls and remain stuck in prolonged A/L cycles.</p>
-                <p class="si-text"><strong>Sky Edge ආයතනය</strong> යනු සාමාන්‍ය පෙළ සාර්ථකව නිම කළ සිසුන්, පළමු වරෙන්ම උසස් පෙළ ජයගන්නා ආත්ම විශ්වාසයෙන් යුත් පිරිසක් බවට පත් කිරීම සඳහා නිර්මාණය කරන ලද නවීන, කඩිනම් අධ්‍යාපන ආයතනයකි. අපගේ රටේ බොහෝ සිසුන් සාමාන්‍ය පෙළින් පසු උසස් පෙළ සඳහා දීර්ඝ කාලයක් වැය කිරීමෙන් අධ්‍යාපනය කෙරෙහි ඇති උනන්දුව නැති කර ගනී.</p>
-                
-                <p class="en-text">We break this pattern by offering a high-speed, structured A/L learning pathway, enabling students to complete the entire syllabus efficiently within <strong>12 to 15 months</strong>. Using smart boards and modern learning tools, and guided by experienced educators, we take full responsibility for your child’s learning journey.</p>
-                <p class="si-text">මාස <strong>12 සිට 15</strong> දක්වා කාලයක් තුළ සම්පූර්ණ විෂය නිර්දේශය කාර්යක්ෂමව ආවරණය කරන කඩිනම් සහ ක්‍රමානුකූල අධ්‍යයන සැලැස්මක් මගින් අපි මෙම දුර්වලතාවය මඟහරවන්නෙමු. නවීන තාක්ෂණය හා පළපුරුදු ගුරුවරුන්ගේ මඟපෙන්වීම යටතේ, ඔබේ දරුවාගේ අධ්‍යාපන ගමනේ සම්පූර්ණ වගකීම අපි භාර ගනිමු.</p>
-            </div>
-
-            <div class="feature-grid">
-                <div class="feature-item animate-on-scroll delay-1">
-                    <h3>📚 <span class="en-text">Our Academic Pathway</span><span class="si-text">අපගේ අධ්‍යයන සැලැස්ම</span></h3>
-                    <ul class="en-text">
-                        <li>Students select any three main subjects</li>
-                        <li>Complete full A/L syllabus within 12–15 months</li>
-                        <li>Continuous weekly unit tests and performance tracking</li>
-                        <li>Intensive revision programs & model paper discussions</li>
-                        <li>Preparation to pass A/L on the first attempt</li>
-                    </ul>
-                    <ul class="si-text">
-                        <li>ඕනෑම ප්‍රධාන විෂයයන් තුනක් තෝරා ගැනීමේ හැකියාව</li>
-                        <li>මාස 12-15 ක් ඇතුළත සම්පූර්ණ විෂය නිර්දේශය ආවරණය කිරීම</li>
-                        <li>සෑම සතියකම ඒකක පරීක්ෂණ සහ ප්‍රගති සමාලෝචන</li>
-                        <li>පුනරීක්ෂණ වැඩසටහන් සහ ආදර්ශ ප්‍රශ්න පත්‍ර සාකච්ඡා කිරීම</li>
-                        <li>පළමු උත්සාහයෙන්ම උසස් පෙළ සමත් වීමට සූදානම් කිරීම</li>
-                    </ul>
-                </div>
-                <div class="feature-item animate-on-scroll delay-2">
-                    <h3>🌟 <span class="en-text">Beyond Academics</span><span class="si-text">අධ්‍යාපනයෙන් ඔබ්බට</span></h3>
-                    <p class="en-text" style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-light);">At Sky Edge, academic success is paired with personal growth. We focus on developing confident, disciplined, motivated students.</p>
-                    <p class="si-text" style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-light);">Sky Edge හිදී, අපි අධ්‍යාපනික සාර්ථකත්වය මෙන්ම පෞරුෂ වර්ධනයටද මුල්තැන දෙමු. විනයගරුක සහ ආත්ම විශ්වාසයකින් යුත් සිසුන් පිරිසක් බිහිකිරීම අපගේ අරමුණයි.</p>
-                    <ul class="en-text">
-                        <li>Strong teacher–student–parent connections</li>
-                        <li>Regular parent meetings & ranking systems</li>
-                        <li>Awards and recognition for top performers</li>
-                        <li>Mental and physical wellbeing programs</li>
-                        <li>Cultural events, educational projects & excursions</li>
-                    </ul>
-                    <ul class="si-text">
-                        <li>ගුරු-සිසු-දෙමාපිය ශක්තිමත් සබඳතා</li>
-                        <li>ක්‍රමානුකූල දෙමාපිය රැස්වීම් සහ ශ්‍රේණිගත කිරීමේ ක්‍රමවේද</li>
-                        <li>විශිෂ්ට ප්‍රතිඵල ලබා ගන්නා සිසුන් ඇගයීම</li>
-                        <li>මානසික සහ ශාරීරික සෞඛ්‍ය ප්‍රවර්ධන වැඩසටහන්</li>
-                        <li>සංස්කෘතික වැඩසටහන් සහ අධ්‍යාපනික චාරිකා</li>
-                    </ul>
-                </div>
-                <div class="feature-item animate-on-scroll delay-3">
-                    <h3>🤝 <span class="en-text">Our Promise</span><span class="si-text">අපගේ පොරොන්දුව</span></h3>
-                    <p class="en-text" style="margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dark);">What usually takes two years, we achieve in one focused, well-structured year — without pressure, burnout, or loss of motivation.</p>
-                    <p class="si-text" style="margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dark);">වසර දෙකක් ගතවන උසස් පෙළ අධ්‍යාපනය, මානසික පීඩනයකින් තොරව ක්‍රමානුකූලව වසරක් තුළ සම්පූර්ණ කර දීම අපගේ වගකීමයි.</p>
-                    <ul class="en-text">
-                        <li>Structured learning and speed without compromise</li>
-                        <li>Personalized attention to identify strengths & weaknesses</li>
-                        <li>First-attempt A/L success readiness</li>
-                    </ul>
-                    <ul class="si-text">
-                        <li>ගුණාත්මක බවින් ඉහළ සහ කඩිනම් ඉගෙනුම් ක්‍රියාවලියක්</li>
-                        <li>සෑම සිසුවෙකුගේම දුර්වලතා හඳුනාගෙන පෞද්ගලික අවධානය යොමු කිරීම</li>
-                        <li>පළමු වරෙන්ම උසස් පෙළ සමත් වීමේ සූදානම</li>
-                    </ul>
-                    <p class="en-text" style="margin-top: 15px; font-weight: bold; color: var(--primary-color);">Sky Edge builds trust, confidence, and results.</p>
-                    <p class="si-text" style="margin-top: 15px; font-weight: bold; color: var(--primary-color);">Sky Edge යනු විශ්වාසය සහ විශිෂ්ට ප්‍රතිඵල වල එකතුවකි.</p>
-                </div>
-            </div>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#home" class="logo"><div class="logo-badge">O</div>OULU&nbsp;<em>Academy</em></a>
+        <p data-key="foot_p">Empowering the next generation of Sri Lankan leaders with expert A/L education, trusted guidance, and modern learning technology — under OULU Higher Education Center.</p>
+        <div class="f-socials">
+          <div class="f-soc" title="Facebook">f</div>
+          <div class="f-soc" title="Instagram">ig</div>
+          <div class="f-soc" title="YouTube">▶</div>
+          <div class="f-soc" title="WhatsApp">✆</div>
         </div>
-    </section>
+      </div>
+      <div class="foot-col">
+        <h5 data-key="foot_nav">Navigate</h5>
+        <ul>
+          <li><a href="#home" data-key="nav_home">Home</a></li>
+          <li><a href="#about" data-key="nav_about">About Us</a></li>
+          <li><a href="#fast-track" data-key="nav_fasttrack">Fast Track</a></li>
+          <li><a href="#subjects" data-key="nav_subjects">Subjects</a></li>
+          <li><a href="#lecturers" data-key="nav_lecturers">Our Lecturers</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5 data-key="foot_res">Resources</h5>
+        <ul>
+          <li><a href="#features" data-key="nav_features">Features</a></li>
+          <li><a href="#gallery" data-key="nav_gallery">Gallery</a></li>
+          <li><a href="#timetables" data-key="nav_tt">Time Tables</a></li>
+          <li><a href="#testimonials" data-key="nav_feedback">Student Feedback</a></li>
+          <li><a href="#faq" data-key="nav_faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5 data-key="foot_contact">Contact</h5>
+        <ul>
+          <li><a href="tel:0721042222">📞 072 104 2222</a></li>
+          <li><a href="mailto:info@ouluacademy.lk">✉ info@ouluacademy.lk</a></li>
+          <li><a href="#contact">📍 Colombo &amp; Online</a></li>
+          <li><a href="https://wa.me/94724401111" target="_blank">💬 WhatsApp Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 OULU Academy | OULU Higher Education Center. All Rights Reserved.</p>
+      <p data-key="foot_tag">Designed for A/L Success · Islandwide Access</p>
+    </div>
+  </div>
+</footer>
 
-    <section class="lecturers" id="lecturers">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll" style="margin-bottom: 0.5rem; color: #1e3a8a; font-weight: 800;">
-                <span class="en-text">Our Talented Lecturers</span>
-                <span class="si-text">අපගේ දක්ෂ දේශක මණ්ඩලය</span>
-            </h2>
-            <p class="section-subtitle animate-on-scroll" style="text-align: center; color: var(--text-light); margin-bottom: 4rem;">
-                <span class="en-text">Learn from the best teachers in the country who has enlightened thousands already.</span>
-                <span class="si-text">දහස් ගණනකගේ නැණැස පෑදූ, දිවයිනේ හොඳම ගුරුවරුන්ගෙන් ඉගෙනගන්න.</span>
-            </p>
+<script>
+/* ══════ TRANSLATIONS ══════ */
+const T = {
+  en: {
+    nav_home:'Home', nav_about:'About', nav_fasttrack:'Fast Track',
+    nav_subjects:'Subjects', nav_lecturers:'Lecturers', nav_gallery:'Gallery',
+    nav_feedback:'Feedback', nav_faq:'FAQ', nav_register:'Register Now',
+    nav_features:'Features', nav_tt:'Time Tables',
+    hero_eyebrow:"Sri Lanka's Fast-Track A/L Institute",
+    hero_h1:'Pass A/Levels on<br>Your <em>First Attempt</em>',
+    hero_sub:'OULU Academy — structured, expert-guided A/L education designed to take motivated O/L graduates from enrolment to exam-ready in just 12–15 months.',
+    hero_sin:'අඩු කාලයකින් · අඩු වියදමකින් · එකම ස්ථානයකින් — A/L සාර්ථකත්වයට.',
+    hero_cta1:'📞 Register Today',
+    hero_cta2:'Explore Programme →',
+    stat1_l:'Months to A/L', stat2_l:'Expert Lecturers', stat3_l:'First-Attempt Focus',
+    badge1_strong:'OULU Higher Education', badge1_span:'Trusted & Certified',
+    badge2_strong:'First-Attempt', badge2_span:'A/L Success',
+    sband1:'Students Enrolled', sband2:'Expert Lecturers',
+    sband3:'Months Full Syllabus', sband4:'Batch Years Offered',
+    about_label:'About OULU Academy', about_h:'Modern Education.<br>Proven Results.',
+    about_p:'OULU Academy is a new-generation A/L institute under <strong>OULU Higher Education Center</strong>, built to help Advanced Level students succeed on their <em>very first attempt</em> — with less time, affordable fees, and all expert support under one roof.',
+    about_pill:'Batch Now Open',
+    about_li1:'Fast-track pathway — complete the full A/L syllabus in 12–15 months',
+    about_li2:'Smart-board technology & modern audio-visual classrooms',
+    about_li3:'Strong teacher–student–parent communication throughout',
+    about_li4:'Online & physical classes — accessible islandwide via Edumix',
+    about_li5:'Budget-friendly fee structure — quality for every student',
+    about_li6:'Monthly progress reports, performance rankings & parent meetings',
+    about_cta:'Get Started Today →',
+    ft_label:'Our Programme', ft_h:'Your Fast Track to<br>First-Attempt A/L Success',
+    ft_p:'"Time is Gold — Learn Faster, Achieve More." What normally takes two years, OULU Academy condenses into one focused, well-structured programme.',
+    ft_c1_h:'Academic Pathway', ft_c2_h:'Beyond Academics', ft_c3_h:'Our Promise',
+    ft_c1_l1:'Choose any three main A/L subjects', ft_c1_l2:'Complete full syllabus within 12–15 months',
+    ft_c1_l3:'Weekly unit tests & performance tracking', ft_c1_l4:'Intensive revision & model paper discussions',
+    ft_c1_l5:'Structured readiness for first-attempt A/L',
+    ft_c2_l1:'Strong teacher–student–parent connections', ft_c2_l2:'Regular parent meetings & ranking systems',
+    ft_c2_l3:'Awards & recognition for top performers', ft_c2_l4:'Mental & physical wellbeing programmes',
+    ft_c2_l5:'Cultural events, projects & excursions',
+    ft_c3_l1:'Structured speed — no burnout, no pressure', ft_c3_l2:'Personalised attention to strengths & gaps',
+    ft_c3_l3:'University Entrance Orientation included', ft_c3_l4:'Time management & exam technique coaching',
+    ft_c3_l5:'OULU builds trust, confidence, and results',
+    ft_strip_h:'12 to 15 Months — Complete A/L Syllabus',
+    ft_strip_p:'From O/L graduate to confident first-attempt A/L candidate. Our fast-track structured pathway covers every subject deeply — efficiently, not carelessly.',
+    subj_label:'What We Teach', subj_h:'Subjects We Offer',
+    subj_p:'Expert-taught A/L subjects across all major streams, language electives and A/L common papers — all under one roof at OULU Academy.',
+    subj_arts:'Arts Stream', subj_lang:'Language Subject', subj_langelec:'Language Elective',
+    subj_com:'Commerce / Arts', subj_common:'A/L Common Subject', subj_gen:'A/L General Paper',
+    lec_label:'Our Team', lec_h:'Expert Lecturers',
+    lec_p:"Learn from the country's most dedicated educators who have guided thousands of students to university success.",
+    feat_label:'Why OULU Academy', feat_h:'Special Features',
+    feat_p:'A complete academic ecosystem ensuring every OULU Academy student thrives — inside the classroom and beyond.',
+    feat_1h:'Online & Physical Classes', feat_1p:'Live classes at our Colombo centre with simultaneous Zoom access. All sessions recorded and available on Edumix — study anywhere, anytime, islandwide.',
+    feat_2h:'Expert Exam Preparation', feat_2p:'Dedicated lecturers for every subject. Intensive past paper & model paper discussions. Full A/L General English and Common General Test preparation included.',
+    feat_3h:'Student Tracking & Mentorship', feat_3p:'Monthly progress reports, parent meetings, performance rankings, motivation sessions, time management coaching, and University Entrance Orientation for every student.',
+    feat_4h:'Budget-Friendly Fees', feat_4p:'සෑම කෙනෙකුටම ගැළපෙන ගාස්තු පද්ධතිය. A carefully structured fee system ensuring high-quality education is accessible to every motivated student without financial burden.',
+    feat_5h:'Smart Board Technology', feat_5p:'Every classroom at OULU Academy is equipped with smart boards and modern audio-visual tools, making complex syllabus concepts clear, engaging and memorable.',
+    feat_6h:'Awards & Recognition', feat_6p:'Top performers receive awards, rankings and recognition at regular award ceremonies — building healthy competition, confidence, and long-lasting academic motivation.',
+    edu_label:'Digital Platform', edu_h:'Powered by<br>Edumix',
+    edu_p:"Edumix is OULU Academy's own modern learning platform — simple, intuitive, and built to give Sri Lankan A/L students a boundless digital learning experience.",
+    edu_pill1:'Study anytime, anywhere', edu_pill2:'Dialog data-free access',
+    edu_pill3:'All lectures recorded', edu_pill4:'Downloadable study packs', edu_pill5:'Dedicated support hotline',
+    edu_c1h:'Freedom', edu_c1p:'Connect to any lesson through Edumix at your convenience — morning, evening, or late night. Your schedule, your pace, your success.',
+    edu_c2h:'Data Free', edu_c2p:'Dialog SIM users enjoy free data access on Edumix. Zero data costs means zero barriers to learning for every student.',
+    edu_c3h:'Support Hotline', edu_c3p:'Quick, reliable technical support for any platform issue. Our team is on standby so your learning is never interrupted.',
+    gal_label:'Our Campus Life', gal_h:'Inside OULU Academy',
+    gal_p:'A glimpse into our vibrant campus, modern classrooms, award ceremonies, and student life at OULU Academy.',
+    testi_label:'Student Voices', testi_h:'What Our Students Say',
+    tt_label:'Schedules', tt_h:'Class Time Tables',
+    tt_p:'Select your batch year to view the OULU Academy class timetable or contact us for the latest schedule.',
+    tt_cta:'Request Schedule',
+    faq_h:'Frequently Asked Questions',
+    faq_q1:'How do I register for OULU Academy?',
+    faq_a1:'Register online through our student portal or visit our Colombo office during working hours. Bring your student ID and O/L results. Call <strong>072 104 2222</strong> for step-by-step guidance.',
+    faq_q2:'Can I access recorded lectures later?',
+    faq_a2:'Yes — every class is recorded and uploaded to the Edumix platform. Access any lecture at any time using your student login. Dialog SIM users access Edumix completely data-free.',
+    faq_q3:'How long does it take to complete the A/L syllabus?',
+    faq_a3:'OULU Academy\'s fast-track programme is structured to complete the full A/L syllabus within 12 to 15 months, preparing students to sit the A/L examination confidently on their first attempt.',
+    faq_q4:'What payment methods are available?',
+    faq_a4:'We accept online bank transfers, credit/debit card payments via our secure gateway, and cash payments at our Colombo centre. Flexible monthly instalment options are available on request.',
+    faq_q5:'Are classes available for students outside Colombo?',
+    faq_a5:'Absolutely. Physical classes are held at our Colombo centre and all sessions are simultaneously accessible online via Edumix. Any student anywhere in Sri Lanka can enrol and attend.',
+    faq_q6:'Is there technical support for the Edumix platform?',
+    faq_a6:'Yes. Our dedicated tech support hotline is available to resolve any platform issues quickly so your learning is never interrupted. Contact us on 072 104 2222 for assistance.',
+    contact_label:'Get In Touch', contact_h:'Register or Enquire',
+    contact_p:'Ready to take the fast track to A/L success with OULU Academy? Reach us instantly on WhatsApp — we respond within minutes.',
+    c_hot:'Hotline', c_hot_d:'072 104 2222 — Monday to Saturday, 8am–6pm',
+    c_email:'Email', c_loc:'Location', c_loc_d:'Colombo & Online — Islandwide Access via Edumix',
+    c_hrs:'Office Hours', c_hrs_d:'Monday – Saturday: 8:00 AM – 6:00 PM',
+    c_note_h:'⚡ Limited Seats Available',
+    c_note_p:'Each batch has a strictly limited number of seats. Register early to secure your place and begin your fast-track journey to A/L success with OULU Academy.',
+    wa_h:'Chat With Us on WhatsApp',
+    wa_p:'Have a question or ready to register? Message us directly on WhatsApp — our team replies fast, any day of the week.',
+    wa_btn:'Message Us on WhatsApp', wa_call:'Call Us', wa_mail:'Send Email',
+    foot_p:'Empowering the next generation of Sri Lankan leaders with expert A/L education, trusted guidance, and modern learning technology — under OULU Higher Education Center.',
+    foot_nav:'Navigate', foot_res:'Resources', foot_contact:'Contact',
+    foot_tag:'Designed for A/L Success · Islandwide Access'
+  },
+  si: {
+    nav_home:'මුල් පිටුව', nav_about:'අප ගැන', nav_fasttrack:'ශීඝ්‍ර මාර්ගය',
+    nav_subjects:'විෂයයන්', nav_lecturers:'කථිකාචාර්යවරු', nav_gallery:'ගැලරිය',
+    nav_feedback:'ප්‍රතිපෝෂණ', nav_faq:'නිතර අසන ප්‍ර.', nav_register:'ලියාපදිංචි වන්න',
+    nav_features:'විශේෂාංග', nav_tt:'කාල සටහන',
+    hero_eyebrow:'ශ්‍රී ලංකාවේ ශීඝ්‍ර A/L ආයතනය',
+    hero_h1:'පළමු වතාවේදීම<br>A/L <em>සාර්ථකත්වය</em>',
+    hero_sub:'OULU Academy — ව්‍යූහගත, විශේෂඥ-මෙහෙයවූ A/L අධ්‍යාපනය. O/L සිසුනට ඇතුළත් වීමේ සිට විභාගයට සූදානම් වීමට මාස 12–15 ක් ප්‍රමාණවත්.',
+    hero_sin:'අඩු කාලයකින් · අඩු වියදමකින් · එකම ස්ථානයකින් — A/L සාර්ථකත්වයට.',
+    hero_cta1:'📞 අද ලියාපදිංචි වන්න',
+    hero_cta2:'වැඩසටහන බලන්න →',
+    stat1_l:'A/L ට මාස ගණන', stat2_l:'විශේෂඥ කථිකාචාර්යවරු', stat3_l:'පළමු-වතාව අවධානය',
+    badge1_strong:'OULU උසස් අධ්‍යාපනය', badge1_span:'විශ්වාසදායී සහ සහතිකලත්',
+    badge2_strong:'පළමු-වතාව', badge2_span:'A/L සාර්ථකත්වය',
+    sband1:'ලියාපදිංචි සිසුන්', sband2:'විශේෂඥ කථිකාචාර්යවරු',
+    sband3:'මාස නිම සිලබස්', sband4:'කාණ්ඩ වර්ෂ',
+    about_label:'OULU Academy ගැන', about_h:'නවීන අධ්‍යාපනය.<br>ඔප්පු කළ ප්‍රතිඵල.',
+    about_p:'OULU Academy යනු <strong>OULU Higher Education Center</strong> යටතේ ඇති නව පරම්පරාවේ A/L ආයතනයකි. A/L සිසුන්ට <em>පළමු වතාවේදීම</em> සාර්ථකත්වය ලබා ගැනීමට — අඩු කාලයකින්, ලාභ ගාස්තුවකින් සහ සියලු විශේෂඥ සහාය සමඟ.',
+    about_pill:'2026 කාණ්ඩය විවෘතයි',
+    about_li1:'ශීඝ්‍ර මාර්ගය — A/L සිලබස් සම්පූර්ණ කිරීම මාස 12–15 තුළ',
+    about_li2:'ස්මාර්ට් බෝඩ් තාක්ෂණය සහ නවීන ශ්‍රව්‍ය-දෘශ්‍ය කලාප',
+    about_li3:'ගුරු–සිසු–දෙමාපිය ශක්තිමත් සන්නිවේදනය',
+    about_li4:'ඔන්ලයින් සහ භෞතික පන්ති — Edumix හරහා 섬-ව්‍යාප්ත',
+    about_li5:'ලාභ ගාස්තු ව්‍යූහය — සිසු සෑම දෙනෙකුටම ගුණාත්මකත්වය',
+    about_li6:'මාසිකව ප්‍රගති වාර්තා, ශ්‍රේණිගත කිරීම් සහ දෙමාපිය රැස්වීම්',
+    about_cta:'අද ආරම්භ කරන්න →',
+    ft_label:'අපගේ වැඩසටහන', ft_h:'A/L සාර්ථකත්වයට<br>ශීඝ්‍ර මාර්ගය',
+    ft_p:'"කාලය රිය — ශීඝ්‍රව ඉගෙන, වැඩිය ජය ගනිව." සාමාන්‍යයෙන් වසර දෙකක් ගන්නා දෙය OULU Academy කෙටිකරයි.',
+    ft_c1_h:'ශාස්ත්‍රීය මාර්ගය', ft_c2_h:'ශාස්ත්‍රීය ඉදිරියෙන්', ft_c3_h:'අපගේ පොරොන්දුව',
+    ft_c1_l1:'ඕනෑම A/L ප්‍රධාන විෂයයන් 3ක් තෝරන්න', ft_c1_l2:'මාස 12–15 ක් ඇතුළත සිලබස් නිම',
+    ft_c1_l3:'සතිපතා ඒකක පරීක්ෂා සහ කාර්ය සාධනය', ft_c1_l4:'දැඩි සංශෝධනය සහ ආදර්ශ ප්‍රශ්නපත්‍ර',
+    ft_c1_l5:'පළමු-වතාව A/L ට ව්‍යූහගත සූදානම',
+    ft_c2_l1:'ශක්තිමත් ගුරු–සිසු–දෙමාපිය සබඳතා', ft_c2_l2:'නිතිපතා දෙමාපිය රැස්වීම් සහ ශ්‍රේණි',
+    ft_c2_l3:'ඉහළ ශිෂ්‍යයන්ට සම්මාන සහ පිළිගැනීම', ft_c2_l4:'මනෝ සහ ශාරීරික සෞඛ්‍ය වැඩසටහන්',
+    ft_c2_l5:'සංස්කෘතික උත්සව, ව්‍යාපෘති සහ遠足',
+    ft_c3_l1:'ව්‍යූහගත වේගය — ගිනි නැත, පීඩනය නැත', ft_c3_l2:'ශක්තීන් සහ හිඩැස් කෙරෙහි අවධානය',
+    ft_c3_l3:'විශ්ව විද්‍යාල ප්‍රවේශ දිශාන්නය ඇතුළත', ft_c3_l4:'කාල කළමනාකරණ සහ විභාග ශිල්ප',
+    ft_c3_l5:'OULU විශ්වාසය, විශ්වාසය සහ ප්‍රතිඵල ගොඩ නංවයි',
+    ft_strip_h:'මාස 12 සිට 15 — A/L සිලබස් සම්පූර්ණ',
+    ft_strip_p:'O/L ශිෂ්‍යයෙකු සිට විශ්වාසබර A/L අපේක්ෂකයෙකු දක්වා. අපගේ ශීඝ්‍ර ව්‍යූහගත මාර්ගය සෑම විෂයයක්ම ගැඹුරින් ආවරණය කරයි.',
+    subj_label:'අපි ඉගැන්වන දෙය', subj_h:'අපගේ විෂයයන්',
+    subj_p:'A/L ප්‍රධාන ධාරා, භාෂා විශේෂාංග සහ A/L පොදු ප්‍රශ්නපත්‍ර — OULU Academy හි සියල්ල.',
+    subj_arts:'කලා ධාරාව', subj_lang:'භාෂා විෂය', subj_langelec:'භාෂා විශේෂාංග',
+    subj_com:'වාණිජ / කලා', subj_common:'A/L පොදු විෂය', subj_gen:'A/L සාමාන්‍ය ප්‍රශ්නපත්‍රය',
+    lec_label:'අපගේ කණ්ඩායම', lec_h:'විශේෂඥ කථිකාචාර්යවරු',
+    lec_p:'දහස් ගණන් සිසුන් විශ්ව විද්‍යාල සාර්ථකත්වයට ගෙනගිය රටේ වඩාත්ම කැපවූ ගුරුවරුන්ගෙන් ඉගෙන ගන්න.',
+    feat_label:'ඇයි OULU Academy', feat_h:'විශේෂ ලක්ෂණ',
+    feat_p:'සෑම OULU Academy සිසුවෙකුම දිනෙමින් — පන්තිකාමරය ඇතුළතත් ඉන් ඔබ්බෙනුත් — සම්පූර්ණ ශාස්ත්‍රීය පරිසරය.',
+    feat_1h:'ඔන්ලයින් සහ භෞතික පන්ති', feat_1p:'Colombo ශාඛාවෙන් සෘජු පන්ති; Zoom හරහා එකවිට. Edumix හරහා සියලු සැසි පටිගත — ඕනෑ තැනකදී, ඕනෑ වෙලාවක.',
+    feat_2h:'විශේෂඥ විභාග සූදානම', feat_2p:'සෑම විෂයයකටම කැපවූ කථිකාචාර්යවරු. දැඩි පෙර ප්‍රශ්නපත්‍ර සාකච්ඡා. A/L සාමාන්‍ය ඉංග්‍රීසි සහ CTG සූදානම ඇතුළත.',
+    feat_3h:'සිසු ලුහුබැඳීම සහ උපදේශනය', feat_3p:'මාසිකව ප්‍රගති වාර්තා, දෙමාපිය රැස්වීම්, ශ්‍රේණිගත කිරීම්, අභිප්‍රේරණ, කාල කළමනාකරණය සහ විශ්ව විද්‍යාල ප්‍රවේශ දිශාන්නය.',
+    feat_4h:'ලාභ ගාස්තු', feat_4p:'සෑම කෙනෙකුටම ගැළපෙන ගාස්තු පද්ධතිය. ගුණාත්මක අධ්‍යාපනය හැකි සිසු සෑම දෙනෙකුටම.',
+    feat_5h:'ස්මාර්ට් බෝඩ් තාක්ෂණය', feat_5p:'OULU Academy හි සෑම කලාපයකම ස්මාර්ට් බෝඩ් සහ නවීන ශ්‍රව්‍ය-දෘශ්‍ය මෙවලම් — සිලබස් සංකල්ප පැහැදිළිව.',
+    feat_6h:'සම්මාන සහ පිළිගැනීම', feat_6p:'ඉහළ ශිෂ්‍යයන්ට නිතිපතා සම්මාන — සෞඛ්‍යමත් තරගකාරිත්වය, විශ්වාසය සහ ශාස්ත්‍රීය අභිප්‍රේරණය ගොඩ නෙංවේ.',
+    edu_label:'ඩිජිටල් වේදිකාව', edu_h:'Edumix<br>බලගන්වනු ලැබේ',
+    edu_p:'Edumix යනු OULU Academy හිම නවීන ඉගෙනුම් වේදිකාවයි — සරල, බුද්ධිමත්, ශ්‍රී ලාංකීය A/L සිසුන් සඳහා.',
+    edu_pill1:'ඕනෑ වෙලාවක ඉගෙනෙව්', edu_pill2:'Dialog data නොමිලේ',
+    edu_pill3:'සියලු පාඩම් පටිගත', edu_pill4:'බා ගත හැකි ශාස්ත්‍රීය පා', edu_pill5:'කැපවූ සහාය හොට්ලයින්',
+    edu_c1h:'නිදහස', edu_c1p:'Edumix හරහා ඕනෑ පාඩමකට ඕනෑ වෙලාවක සම්බන්ධ වන්න. ඔබේ කාලසටහන, ඔබේ වේගය, ඔබේ සාර්ථකත්වය.',
+    edu_c2h:'Data නොමිලේ', edu_c2p:'Dialog SIM භාවිතකරුවන් Edumix හරහා data ගාස්තු රහිතව ඉගෙනෙව්.',
+    edu_c3h:'සහාය හොට්ලයින්', edu_c3p:'ඕනෑ platform ගැටලුවකට ශීඝ්‍ර, විශ්වාසදායී සහාය. ඉගෙනීම කිසි විටෙකත් නතර නොකෙරේ.',
+    gal_label:'අපගේ විද්‍යාලීය ජීවිතය', gal_h:'OULU Academy ඇතුළත',
+    gal_p:'OULU Academy හි ජීවංත කෙළවරුව, නවීන කලාප, සම්මාන දෙනා රාත්‍රී, සහ සිසු ජීවිතය.',
+    testi_label:'සිසු හඬ', testi_h:'අපගේ සිසුන් කියන දේ',
+    tt_label:'කාලසටහන්', tt_h:'පන්ති කාල සටහන',
+    tt_p:'ඔබේ කාණ්ඩ වර්ෂය තෝරා OULU Academy පන්ති කාල සටහන බලන්න.',
+    tt_cta:'කාලසටහන ඉල්ලන්න',
+    faq_h:'නිතර අසන ප්‍රශ්න',
+    faq_q1:'OULU Academy ලියාපදිංචි කරගන්නේ කෙසේද?',
+    faq_a1:'ශිෂ්‍ය ද්වාරය හරහා ඔන්ලයින් ලියාපදිංචි කරන්න. ශිෂ්‍ය ID සහ O/L ප්‍රතිඵල රැගෙන Colombo කාර්යාලයට එන්න. <strong>072 104 2222</strong> ට ඇමතීමෙන් මාර්ගෝපදේශ ලබාගන්න.',
+    faq_q2:'පටිගත පාඩම් පසුව ප්‍රවේශ කළ හැකිද?',
+    faq_a2:'ඔව් — සෑම පන්තියක්ම Edumix වේදිකාවට උඩුගත කෙරේ. ඕනෑ වෙලාවක ශිෂ්‍ය ලොගින් හරහා ප්‍රවේශ කරන්න. Dialog SIM භාවිතකරුවන් data නොමිලේ.',
+    faq_q3:'A/L සිලබස් නිම කිරීමට කොපමණ කාලයක් ගතවේද?',
+    faq_a3:'OULU Academy ශීඝ්‍ර-track වැඩසටහන මාස 12–15 ක් ඇතුළත A/L සිලබස් සම්පූර්ණ කිරීමට ව්‍යූහගතය.',
+    faq_q4:'ගෙවීම් ක්‍රම මොනවාද?',
+    faq_a4:'ඔන්ලයින් බැංකු හුවමාරු, ක්‍රෙඩිට්/ඩෙබිට් කාඩ් ගෙවීම් සහ Colombo ශාඛාවේ මුදල් ගෙවීම් පිළිගනු ලැබේ.',
+    faq_q5:'Colombo ඉවත් සිසුන්ට පන්ති ලබා ගත හැකිද?',
+    faq_a5:'ඔව්. Colombo ශාඛාවේ භෞතික පන්ති සහ Edumix හරහා ඕනෑ ශ්‍රී ලාංකිකයෙකුට ප්‍රවේශ කළ හැකිය.',
+    faq_q6:'Edumix platform ට තාක්ෂණ සහාය තිබේද?',
+    faq_a6:'ඔව්. 072 104 2222 ට ඇමතීමෙන් ඕනෑ platform ගැටලුවකට ශීඝ්‍ර සහාය ලබාගන්න.',
+    contact_label:'අමතන්න', contact_h:'ලියාපදිංචිය හෝ විමසීම',
+    contact_p:'OULU Academy සමඟ A/L සාර්ථකත්වයට ශීඝ්‍ර මාර්ගය ගත හැකිද? WhatsApp හරහා ශීඝ්‍රව සම්බන්ධ වන්න.',
+    c_hot:'හොට්ලයින්', c_hot_d:'072 104 2222 — සදා සිට සෙනසුරාදා, 8am–6pm',
+    c_email:'ඊමේල්', c_loc:'ස්ථානය', c_loc_d:'Colombo සහ Online — Edumix හරහා 섬-ව්‍යාප්ත',
+    c_hrs:'කාර්යාල වේලාව', c_hrs_d:'සදා – සෙනසුරාදා: 8:00 AM – 6:00 PM',
+    c_note_h:'⚡ ආසන සීමිතයි',
+    c_note_p:'සෑම කාණ්ඩයකම ආසන ගණන සීමිතයි. ඉක්මනින් ලියාපදිංචි වී ඔබේ ස්ථානය ආරක්ෂා කරගන්න.',
+    wa_h:'WhatsApp හරහා අපව අමතන්න',
+    wa_p:'ප්‍රශ්නයක් හෝ ලියාපදිංචි වීමට සූදානම්ද? WhatsApp හරහා සෘජුවම ලියන්න — ශීඝ්‍ර පිළිතුරු ලැබේ.',
+    wa_btn:'WhatsApp හරහා ලියන්න', wa_call:'ඇමතීම', wa_mail:'ඊමේල් එවන්න',
+    foot_p:'OULU Higher Education Center යටතේ, ශ්‍රී ලාංකීය ශිෂ්‍යයන් ශක්තිමත් කිරීමට.',
+    foot_nav:'සංචාලනය', foot_res:'සම්පත්', foot_contact:'සම්බන්ධ වන්න',
+    foot_tag:'A/L සාර්ථකත්වය · 섬-ව්‍යාප්ත ප්‍රවේශය'
+  }
+};
 
-            <div class="carousel-wrapper animate-on-scroll delay-1">
-                <button class="nav-arrow left-arrow" id="prevLecturer">&#10094;</button>
+let currentLang = 'en';
 
-                <div class="carousel-track" id="lecturerTrack">
-                    <div class="lecturer-card" data-index="0">
-                        <div class="card-top bg-green">
-                            <img src="Ishan Ghamage.jpeg" alt="Ishan Ghamage">
-                        </div>
-                        <div class="card-bottom">
-                            <h3>Ishan Ghamage</h3>
-                            <h4 class="subject-title"><span class="en-text">History</span><span class="si-text">ඉතිහාසය</span></h4>
-                            <div class="qualifications">
-                                <p>BA (UG), University of Sri Jayewardenepura</p>
-                                <p>Dip. in Epigraphy, PGIAR, University of Kelaniya</p>
-                                <p>Dip. in Epigraphy, Institute of Language Development.</p>
-                            </div>
-                        </div>
-                    </div>
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
 
-                    <div class="lecturer-card" data-index="1">
-                        <div class="card-top bg-orange">
-                            <img src="D.U.S. WIJESINGHE.jpeg" alt="D.U.S. WIJESINGHE">
-                        </div>
-                        <div class="card-bottom">
-                            <h3>D.U.S. WIJESINGHE</h3>
-                            <h4 class="subject-title"><span class="en-text">Sinhala</span><span class="si-text">සිංහල</span></h4>
-                            <div class="qualifications">
-                                <p>Teacher at Visakha Vidyalaya, Colombo 05</p>
-                                <p>B.Ed. Hons. in IT (Reading), CINEC Campus</p>
-                                <p>Dip. in Law, SW Law Education Center</p>
-                                <p>Cert. in Digital Marketing, SLIM</p>
-                            </div>
-                        </div>
-                    </div>
+  // Update lang attribute
+  document.documentElement.lang = lang === 'si' ? 'si' : 'en';
 
-                    <div class="lecturer-card active" data-index="2">
-                        <div class="card-top bg-red">
-                            <img src="shyamali.png" alt="Shyamali Liyanarachchi">
-                        </div>
-                        <div class="card-bottom">
-                            <h3>Shyamali Liyanarachchi</h3>
-                            <h4 class="subject-title"><span class="en-text">Logic & Scientific Method</span><span class="si-text">තර්ක ශාස්ත්‍රය හා විද්‍යාත්මක ක්‍රමය</span></h4>
-                            <div class="qualifications">
-                                <p>BA,MA</p>
-                            </div>
-                        </div>
-                    </div>
+  // Update all keyed elements
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    if (t[key] !== undefined) {
+      // For .faq-q elements that contain the icon div, only update text node
+      if (el.classList.contains('faq-q')) {
+        const ico = el.querySelector('.faq-ico');
+        el.innerHTML = t[key] + ' ';
+        if (ico) el.appendChild(ico);
+      } else {
+        el.innerHTML = t[key];
+      }
+    }
+  });
 
-                    <div class="lecturer-card" data-index="3">
-                        <div class="card-top bg-purple">
-                            <img src="Hansika Perera.jpeg" alt="Hansika Perera">
-                        </div>
-                        <div class="card-bottom">
-                            <h3>Hansika Perera</h3>
-                            <h4 class="subject-title"><span class="en-text">Japanese</span><span class="si-text">ජපන් භාෂාව</span></h4>
-                            <div class="qualifications">
-                                <p>B.Sc. Eng. (Hons.) UOM</p>
-                            </div>
-                        </div>
-                    </div>
+  // Update lang toggle buttons
+  ['btnEN','mBtnEN'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.classList.toggle('active', lang === 'en');
+  });
+  ['btnSI','mBtnSI'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.classList.toggle('active', lang === 'si');
+  });
 
-                    <div class="lecturer-card" data-index="4">
-                        <div class="card-top bg-lightgreen">
-                            <img src="Sugathi Silva .png" alt="Sugathi Silva">
-                        </div>
-                        <div class="card-bottom">
-                            <h3>Sugathi Silva</h3>
-                            <h4 class="subject-title"><span class="en-text">Political Science</span><span class="si-text">දේශපාලන විද්‍යාව</span></h4>
-                            <div class="qualifications">
-                                <p>BA (Hon ) in Criminology and Criminal Justice (UG at USJ )</p>
-                            </div>
-                        </div>
-                    </div>
+  // Update timetable tabs messages
+  const tabMsgs = {
+    en: {
+      '2025': 'The 2025 Batch timetable will be published shortly. Contact us on <strong>072 104 2222</strong> for the current schedule.',
+      '2026': 'The 2026 Batch timetable is being finalised. Call <strong>072 104 2222</strong> to be notified.',
+      '2027': 'The 2027 Batch timetable will be available closer to enrolment. Register your interest now.'
+    },
+    si: {
+      '2025': '2025 කාණ්ඩ කාල සටහන ඉක්මනින් ප්‍රකාශිත කෙරේ. <strong>072 104 2222</strong> ට ඇමතීමෙන් දැනුම් ගන්න.',
+      '2026': '2026 කාණ්ඩ කාල සටහන සකස් කෙරෙමින් ඇත. <strong>072 104 2222</strong> ට ඇමතීමෙන් ඇසූ.',
+      '2027': '2027 කාණ්ඩ කාල සටහන ලියාපදිංචිය ආසන්නයේ ලබා ගත හැකිය.'
+    }
+  };
+  ttMsgs = tabMsgs[lang];
 
-                    <div class="lecturer-card" data-index="5">
-                        <div class="card-top bg-lightgreen">
-                            <img src="leon silva.jpeg" alt="Leon Silva">
-                        </div>
-                        <div class="card-bottom">
-                            <h3>Leon Silva</h3>
-                            <h4 class="subject-title"><span class="en-text">Economics</span><span class="si-text">ආර්ථික විද්‍යාව</span></h4>
-                            <div class="qualifications">
-                                <p>B.Sc.(Mgt.)Sp</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  // Re-apply active timetable msg
+  const activeTab = document.querySelector('.tt-tab.active');
+  if (activeTab) {
+    const year = activeTab.textContent.match(/\d{4}/)[0];
+    const msgEl = document.getElementById('tt-msg');
+    if (msgEl && ttMsgs[year]) msgEl.innerHTML = ttMsgs[year];
+  }
+}
 
-                <button class="nav-arrow right-arrow" id="nextLecturer">&#10095;</button>
-                
-                <div class="carousel-dots" id="lecturerDots"></div>
-            </div>
-        </div>
-    </section>
+/* ══════ GALLERY ══════ */
+const galleryItems = [
+  { src:'image1.png', label:'Students in Class', labelSi:'පන්ති කාමරය' },
+  { src:'slide1.png', label:'Modern Classrooms', labelSi:'නවීන කලාප' },
+  { src:'g2.jpeg', label:'Expert Lecturers', labelSi:'විශේෂඥ ගුරුවරු' },
+  { src:'g3.jpeg', label:'Award Ceremonies', labelSi:'සම්මාන' },
+  { src:'g6.avif', label:'Campus Activities', labelSi:'කෙළවර ක්‍රියාකාරකම්' },
+  { src:'g5.jpeg', label:'Student Life', labelSi:'සිසු ජීවිතය' },
+  { src:'g4.jpeg', label:'Study Sessions', labelSi:'ශාස්ත්‍රීය සැසි' }
+];
 
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">
-                <span class="en-text">Our Special Features</span>
-                <span class="si-text">අපගේ සුවිශේෂී ලක්ෂණ</span>
-            </h2>
-            <div class="feature-grid">
-                <div class="feature-item animate-on-scroll delay-1">
-                    <h3><span class="en-text">Flexible Learning</span><span class="si-text">නම්‍යශීලී ඉගෙනුම් රටාව</span></h3>
-                    <ul class="en-text">
-                        <li>Online and Physical Classes (Islandwide)</li>
-                        <li>Class Recording & Study Packs</li>
-                    </ul>
-                    <ul class="si-text">
-                        <li>මාර්ගගත සහ භෞතික පන්ති (දිවයින පුරා)</li>
-                        <li>පන්ති පටිගත කිරීම් සහ අධ්‍යයන පැකේජ</li>
-                    </ul>
-                    <p class="en-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">Direct instruction, hands-on learning, and live Zoom classes offer an interactive and flexible learning experience from anywhere.</p>
-                    <p class="si-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">සජීවී විශිෂ්ට ඉගැන්වීම් රටාව ඔස්සේ ලංකාවේ ඕනෑම ස්ථානයක සිට නම්‍යශීලීව ඉගෙනීමේ පහසුකම් සලසා ඇත.</p>
-                </div>
-                <div class="feature-item animate-on-scroll delay-2">
-                    <h3><span class="en-text">Expert Preparation</span><span class="si-text">විශේෂඥ මඟපෙන්වීම</span></h3>
-                    <ul class="en-text">
-                        <li>Experienced teachers for major subjects</li>
-                        <li>A/L General English & Common Test prep</li>
-                        <li>Past Paper & Model Paper discussions</li>
-                    </ul>
-                    <ul class="si-text">
-                        <li>ප්‍රධාන විෂයයන් සඳහා පළපුරුදු ගුරුවරුන්</li>
-                        <li>සාමාන්‍ය ඉංග්‍රීසි සහ පොදු පරීක්ෂණ සූදානම</li>
-                        <li>පසුගිය ප්‍රශ්න පත්‍ර සහ ආදර්ශ ප්‍රශ්න පත්‍ර සාකච්ඡා</li>
-                    </ul>
-                    <p class="en-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">Complete and structured A/L exam preparation designed to tackle the hardest papers with ease.</p>
-                    <p class="si-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">සංකීර්ණ ප්‍රශ්න පත්‍ර සඳහා පවා පහසුවෙන් මුහුණ දීමට සකස් කළ විධිමත් විභාග සූදානම.</p>
-                </div>
-                <div class="feature-item animate-on-scroll delay-3">
-                    <h3><span class="en-text">Student Tracking & Mentorship</span><span class="si-text">ශිෂ්‍ය ලුහුබැඳීම සහ උපදේශනය</span></h3>
-                    <ul class="en-text">
-                        <li>Monthly Progress Reports</li>
-                        <li>Parent Meetings</li>
-                        <li>Motivation & Self-confidence Sessions</li>
-                    </ul>
-                    <ul class="si-text">
-                        <li>මාසික ප්‍රගති වාර්තා</li>
-                        <li>දෙමාපිය රැස්වීම්</li>
-                        <li>ප්‍රබෝධමත් කිරීමේ සහ ආත්ම විශ්වාසය ගොඩනැංවීමේ සැසි</li>
-                    </ul>
-                    <p class="en-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">We provide close monitoring, time management skills, exam techniques, and University Entrance Orientation.</p>
-                    <p class="si-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">කාල කළමනාකරණය, විභාග ශිල්පක්‍රම සහ විශ්වවිද්‍යාල ප්‍රවේශය සඳහා සමීපව නිරීක්ෂණය කරමින් මඟ පෙන්වයි.</p>
-                </div>
-                <div class="feature-item animate-on-scroll delay-4">
-                    <h3><span class="en-text">Budget Friendly</span><span class="si-text">සහනදායී ගාස්තු</span></h3>
-                    <p class="en-text" style="margin-top: 10px;">A budget-friendly fee structure for everyone.</p>
-                    <p class="si-text" style="margin-top: 10px;">සෑම කෙනෙකුටම ගැළපෙන ගාස්තු පද්ධතිය.</p>
-                    <p class="en-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">A fee structure ensuring that everyone has access to high-quality education without the financial burden.</p>
-                    <p class="si-text" style="margin-top: 10px; font-size: 0.95rem; color: var(--text-light);">මූල්‍යමය අපහසුතාවයකින් තොරව උසස් තත්ත්වයේ අධ්‍යාපනයක් ලබා ගැනීමට අවස්ථාව සලසන ගාස්තු ව්‍යුහයකි.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+const placeholderIcons = ['🏫','📚','🎓','🏆','🖥️','📸','✨'];
+const placeholderLabels = ['Classroom','Library','Graduation','Awards','Technology','Campus','Events'];
 
-    <section class="timetables" id="timetables">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">
-                <span class="en-text">Class Time Tables</span>
-                <span class="si-text">පන්ති කාලසටහන්</span>
-            </h2>
-            <div class="timetable-buttons animate-on-scroll delay-1">
-                <button class="btn-outline">
-                    <span class="en-text">Calendar 2025 Classes</span>
-                    <span class="si-text">2025 පන්ති කාලසටහන</span>
-                </button>
-                <button class="btn-outline">
-                    <span class="en-text">Calendar 2026 Classes</span>
-                    <span class="si-text">2026 පන්ති කාලසටහන</span>
-                </button>
-                <button class="btn-outline">
-                    <span class="en-text">Calendar 2027 Classes</span>
-                    <span class="si-text">2027 පන්ති කාලසටහන</span>
-                </button>
-            </div>
-        </div>
-    </section>
+function buildGallery() {
+  const grid = document.getElementById('galleryGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  galleryItems.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'g-item';
+    div.setAttribute('data-r', '');
+    div.setAttribute('data-d', String((i % 4) + 1));
+    div.innerHTML = `
+      <img src="${item.src}" alt="${item.label}"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="g-placeholder" style="display:none">
+        <div class="gp-ico">${placeholderIcons[i % placeholderIcons.length]}</div>
+        <div class="gp-lbl">${placeholderLabels[i % placeholderLabels.length]}</div>
+      </div>
+      <div class="g-overlay"><span class="g-label">${item.label}</span></div>`;
+    div.addEventListener('click', () => {
+      const img = div.querySelector('img');
+      if (img && img.style.display !== 'none' && img.complete && img.naturalWidth > 0) {
+        document.getElementById('lbImg').src = img.src;
+        document.getElementById('lightbox').classList.add('show');
+      }
+    });
+    grid.appendChild(div);
+  });
+  // Observe new items
+  grid.querySelectorAll('[data-r]').forEach(el => revObs.observe(el));
+}
 
-    <section class="edumix" id="edumix">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll" style="color: white;">
-                <span class="en-text">Built for Students</span>
-                <span class="si-text">සිසුන් වෙනුවෙන්ම නිර්මාණය කර ඇත</span>
-            </h2>
-            <p class="en-text animate-on-scroll delay-1" style="text-align: center; max-width: 700px; margin: 0 auto;">Edumix is a simple and intuitive modern learning platform which uses latest technologies to provide a boundless digital learning experience for Sri Lankan students.</p>
-            <p class="si-text animate-on-scroll delay-1" style="text-align: center; max-width: 700px; margin: 0 auto;">Edumix යනු ශ්‍රී ලාංකික සිසුන් සඳහා සීමා රහිත ඩිජිටල් ඉගෙනුම් අත්දැකීමක් ලබා දීමට නවීන තාක්ෂණයන් භාවිතා කරන සරල සහ බුද්ධිමත් නවීන ඉගෙනුම් වේදිකාවකි.</p>
-            
-            <div class="edumix-content">
-                <div class="edumix-item animate-on-scroll delay-1">
-                    <h3><span class="en-text">Freedom</span><span class="si-text">නිදහස</span></h3>
-                    <p class="en-text">Connect to the lesson through Edumix at your convenience.</p>
-                    <p class="si-text">ඔබට පහසු ඕනෑම වෙලාවක Edumix හරහා පාඩම් සමග සම්බන්ධ වන්න.</p>
-                </div>
-                <div class="edumix-item animate-on-scroll delay-2">
-                    <h3><span class="en-text">Data Free</span><span class="si-text">දත්ත රහිත (නොමිලේ)</span></h3>
-                    <p class="en-text">Dialog-free data for lessons when connecting via internet!</p>
-                    <p class="si-text">Dialog අන්තර්ජාලය හරහා සම්බන්ධ වීමේදී පාඩම් සඳහා දත්ත අය කිරීමක් සිදු නොවේ!</p>
-                </div>
-                <div class="edumix-item animate-on-scroll delay-3">
-                    <h3><span class="en-text">Support Hotline</span><span class="si-text">තාක්ෂණික සහාය</span></h3>
-                    <p class="en-text">Quick and reliable tech support for all your technical problems.</p>
-                    <p class="si-text">ඔබේ සියලුම තාක්ෂණික ගැටළු සඳහා කඩිනම් සහ විශ්වාසදායක සහාය සේවාවක්.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+/* ══════ PRELOADER ══════ */
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('preloader').classList.add('hide'), 2600);
+});
 
-    <section class="feedback" id="feedback">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">
-                <span class="en-text">Student Feedbacks</span>
-                <span class="si-text">සිසුන්ගේ ප්‍රතිපෝෂණ</span>
-            </h2>
-            <div class="feedback-container">
-                <div class="feedback-card animate-on-scroll delay-1">
-                    <p class="en-text">The institute provided great support for my studies. The online platform is very user-friendly. Being able to re-watch the lessons is highly valuable.</p>
-                    <p class="si-text">ආයතනය මගේ ඉගෙනීම සඳහා මට හොඳ සහයෝගයක් ලබා දුන්නා. Online platform එක ගොඩක් user-friendly. පාඩම් නැවත නැවත බලන්න පුලුවන් උන එක ගොඩක් වටිනවා.</p>
-                    <div class="feedback-author">Nuwan De Silva (Mahanama College)</div>
-                </div>
-                <div class="feedback-card animate-on-scroll delay-2">
-                    <p class="en-text">Honestly, this is a superb place that gives students the strength to succeed. You can find so many things here that you won't see in other institutes.</p>
-                    <p class="si-text">ඇත්තෙන්ම කියනවනම් මේක කියන්නේ ලමෙක්ට ගොඩ යන්න ශක්තිය දෙන සුපිරි තැනක්.. මෙතන වෙන ආයතන වල දැකපු නැති ගොඩාක් දේවල් තියෙනව.</p>
-                    <div class="feedback-author">Kavindu Sashintha</div>
-                </div>
-                <div class="feedback-card animate-on-scroll delay-3">
-                    <p class="en-text">After finishing O/Ls, jumping into the vast ocean of A/Ls is hard. Since it's tough to swim alone, I boarded this ship called Sky Edge Institute.</p>
-                    <p class="si-text">OL ඉවර වෙලා AL කියන මහා සාගරේට පැන්නෙ කොහොමහරි එතෙර වෙනවා කියලා හිතාගන්න. තනියෙන් පීනගෙන යන්න අමාරු නිසා මේ ආයතනය කියන නැවට නැග්ගා.</p>
-                    <div class="feedback-author">Ramika Risiwara (Ananda College)</div>
-                </div>
-            </div>
-        </div>
-    </section>
+/* ══════ MOBILE NAV ══════ */
+const burger = document.getElementById('burger');
+const mNav = document.getElementById('mNav');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  mNav.classList.toggle('open');
+});
+mNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  burger.classList.remove('open');
+  mNav.classList.remove('open');
+}));
 
-    <section class="faq" id="faq">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">
-                <span class="en-text">Frequently Asked Questions</span>
-                <span class="si-text">නිතර අසන ප්‍රශ්න</span>
-            </h2>
-            <div class="accordion animate-on-scroll delay-1">
-                <div class="accordion-item active">
-                    <div class="accordion-header">
-                        <span class="en-text">How do I register for classes?</span>
-                        <span class="si-text">මා පන්ති සඳහා ලියාපදිංචි වන්නේ කෙසේද?</span>
-                    </div>
-                    <div class="accordion-content">
-                        <p class="en-text">You can register online through our student portal or visit our physical office during working hours. Make sure to bring your student ID and relevant documents.</p>
-                        <p class="si-text">අපගේ ශිෂ්‍ය ද්වාරය හරහා මාර්ගගතව හෝ කාර්යාල වේලාවන් තුළ පැමිණ ඔබට ලියාපදිංචි විය හැක. ඔබගේ හැඳුනුම්පත සහ අදාළ ලියකියවිලි ගෙන ඒමට අමතක නොකරන්න.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span class="en-text">Can I access recorded lectures?</span>
-                        <span class="si-text">මට පටිගත කළ දේශන නැරඹිය හැකිද?</span>
-                    </div>
-                    <div class="accordion-content">
-                        <p class="en-text">Yes, all online and physical classes are recorded and uploaded to the Edumix platform. You can access them anytime using your student login credentials.</p>
-                        <p class="si-text">ඔව්, සියලුම මාර්ගගත සහ භෞතික පන්ති පටිගත කර Edumix වෙත උඩුගත කෙරේ. ඔබට ඔබගේ ගිණුම හරහා ඕනෑම වේලාවක ඒවාට පිවිසිය හැක.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span class="en-text">What are the payment methods available?</span>
-                        <span class="si-text">මුදල් ගෙවීමේ ක්‍රම මොනවාද?</span>
-                    </div>
-                    <div class="accordion-content">
-                        <p class="en-text">We accept online bank transfers, credit/debit cards via our secure gateway, and physical cash payments at our main center.</p>
-                        <p class="si-text">අපගේ ප්‍රධාන මධ්‍යස්ථානයේදී මුදලින් ගෙවීමට මෙන්ම, බැංකු තැන්පතු හෝ ක්‍රෙඩිට්/ඩෙබිට් කාඩ්පත් හරහාද ගෙවීම් කළ හැකිය.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span class="en-text">Is there technical support for the Edumix platform?</span>
-                        <span class="si-text">Edumix වේදිකාව සඳහා තාක්ෂණික සහාය තිබේද?</span>
-                    </div>
-                    <div class="accordion-content">
-                        <p class="en-text">Absolutely! We have a dedicated support hotline. If you face any issues connecting to classes or accessing your data-free study packs, our team is ready to help.</p>
-                        <p class="si-text">අනිවාර්යයෙන්ම! අපට ඒ සඳහාම වෙන්වූ ක්ෂණික ඇමතුම් සේවාවක් ඇත. පන්තිවලට සම්බන්ධ වීමේදී ගැටළුවක් ඇති වුවහොත් අපගේ කණ්ඩායම උපකාර කිරීමට සූදානම්.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+/* ══════ SCROLL REVEAL ══════ */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); revObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('[data-r]').forEach(el => revObs.observe(el));
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>
-                        <span class="en-text">Sky Edge Institute</span>
-                        <span class="si-text">Sky Edge ආයතනය</span>
-                    </h4>
-                    <p class="en-text" style="color: #94a3b8; margin-top: 1.5rem; line-height: 1.6;">Empowering the next generation of leaders with world-class education, trusted guidance, and modern learning technologies.</p>
-                    <p class="si-text" style="color: #94a3b8; margin-top: 1.5rem; line-height: 1.6;">ලොවක් දිනන අනාගත පරපුරක් බිහිකිරීම උදෙසා විශ්වාසනීය මඟපෙන්වීමක් සහ නවීන තාක්ෂණයෙන් සපිරි විශිෂ්ට අධ්‍යාපනයක්.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>
-                        <span class="en-text">Quick Links</span>
-                        <span class="si-text">කෙටි සබැඳි</span>
-                    </h4>
-                    <ul>
-                        <li><a href="#home"><span class="en-text">Home</span><span class="si-text">මුල් පිටුව</span></a></li>
-                        <li><a href="#objectives"><span class="en-text">Our Mission</span><span class="si-text">අපගේ මෙහෙවර</span></a></li>
-                        <li><a href="#fast-track"><span class="en-text">Fast Track</span><span class="si-text">කඩිනම් වැඩපිළිවෙළ</span></a></li>
-                        <li><a href="#lecturers"><span class="en-text">Our Lecturers</span><span class="si-text">දේශක මණ්ඩලය</span></a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>
-                        <span class="en-text">Contact Us</span>
-                        <span class="si-text">අප හා සම්බන්ධ වන්න</span>
-                    </h4>
-                    <ul>
-                        <li><span style="color: #94a3b8;"><span class="en-text">Hotline:</span><span class="si-text">ක්ෂණික ඇමතුම්:</span></span> 
-                            <a href="https://wa.me/94721042222?text=Hello%20Sky%20Edge%20Institute%2C%20I%20would%20like%20to%20know%20more%20about%20your%20classes." target="_blank" class="whatsapp-btn">
-                                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-                                </svg>
-                                072 104 2222
-                            </a>
-                        </li>
-                        <li><span style="color: #94a3b8;"><span class="en-text">Email:</span><span class="si-text">විද්‍යුත් තැපෑල:</span></span> info@skyedge.lk</li>
-                        <li><span style="color: #94a3b8;"><span class="en-text">Location:</span><span class="si-text">ස්ථානය:</span></span> <span class="en-text">Colombo & Online – Islandwide Access</span><span class="si-text">කොළඹ සහ මාර්ගගතව - දිවයින පුරා සේවය</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Sky Edge Institute | OULU Higher Education Center. <span class="en-text">All Rights Reserved.</span><span class="si-text">සියලුම හිමිකම් ඇවිරිණි.</span></p>
-            </div>
-        </div>
-    </footer>
+/* ══════ COUNT-UP ══════ */
+function countUp(el) {
+  const target = +el.dataset.count;
+  const dur = 1800; const step = target / (dur / 16);
+  let cur = 0;
+  const id = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    const v = Math.floor(cur);
+    if (target === 15) el.textContent = '12–15';
+    else if (target === 3) el.textContent = v + '+';
+    else el.textContent = v + '+';
+    if (cur >= target) clearInterval(id);
+  }, 16);
+}
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('[data-count]').forEach(countUp);
+      cntObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.stats-band-inner').forEach(el => cntObs.observe(el));
 
-    <script>
-        // --- 0. Language Toggle Logic ---
-        const langToggleBtn = document.getElementById('langToggle');
-        
-        langToggleBtn.addEventListener('click', () => {
-            const isEnglish = document.body.classList.contains('lang-en');
-            
-            if (isEnglish) {
-                document.body.classList.remove('lang-en');
-                document.body.classList.add('lang-si');
-                langToggleBtn.textContent = 'English';
-            } else {
-                document.body.classList.remove('lang-si');
-                document.body.classList.add('lang-en');
-                langToggleBtn.textContent = 'සිංහල';
-            }
-        });
+/* ══════ SCROLL TO TOP ══════ */
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 500);
+});
+document.getElementById('scrollTop').addEventListener('click', () =>
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+);
 
-        // --- 1. Mobile Navigation Toggle ---
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
+/* ══════ FAQ ══════ */
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
 
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
-        });
-        
-        // Close mobile menu on link click
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.classList.remove('active');
-                mobileMenuBtn.innerHTML = '☰';
-            });
-        });
+/* ══════ TIMETABLE ══════ */
+let ttMsgs = {
+  '2025': 'The 2025 Batch timetable will be published shortly. Contact us on <strong>072 104 2222</strong> for the current schedule.',
+  '2026': 'The 2026 Batch timetable is being finalised. Call <strong>072 104 2222</strong> to be notified.',
+  '2027': 'The 2027 Batch timetable will be available closer to enrolment. Register your interest now.'
+};
+function switchTab(btn, year) {
+  document.querySelectorAll('.tt-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const msgEl = document.getElementById('tt-msg');
+  if (msgEl && ttMsgs[year]) msgEl.innerHTML = ttMsgs[year];
+}
 
-        // --- 2. Scroll Animations ---
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target); // Run animation only once
-                }
-            });
-        }, observerOptions);
-        
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
+/* ══════ LIGHTBOX ══════ */
+document.getElementById('lbClose').addEventListener('click', () =>
+  document.getElementById('lightbox').classList.remove('show')
+);
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) this.classList.remove('show');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('show');
+});
 
-        // --- 3. FAQ Accordion ---
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const item = header.parentElement;
-                const isActive = item.classList.contains('active');
-                
-                // Close all accordion items
-                document.querySelectorAll('.accordion-item').forEach(otherItem => {
-                    otherItem.classList.remove('active');
-                });
-
-                // Toggle current item if it wasn't already active
-                if (!isActive) {
-                    item.classList.add('active');
-                }
-            });
-        });
-
-        // --- 4. Lecturer 3D Carousel Logic ---
-        const track = document.getElementById('lecturerTrack');
-        const cards = Array.from(track.querySelectorAll('.lecturer-card'));
-        const prevBtn = document.getElementById('prevLecturer');
-        const nextBtn = document.getElementById('nextLecturer');
-        const dotsContainer = document.getElementById('lecturerDots');
-        
-        let currentIndex = 2; // Start with the 3rd card centered (Shyamali)
-
-        // Generate Dots dynamically based on number of cards
-        cards.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (index === currentIndex) dot.classList.add('active');
-            dot.addEventListener('click', () => updateCarousel(index));
-            dotsContainer.appendChild(dot);
-        });
-        
-        const dots = Array.from(dotsContainer.querySelectorAll('.dot'));
-        
-        function updateCarousel(newIndex) {
-            // Handle array bounds for infinite wrapping
-            if (newIndex < 0) newIndex = cards.length - 1;
-            if (newIndex >= cards.length) newIndex = 0;
-            
-            currentIndex = newIndex;
-            
-            // Reset classes on all cards
-            cards.forEach(card => {
-                card.className = 'lecturer-card'; 
-            });
-            
-            // Update Dots
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[currentIndex].classList.add('active');
-            
-            // Apply new positioning classes
-            cards[currentIndex].classList.add('active');
-            
-            // Helper function to calculate wrapped indices
-            const getIndex = (offset) => (currentIndex + offset + cards.length) % cards.length;
-            
-            cards[getIndex(-1)].classList.add('prev-1');
-            cards[getIndex(1)].classList.add('next-1');
-            
-            if (cards.length > 3) {
-                cards[getIndex(-2)].classList.add('prev-2');
-                cards[getIndex(2)].classList.add('next-2');
-            }
-        }
-
-        // Event Listeners for carousel arrows
-        prevBtn.addEventListener('click', () => updateCarousel(currentIndex - 1));
-        nextBtn.addEventListener('click', () => updateCarousel(currentIndex + 1));
-
-        // Initial carousel render
-        updateCarousel(currentIndex);
-    </script>
+/* ══════ INIT ══════ */
+buildGallery();
+</script>
 </body>
 </html>
