@@ -574,6 +574,108 @@ footer { background:#050c19; border-top:1px solid var(--border-d); padding:4rem 
   .g-item { aspect-ratio:16/9 !important; }
   .wa-contact-card { padding:2rem 1.5rem; }
 }
+
+/* ─── ABOUT US (Leadership) SECTION ─── */
+.aboutus-sec { background:var(--ink); overflow:hidden; position:relative; }
+.aboutus-sec::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 700px 500px at 80% 20%, rgba(196,146,42,.07) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 10% 80%, rgba(59,130,246,.06) 0%, transparent 70%);
+}
+.aboutus-intro { max-width:800px; margin:0 auto 4rem; text-align:center; }
+.aboutus-intro p { font-size:1rem; color:rgba(255,255,255,.58); line-height:1.85; margin-bottom:.9rem; }
+.aboutus-intro p strong { color:var(--gold-lt); }
+
+/* Leadership grid */
+.leadership-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; margin-bottom:4rem;
+}
+.leader-card {
+  background:rgba(255,255,255,.04); border:1px solid var(--border-d);
+  border-radius:18px; padding:2rem 1.5rem; text-align:center;
+  position:relative; overflow:hidden; transition:all .35s var(--ease);
+}
+.leader-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-lt)); opacity:0; transition:opacity .3s;
+}
+.leader-card:hover { background:rgba(255,255,255,.07); transform:translateY(-6px); }
+.leader-card:hover::before { opacity:1; }
+.leader-org {
+  font-size:.68rem; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--gold); font-weight:700; margin-bottom:1.3rem;
+  background:var(--gold-dim); border:1px solid rgba(196,146,42,.25);
+  border-radius:99px; padding:.28rem .9rem; display:inline-block;
+}
+/* Photo slot */
+.leader-photo {
+  width:110px; height:110px; border-radius:50%; margin:0 auto 1.2rem;
+  border:3px solid rgba(196,146,42,.35);
+  background:linear-gradient(135deg,#1a2744 0%,#0e1930 100%);
+  overflow:hidden; position:relative; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 28px rgba(0,0,0,.4);
+}
+.leader-photo img { width:100%; height:100%; object-fit:cover; }
+.leader-photo .photo-placeholder {
+  display:flex; flex-direction:column; align-items:center; gap:.4rem;
+}
+.leader-photo .photo-placeholder span { font-size:2.1rem; }
+.leader-photo .photo-placeholder small {
+  font-size:.55rem; letter-spacing:.08em; text-transform:uppercase;
+  color:rgba(255,255,255,.3); font-weight:600;
+}
+.leader-name {
+  font-family:'Playfair Display',serif; font-size:1.05rem;
+  font-weight:700; color:#fff; margin-bottom:.35rem; line-height:1.3;
+}
+.leader-role {
+  font-size:.78rem; color:var(--gold); font-weight:600;
+  letter-spacing:.04em; margin-bottom:.6rem;
+}
+.leader-quals {
+  font-size:.72rem; color:rgba(255,255,255,.35); line-height:1.55;
+}
+
+/* Bottom info strip */
+.aboutus-bottom {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.4rem; margin-bottom:3rem;
+}
+.aub-card {
+  background:rgba(255,255,255,.035); border:1px solid var(--border-d);
+  border-radius:var(--r); padding:1.6rem 1.5rem;
+}
+.aub-card h4 {
+  font-family:'Playfair Display',serif; font-size:1rem; color:var(--gold-lt);
+  margin-bottom:1rem; display:flex; align-items:center; gap:.5rem;
+}
+.aub-card ul { display:flex; flex-direction:column; gap:.55rem; }
+.aub-card ul li {
+  font-size:.86rem; color:rgba(255,255,255,.58);
+  display:flex; align-items:center; gap:.55rem;
+}
+.aub-card ul li::before { content:'→'; color:var(--gold); font-size:.72rem; flex-shrink:0; }
+
+/* Mission banner */
+.aboutus-mission {
+  background:linear-gradient(135deg, rgba(196,146,42,.12) 0%, rgba(196,146,42,.04) 100%);
+  border:1px solid rgba(196,146,42,.25); border-radius:16px;
+  padding:2rem 2.5rem; display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;
+}
+.aboutus-mission-ico { font-size:2.2rem; flex-shrink:0; }
+.aboutus-mission p {
+  font-size:.97rem; color:rgba(255,255,255,.72); line-height:1.75; flex:1;
+}
+.aboutus-mission p strong { color:var(--gold-lt); }
+
+@media (max-width:900px) {
+  .leadership-grid { grid-template-columns:1fr 1fr; }
+  .aboutus-bottom { grid-template-columns:1fr; }
+}
+@media (max-width:600px) {
+  .leadership-grid { grid-template-columns:1fr; }
+  .aboutus-mission { padding:1.5rem; }
+}
 </style>
 </head>
 <body>
@@ -616,6 +718,7 @@ footer { background:#050c19; border-top:1px solid var(--border-d); padding:4rem 
       <a href="#gallery" data-key="nav_gallery">Gallery</a>
       <a href="#testimonials" data-key="nav_feedback">Feedback</a>
       <a href="#faq" data-key="nav_faq">FAQ</a>
+      <a href="#about-us">About Us</a>
       <a href="#contact" class="cta" data-key="nav_register">Register Now</a>
     </nav>
     <div class="nav-right">
@@ -641,6 +744,7 @@ footer { background:#050c19; border-top:1px solid var(--border-d); padding:4rem 
     <a href="#gallery" data-key="nav_gallery">Gallery</a>
     <a href="#testimonials" data-key="nav_feedback">Feedback</a>
     <a href="#faq" data-key="nav_faq">FAQ</a>
+    <a href="#about-us">About Us</a>
     <a href="#contact" class="mcta" data-key="nav_register">Register Now</a>
   </nav>
 </header>
@@ -913,6 +1017,116 @@ footer { background:#050c19; border-top:1px solid var(--border-d); padding:4rem 
       <div class="faq-item" data-r data-d="1"><div class="faq-q" data-key="faq_q4">What payment methods are available? <div class="faq-ico">+</div></div><div class="faq-a" data-key="faq_a4">We accept online bank transfers, credit/debit card payments via our secure gateway, and cash payments at our Colombo centre. Flexible monthly instalment options are available on request.</div></div>
       <div class="faq-item" data-r data-d="2"><div class="faq-q" data-key="faq_q5">Are classes available for students outside Colombo? <div class="faq-ico">+</div></div><div class="faq-a" data-key="faq_a5">Absolutely. Physical classes are held at our Colombo centre and all sessions are simultaneously accessible online via Edumix. Any student anywhere in Sri Lanka can enrol and attend.</div></div>
       <div class="faq-item" data-r data-d="3"><div class="faq-q" data-key="faq_q6">Is there technical support for the Edumix platform? <div class="faq-ico">+</div></div><div class="faq-a" data-key="faq_a6">Yes. Our dedicated tech support hotline is available to resolve any platform issues quickly so your learning is never interrupted. Contact us on 072 104 2222 for assistance.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT US (Leadership & Identity) -->
+<section class="sec aboutus-sec" id="about-us">
+  <div class="wrap" style="position:relative;z-index:2;">
+    <div class="sec-label" data-r>Who We Are</div>
+    <h2 class="sec-h lt" data-r data-d="1">The People Behind<br><em style="color:var(--gold-lt);font-style:italic;">OULU Academy</em></h2>
+
+    <!-- Intro text -->
+    <div class="aboutus-intro" data-r data-d="2">
+      <p>
+        <strong>OULU Academy</strong> is a professional and results-driven educational institute dedicated exclusively to Advanced Level (A/L) students. The academy was built on a foundation of over <strong>20 years of professional teaching experience</strong> and an unwavering commitment to quality education.
+      </p>
+      <p>
+        Led by <strong>Shyamali Liyanarachchi</strong> (BA, MA, PGDE, Diploma in Psychology) — an experienced educator with two decades of expertise in Logic and scientific subjects — OULU Academy brings a modern, student-centered approach focused on delivering excellent academic results, first time, every time.
+      </p>
+    </div>
+
+    <!-- Leadership cards -->
+    <div class="sec-label" data-r style="margin-bottom:1.6rem;">🏢 Our Leadership</div>
+    <div class="leadership-grid">
+
+      <!-- Leader 1 -->
+      <div class="leader-card" data-r data-d="1">
+        <div class="leader-org">OULU Academy · Sri Lanka</div>
+        <div class="leader-photo">
+          <img src="shyamali.jpg" alt="Shyamali Liyanarachchi"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="photo-placeholder" style="display:none">
+            <span>👩‍🏫</span>
+            <small>Add Photo</small>
+          </div>
+        </div>
+        <div class="leader-name">Shyamali Liyanarachchi</div>
+        <div class="leader-role">Owner / Director</div>
+        <div class="leader-quals">BA · MA · PGDE<br>Diploma in Psychology<br>20+ Years Teaching Excellence</div>
+      </div>
+
+      <!-- Leader 2 -->
+      <div class="leader-card" data-r data-d="2">
+        <div class="leader-org">OULU Academy Plasmonics · Technology</div>
+        <div class="leader-photo">
+          <img src="pamindu.jpg" alt="Pamindu Pasandul Karunadasa"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="photo-placeholder" style="display:none">
+            <span>👨‍💼</span>
+            <small>Add Photo</small>
+          </div>
+        </div>
+        <div class="leader-name">Pamindu Pasandul Karunadasa</div>
+        <div class="leader-role">Co-founder / CEO</div>
+        <div class="leader-quals">Technology Sector<br>OULU Plasmonics Division</div>
+      </div>
+
+      <!-- Leader 3 -->
+      <div class="leader-card" data-r data-d="3">
+        <div class="leader-org">OULU AG · Digital Agency</div>
+        <div class="leader-photo">
+          <img src="omindu.jpg" alt="Omindu Nethdula Karunadasa"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="photo-placeholder" style="display:none">
+            <span>👨‍💻</span>
+            <small>Add Photo</small>
+          </div>
+        </div>
+        <div class="leader-name">Omindu Nethdula Karunadasa</div>
+        <div class="leader-role">CEO</div>
+        <div class="leader-quals">Digital Agency<br>OULU AG Division</div>
+      </div>
+    </div>
+
+    <!-- Courses, Class Types, and Mission -->
+    <div class="aboutus-bottom">
+      <div class="aub-card" data-r data-d="1">
+        <h4>🎓 Our Courses</h4>
+        <ul>
+          <li>A/L Arts – All Subjects</li>
+          <li>Fast Track Programmes</li>
+          <li>Language Electives</li>
+          <li>A/L Common &amp; General Papers</li>
+        </ul>
+      </div>
+      <div class="aub-card" data-r data-d="2">
+        <h4>👩‍🏫 Class Types</h4>
+        <ul>
+          <li>Group Classes</li>
+          <li>Individual Classes</li>
+          <li>Online via Edumix Platform</li>
+          <li>Physical Classes – Colombo 06</li>
+        </ul>
+      </div>
+      <div class="aub-card" data-r data-d="3">
+        <h4>🏛️ Our Institution</h4>
+        <ul>
+          <li>OULU Academy (Education)</li>
+          <li>OULU Plasmonics (Technology)</li>
+          <li>OULU AG (Digital Agency)</li>
+          <li>Founded on 20+ years of expertise</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Mission statement -->
+    <div class="aboutus-mission" data-r data-d="2">
+      <div class="aboutus-mission-ico">🎯</div>
+      <p>
+        <strong>Our Mission:</strong> To identify each student's unique potential and guide them towards academic excellence through effective, personalised education — equipping them with the knowledge, confidence, and skills needed to succeed in their A/L examinations on the very first attempt.
+      </p>
     </div>
   </div>
 </section>
