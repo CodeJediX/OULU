@@ -749,7 +749,7 @@ header{transition:all .3s var(--ease);}
 @media(max-width:900px){#pageNav{display:none;}}
 
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="./three.min.js" defer></script>
 </head>
 <body>
 
@@ -1981,6 +1981,11 @@ window.addEventListener('scroll', ()=>{
     nav.classList.toggle('visible',window.scrollY>200);
   });
 })();
+if (!window.THREE) {
+    const s = document.createElement('script');
+    s.src = './three.min.js';
+    document.head.appendChild(s);
+}
 
 </script>
 </body>
