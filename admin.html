@@ -208,8 +208,8 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 // ─── Supabase ───────────────────────────────────────────────────────────────
-const SUPABASE_URL = "https://irzomytqemprdffyridu.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlyem9teXRxZW1wcmRmZnlyaWR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MTQyMTMsImV4cCI6MjA5NzE5MDIxM30.acGX5R66pLwQCU52Qdijrphj9Oi6UmBvQ3kVGrDq4lM";
+const SUPABASE_URL = "https://irzomytqemprdffyridu.supabase.co".replace(/\/rest\/v1\/?$/, "");
+const SUPABASE_KEY = "sb_publishable_7ONbDFbTYiVXslGUyZHDLw_KrN6HuC9";
 const SUPABASE_BUCKET = "classx-posts";
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
