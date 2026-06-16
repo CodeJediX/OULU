@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Class X Admin Panel</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Arial, sans-serif;
+    background:#0b1220;
+    color:#e5e7eb;
+    min-height:100vh;
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:24px}
+  .card{
+    background:#111827;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 10px 35px rgba(0,0,0,.25);
+  }
+  h1,h2{margin-bottom:14px}
+  p{color:#9ca3af;line-height:1.6}
+  input,textarea,button{
+    width:100%;
+    border:none;
+    border-radius:12px;
+    padding:12px 14px;
+    font:inherit;
+  }
+  input,textarea{
+    background:#0f172a;
+    color:#fff;
+    border:1px solid rgba(255,255,255,.08);
+    margin-top:8px;
+    margin-bottom:14px;
+  }
+  textarea{min-height:110px;resize:vertical}
+  button{
+    cursor:pointer;
+    background:#c4922a;
+    color:#08111f;
+    font-weight:700;
+    margin-top:8px;
+  }
+  button.secondary{background:#334155;color:#fff}
+  button.danger{background:#ef4444;color:#fff}
+  button.good{background:#22c55e;color:#052e16}
+  button.promote{background:#6366f1;color:#fff}
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:18px;
+  }
+  .hidden{display:none}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .item{
+    background:#0f172a;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:14px;
+    display:grid;
+    grid-template-columns:88px 1fr auto;
+    gap:12px;
+    align-items:center;
+  }
+  .item.is-main{
+    border-color:rgba(196,146,42,.45);
+    box-shadow:0 0 0 1px rgba(196,146,42,.25);
+  }
+  .thumb{
+    width:88px;
+    aspect-ratio:4/5;
+    border-radius:12px;
+    overflow:hidden;
+    background:#1f2937;
+  }
+  .thumb.landscape{aspect-ratio:16/9}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .meta small{display:block;color:#9ca3af;margin-top:4px}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .actions button{width:auto;padding:10px 12px;border-radius:10px}
+  .preview{
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.08);
+    background:#0f172a;
+  }
+  .previewFrame{
+    aspect-ratio:4/5;
+    background:#1f2937;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .previewFrame.landscape{aspect-ratio:16/9}
+  .previewFrame img{width:100%;height:100%;object-fit:cover;display:block}
+  .muted{color:#94a3b8;font-size:.92rem}
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    margin-bottom:18px;flex-wrap:wrap;
+  }
+  .pill{
+    display:inline-block;padding:8px 12px;border-radius:999px;
+    background:#1f2937;color:#fbbf24;font-size:.85rem;font-weight:700;
+  }
+  .badge{
+    display:inline-block;padding:3px 9px;border-radius:999px;
+    background:#c4922a22;color:#fbbf24;font-size:.78rem;font-weight:700;
+    margin-left:8px;vertical-align:middle;border:1px solid rgba(196,146,42,.3);
+  }
+  .warn-msg{
+    color:#fbbf24;font-size:.85rem;margin-top:6px;padding:8px 12px;
+    background:#fbbf2411;border-radius:8px;border:1px solid rgba(251,191,36,.2);
+  }
+  @media (max-width:900px){
+    .grid{grid-template-columns:1fr}
+    .item{grid-template-columns:1fr}
+    .actions{justify-content:flex-start}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <h1>Class X Admin Panel <span id="countBadge" class="badge hidden">0 posts</span></h1>
+      <p>Manage poster images, titles, and order. Newest post becomes the main poster automatically.</p>
+    </div>
+    <div class="pill">Supabase panel</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginCard" class="card">
+    <h2>Login</h2>
+    <p class="muted">Use the username and password below.</p>
+    <div class="grid" style="grid-template-columns:1fr 1fr">
+      <div>
+        <label>Username</label>
+        <input id="username" type="text" placeholder="Username" />
+      </div>
+      <div>
+        <label>Password</label>
+        <input id="password" type="password" placeholder="Password" />
+      </div>
+    </div>
+    <button id="loginBtn">Login</button>
+    <p id="loginMsg" style="margin-top:10px;color:#fca5a5;"></p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="hidden">
+    <div class="grid">
+
+      <!-- LEFT: FORM -->
+      <div class="card">
+        <h2 id="formTitle">Add Post</h2>
+        <div class="row">
+          <div>
+            <label>Title</label>
+            <input id="postTitle" type="text" placeholder="Post title" />
+          </div>
+          <div>
+            <label>Orientation (auto-detected)</label>
+            <input id="orientation" type="text" readonly value="Portrait / Landscape will be detected" />
+          </div>
+        </div>
+        <label>Description</label>
+        <textarea id="postDesc" placeholder="Optional description"></textarea>
+
+        <label>Image</label>
+        <input id="postImage" type="file" accept="image/*" />
+        <div id="imageSizeWarn" class="warn-msg hidden">⚠️ Large images can use more storage and take longer to upload.</div>
+
+        <div class="preview" style="margin-bottom:14px">
+          <div id="previewFrame" class="previewFrame">
+            <span class="muted">Preview will appear here</span>
+          </div>
+        </div>
+
+        <button id="saveBtn">Save Post</button>
+        <button id="clearBtn" class="secondary" style="margin-top:8px">Clear Form</button>
+        <button id="logoutBtn" class="danger" style="margin-top:8px">Logout</button>
+      </div>
+
+      <!-- RIGHT: LIST -->
+      <div class="card">
+        <h2>Current Posts</h2>
+        <p class="muted">Top item is the main poster on the website.</p>
+        <div id="stats" style="margin:12px 0 16px 0;"></div>
+        <div id="postsList" class="list"></div>
+        <button id="resetAllBtn" class="danger" style="margin-top:14px;">Delete All Posts</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+// ─── Supabase ───────────────────────────────────────────────────────────────
+const SUPABASE_URL = "https://irzomytqemprdffyridu.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlyem9teXRxZW1wcmRmZnlyaWR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MTQyMTMsImV4cCI6MjA5NzE5MDIxM30.acGX5R66pLwQCU52Qdijrphj9Oi6UmBvQ3kVGrDq4lM";
+const SUPABASE_BUCKET = "classx-posts";
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ─── Auth ───────────────────────────────────────────────────────────────────
+const ADMIN_USER = "ouluadmin";
+const ADMIN_PASS = "Oulu@2026!";
+
+// ─── State ──────────────────────────────────────────────────────────────────
+let editingId = null;
+let currentImageFile = null;
+let currentImageData = "";
+let currentImageUrl = "";
+let currentImagePath = "";
+let currentOrientation = "portrait";
+
+// ─── Elements ───────────────────────────────────────────────────────────────
+const loginCard   = document.getElementById("loginCard");
+const dashboard   = document.getElementById("dashboard");
+const loginMsg    = document.getElementById("loginMsg");
+const countBadge  = document.getElementById("countBadge");
+
+const usernameEl  = document.getElementById("username");
+const passwordEl  = document.getElementById("password");
+const loginBtn    = document.getElementById("loginBtn");
+const logoutBtn   = document.getElementById("logoutBtn");
+
+const postTitle   = document.getElementById("postTitle");
+const postDesc    = document.getElementById("postDesc");
+const previewFrame= document.getElementById("previewFrame");
+const orientationInput = document.getElementById("orientation");
+const imageSizeWarn    = document.getElementById("imageSizeWarn");
+
+const saveBtn     = document.getElementById("saveBtn");
+const clearBtn    = document.getElementById("clearBtn");
+const postsList   = document.getElementById("postsList");
+const resetAllBtn = document.getElementById("resetAllBtn");
+const stats       = document.getElementById("stats");
+const formTitle   = document.getElementById("formTitle");
+
+// ─── Helpers ────────────────────────────────────────────────────────────────
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function normalizeRow(row) {
+  const createdAtRaw = row.created_at || new Date().toISOString();
+  return {
+    dbId: row.id,
+    id: String(row.id),
+    title: row.title || "",
+    description: row.description || "",
+    image: row.image_url || "",
+    imagePath: row.image_path || "",
+    orientation: row.orientation || "portrait",
+    createdAtRaw,
+    createdAt: new Date(createdAtRaw).getTime() || Date.now(),
+  };
+}
+
+function extractStoragePath(url) {
+  if (!url) return "";
+  const marker = `/storage/v1/object/public/${SUPABASE_BUCKET}/`;
+  const idx = url.indexOf(marker);
+  if (idx === -1) return "";
+  return decodeURIComponent(url.slice(idx + marker.length));
+}
+
+async function getPosts() {
+  const { data, error } = await supabase
+    .from("posts")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+  return (data || []).map(normalizeRow);
+}
+
+async function uploadImage(file) {
+  const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+  const safeName = `${crypto.randomUUID()}.${ext}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from(SUPABASE_BUCKET)
+    .upload(safeName, file, {
+      contentType: file.type || "application/octet-stream",
+      upsert: false,
+    });
+
+  if (uploadError) throw uploadError;
+
+  const { data } = supabase.storage.from(SUPABASE_BUCKET).getPublicUrl(safeName);
+  return {
+    imageUrl: data.publicUrl,
+    imagePath: safeName,
+  };
+}
+
+async function deleteStoragePath(path) {
+  if (!path) return;
+  const { error } = await supabase.storage.from(SUPABASE_BUCKET).remove([path]);
+  if (error) throw error;
+}
+
+function setPreview(imageData, orientation) {
+  currentImageData = imageData;
+  currentOrientation = orientation;
+
+  previewFrame.className = "previewFrame " + orientation;
+  previewFrame.innerHTML = "";
+
+  const img = document.createElement("img");
+  img.src = imageData;
+  img.alt = "Preview";
+  previewFrame.appendChild(img);
+
+  orientationInput.value = orientation.toUpperCase();
+}
+
+function attachImageListener() {
+  const input = document.getElementById("postImage");
+  if (!input) return;
+
+  input.addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    currentImageFile = file;
+    currentImagePath = "";
+    currentImageUrl = "";
+
+    const sizeMB = file.size / 1024 / 1024;
+    imageSizeWarn.classList.toggle("hidden", sizeMB <= 2);
+
+    const reader = new FileReader();
+    reader.onload = function (ev) {
+      const imageData = ev.target.result;
+      const tempImg = new Image();
+      tempImg.onload = function () {
+        const orientation = tempImg.naturalHeight > tempImg.naturalWidth ? "portrait" : "landscape";
+        setPreview(imageData, orientation);
+      };
+      tempImg.src = imageData;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function clearForm() {
+  editingId = null;
+  currentImageFile = null;
+  currentImageData = "";
+  currentImageUrl = "";
+  currentImagePath = "";
+  currentOrientation = "portrait";
+
+  postTitle.value = "";
+  postDesc.value = "";
+  imageSizeWarn.classList.add("hidden");
+
+  const oldInput = document.getElementById("postImage");
+  const newInput = oldInput.cloneNode(false);
+  oldInput.parentNode.replaceChild(newInput, oldInput);
+  attachImageListener();
+
+  formTitle.textContent = "Add Post";
+  orientationInput.value = "Portrait / Landscape will be detected";
+  previewFrame.className = "previewFrame";
+  previewFrame.innerHTML = '<span class="muted">Preview will appear here</span>';
+}
+
+async function render() {
+  countBadge.classList.add("hidden");
+  stats.textContent = "Loading...";
+
+  try {
+    const posts = await getPosts();
+
+    countBadge.textContent = `${posts.length} post${posts.length !== 1 ? "s" : ""}`;
+    countBadge.classList.toggle("hidden", posts.length === 0);
+
+    stats.innerHTML = `<strong>${posts.length}</strong> post(s) saved`;
+
+    if (!posts.length) {
+      postsList.innerHTML = '<p class="muted">No posts saved yet.</p>';
+      return;
+    }
+
+    postsList.innerHTML = posts.map((p, index) => {
+      const isMain = index === 0;
+      const date = p.createdAtRaw ? new Date(p.createdAtRaw).toLocaleString() : "";
+      return `
+        <div class="item${isMain ? " is-main" : ""}">
+          <div class="thumb ${p.orientation || "portrait"}">
+            <img src="${escapeHtml(p.image || "")}" alt="${escapeHtml(p.title || "Post")}">
+          </div>
+          <div class="meta">
+            <strong>${isMain ? "⭐ Main Poster" : "Previous Post"} — ${escapeHtml(p.title || "Untitled")}</strong>
+            <small>${escapeHtml(p.description || "No description")}</small>
+            <small>${date}</small>
+            <small>Orientation: ${(p.orientation || "portrait").toUpperCase()}</small>
+          </div>
+          <div class="actions">
+            ${!isMain ? `<button class="promote" onclick="promotePost('${p.id}')">Move to Top</button>` : ""}
+            <button class="secondary" onclick="editPost('${p.id}')">Edit</button>
+            <button class="danger" onclick="deletePost('${p.id}')">Delete</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+  } catch (error) {
+    console.error(error);
+    stats.textContent = "Failed to load posts.";
+    postsList.innerHTML = '<p class="muted">Could not load posts from Supabase.</p>';
+  }
+}
+
+async function editPost(id) {
+  try {
+    const posts = await getPosts();
+    const post = posts.find(p => String(p.id) === String(id));
+    if (!post) return;
+
+    if (currentImageData && editingId !== id) {
+      if (!confirm("You have unsaved changes in the form. Discard them and edit this post?")) return;
+    }
+
+    editingId = post.id;
+    postTitle.value = post.title || "";
+    postDesc.value = post.description || "";
+    currentImageFile = null;
+    currentImageData = post.image || "";
+    currentImageUrl = post.image || "";
+    currentImagePath = post.imagePath || extractStoragePath(post.image) || "";
+    currentOrientation = post.orientation || "portrait";
+
+    setPreview(currentImageData, currentOrientation);
+    formTitle.textContent = "Edit Post";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } catch (error) {
+    console.error(error);
+    alert("Could not open this post for editing.");
+  }
+}
+
+async function deletePost(id) {
+  if (!confirm("Delete this post?")) return;
+
+  try {
+    const posts = await getPosts();
+    const post = posts.find(p => String(p.id) === String(id));
+    if (!post) return;
+
+    if (post.imagePath) {
+      await deleteStoragePath(post.imagePath);
+    }
+
+    const { error } = await supabase
+      .from("posts")
+      .delete()
+      .eq("id", post.dbId);
+
+    if (error) throw error;
+
+    if (String(editingId) === String(id)) clearForm();
+    await render();
+  } catch (error) {
+    console.error(error);
+    alert("Delete failed. Please try again.");
+  }
+}
+
+async function promotePost(id) {
+  try {
+    const posts = await getPosts();
+    const post = posts.find(p => String(p.id) === String(id));
+    if (!post) return;
+
+    const { error } = await supabase
+      .from("posts")
+      .update({ created_at: new Date().toISOString() })
+      .eq("id", post.dbId);
+
+    if (error) throw error;
+    await render();
+  } catch (error) {
+    console.error(error);
+    alert("Could not move the post to the top.");
+  }
+}
+
+window.editPost = editPost;
+window.deletePost = deletePost;
+window.promotePost = promotePost;
+
+// ─── Save ────────────────────────────────────────────────────────────────────
+saveBtn.addEventListener("click", async () => {
+  if (!postTitle.value.trim()) {
+    alert("Add a title first.");
+    return;
+  }
+
+  try {
+    const posts = await getPosts();
+    const originalPost = posts.find(p => String(p.id) === String(editingId));
+    const originalPath = originalPost?.imagePath || extractStoragePath(originalPost?.image || "");
+    let imageUrl = currentImageUrl;
+    let imagePath = currentImagePath;
+    let uploadedPath = "";
+
+    if (currentImageFile) {
+      const uploaded = await uploadImage(currentImageFile);
+      imageUrl = uploaded.imageUrl;
+      imagePath = uploaded.imagePath;
+      uploadedPath = uploaded.imagePath;
+    }
+
+    if (!imageUrl) {
+      alert("Choose an image first.");
+      return;
+    }
+
+    const isEditing = Boolean(originalPost);
+    const payload = {
+      title: postTitle.value.trim(),
+      description: postDesc.value.trim(),
+      image_url: imageUrl,
+      image_path: imagePath,
+      orientation: currentOrientation,
+      created_at: isEditing ? originalPost.createdAtRaw : new Date().toISOString(),
+    };
+
+    if (isEditing) {
+      const { error } = await supabase
+        .from("posts")
+        .update(payload)
+        .eq("id", originalPost.dbId);
+
+      if (error) throw error;
+
+      if (currentImageFile && originalPath && originalPath !== imagePath) {
+        await deleteStoragePath(originalPath);
+      }
+    } else {
+      const { error } = await supabase
+        .from("posts")
+        .insert([payload]);
+
+      if (error) throw error;
+    }
+
+    clearForm();
+    await render();
+    alert("Post saved successfully.");
+  } catch (error) {
+    console.error(error);
+    if (uploadedPath) {
+      await deleteStoragePath(uploadedPath).catch(() => {});
+    }
+    alert(error?.message || "Save failed.");
+  }
+});
+
+// ─── Toolbar buttons ─────────────────────────────────────────────────────────
+clearBtn.addEventListener("click", clearForm);
+
+resetAllBtn.addEventListener("click", async () => {
+  if (!confirm("Delete ALL saved posts? This cannot be undone.")) return;
+
+  try {
+    const posts = await getPosts();
+    const paths = posts.map(p => p.imagePath).filter(Boolean);
+    if (paths.length) {
+      await supabase.storage.from(SUPABASE_BUCKET).remove(paths);
+    }
+
+    const { error } = await supabase
+      .from("posts")
+      .delete()
+      .neq("id", -1);
+
+    if (error) throw error;
+
+    clearForm();
+    await render();
+  } catch (error) {
+    console.error(error);
+    alert("Could not delete all posts.");
+  }
+});
+
+logoutBtn.addEventListener("click", () => {
+  clearForm();
+  dashboard.classList.add("hidden");
+  loginCard.classList.remove("hidden");
+  usernameEl.value = "";
+  passwordEl.value = "";
+  loginMsg.textContent = "";
+});
+
+// ─── Login ───────────────────────────────────────────────────────────────────
+function doLogin() {
+  if (usernameEl.value === ADMIN_USER && passwordEl.value === ADMIN_PASS) {
+    loginCard.classList.add("hidden");
+    dashboard.classList.remove("hidden");
+    loginMsg.textContent = "";
+    render();
+  } else {
+    loginMsg.textContent = "Wrong username or password.";
+  }
+}
+
+loginBtn.addEventListener("click", doLogin);
+[usernameEl, passwordEl].forEach(el =>
+  el.addEventListener("keydown", e => { if (e.key === "Enter") doLogin(); })
+);
+
+// ─── Init ────────────────────────────────────────────────────────────────────
+attachImageListener();
+render();
+</script>
+
+</body>
+</html>
