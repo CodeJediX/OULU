@@ -1002,6 +1002,72 @@ header{transition:all .3s var(--ease);}
   }
 }
 
+
+/* ─── FINAL VISUAL POLISH OVERRIDES ─── */
+:root {
+  --accent: var(--gold);
+  --accent-2: var(--sky);
+  --white: #ffffff;
+  --shadow-soft: 0 12px 34px rgba(8,17,31,.08);
+}
+
+::selection {
+  background: rgba(196,146,42,.22);
+  color: var(--ink);
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.sec-label {
+  background: rgba(196,146,42,.10);
+  color: var(--gold);
+  border: 1px solid rgba(196,146,42,.18);
+}
+
+.sec-title,
+.sec-h {
+  letter-spacing: -0.02em;
+}
+
+.sec-desc,
+.sec-p {
+  color: var(--muted);
+}
+
+.classx-header .sec-label {
+  background: rgba(196,146,42,.10);
+  color: var(--gold);
+}
+
+.classx-main,
+.classx-thumb {
+  box-shadow: var(--shadow-soft);
+}
+
+.poster-badge {
+  background: linear-gradient(135deg, var(--gold), var(--sky));
+  box-shadow: 0 8px 18px rgba(59,130,246,.16);
+}
+
+.poster-info {
+  background: var(--white);
+}
+
+.poster-empty {
+  background: linear-gradient(135deg, #101d33, #0b1324);
+}
+
+.lightbox {
+  background: rgba(6, 12, 22, .9);
+}
+
+#pageNav .pn-dot.active {
+  box-shadow: 0 0 0 6px rgba(196,146,42,.12);
+}
+
 </style>
 <script src="./three.min.js" defer></script>
 </head>
