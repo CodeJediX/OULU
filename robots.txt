@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ouluacademy.lk/sitemap.xml
